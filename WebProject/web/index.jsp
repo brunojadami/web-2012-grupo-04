@@ -7,9 +7,12 @@
 <html>
     <%@ include file="head.jsp" %>
     <body>
+        <script type="text/javascript" src="script/validation.js"></script>
+        <script type="text/javascript" src="script/index.js"></script>
+        
         <h1>Entrar</h1>
         
-        <form method="POST" action="./Login">
+        <form name="form" method="POST" action="./Login" onsubmit="return validateForm();">
             <label for="email">Email:</label>
             <input type="text" name="email" id="email"/><br/>
             <label for="password">Senha:</label>
