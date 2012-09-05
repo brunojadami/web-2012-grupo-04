@@ -31,7 +31,8 @@ public class Validator
      */
     public boolean validateEmail(String email)
     {
-        return email.length() >= EMAIL_MIN_LENGTH && email.length() <= EMAIL_MAX_LENGTH
+        return email != null
+                && email.length() >= EMAIL_MIN_LENGTH && email.length() <= EMAIL_MAX_LENGTH
                 && email.matches(".*\\@.*\\..{2,4}");
     }
     
@@ -41,6 +42,7 @@ public class Validator
      */
     public boolean validatePassword(String password)
     {
-        return password.length() >= PASSWORD_MIN_LENGTH && password.length() <= PASSWORD_MAX_LENGTH;
+        return password != null
+                && password.length() >= PASSWORD_MIN_LENGTH && password.length() <= PASSWORD_MAX_LENGTH;
     }
 }
