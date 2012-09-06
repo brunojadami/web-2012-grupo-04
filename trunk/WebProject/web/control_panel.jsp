@@ -8,5 +8,9 @@
     <%@ include file="head.jsp" %>
     <body>
         <h1>Painel de controle</h1>
+        <ul>
+            <li><a href="personal_info.jsp">Informações pessoais e endereço</a></li>
+            <li><a href="academic.jsp">Formação acadêmica</a></li>
+        </ul>
     </body>
 </html>
