@@ -1,4 +1,4 @@
-<%@page import="webproject.*" %>
+<%@page import="webproject.misc.PageType"%>
 <% 
 PageType pageType = (PageType) pageContext.getAttribute("pageType");
 String email = (String) session.getAttribute("email");
