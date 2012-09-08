@@ -1,4 +1,4 @@
-package webproject;
+package webproject.page;
 
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import webproject.validation.Validator;
 
 /**
  * Login servlet.
@@ -32,11 +33,9 @@ public class Login extends HttpServlet
         
         Validator validator = new Validator();
         
-        String validatorMessage = null;
-        if (!validator.validateEmail(email) || !validator.validatePassword(password))
-        {
-            validatorMessage = "Email e senha incorretos.";
-        }
+        String validatorMessage = validator.validateEmail(email, "Email e senha incorretos.");
+        validatorMessage = validatorMessage == null
+                ? validator.validate(password, null, 0, 100, "Email e senha incorretos") : validatorMessage;
         
         RequestDispatcher dispatcher;
         if (validatorMessage == null)

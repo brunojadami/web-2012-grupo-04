@@ -1,4 +1,4 @@
-package webproject;
+package webproject.misc;
 
 /**
  * Tipo da página. Enum usado para que usuários não acessem páginas indevidas.

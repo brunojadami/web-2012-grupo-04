@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="webproject.*" %>
+<%@page import="webproject.misc.PageType"%>
+<%@page import="webproject.misc.Util"%>
 <%@page import="java.util.List"%>
 <% pageContext.setAttribute("pageTitle", "Informações pessoais"); %>
 <% pageContext.setAttribute("pageType", PageType.ANY); %>
@@ -9,10 +10,11 @@
     <%@ include file="head.jsp" %>
     <body>
         <script type="text/javascript" src="script/validation.js"></script>
+        <script type="text/javascript" src="script/personal_info.js"></script>
         
         <h1>Informações pessoais e endereço</h1>
         
-        <form name="form" method="POST" action="./PersonalInfo">
+        <form name="form" method="POST" action="./PersonalInfo" onsubmit="return validateForm();">
             
             <h3>Geral</h3>
             Nome:

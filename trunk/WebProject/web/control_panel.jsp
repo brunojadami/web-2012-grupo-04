@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="webproject.*" %>
+<%@page import="webproject.misc.PageType"%>
 <% pageContext.setAttribute("pageTitle", "Painel de Controle"); %>
 <% pageContext.setAttribute("pageType", PageType.ANY); %>
 <%@ include file="session.jsp" %>

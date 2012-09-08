@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="webproject.*" %>
+<%@page import="webproject.misc.PageType"%>
 <% pageContext.setAttribute("pageTitle", "Entrar"); %>
 <% pageContext.setAttribute("pageType", PageType.INDEX); %>
 <%@ include file="session.jsp" %>

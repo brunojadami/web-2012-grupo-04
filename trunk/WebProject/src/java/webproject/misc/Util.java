@@ -1,16 +1,41 @@
-package webproject;
+package webproject.misc;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+/**
+ * Classe útil.
+ */
 public class Util
 {
+    /**
+     * @return Uma lista com os tipos de estados de um curso acadêmico.
+     */
+    public static List<String> getAcademicStatusNames()
+    {
+        return Arrays.asList(new String[] { 
+            "Completo", "Em Andamento", "Incompleto"});
+    }
+    
+    /**
+     * @return Uma lista com os níveis acadêmicos.
+     */
+    public static List<String> getAcademicLevelNames()
+    {
+        return Arrays.asList(new String[] { 
+            "Aperfeiçoamento", "Primeiro Grau", "Segundo Grau", "Ensino Técnico",
+            "Graduação", "Especialização", "Mestrado Profissionalizante", "Mestrado",
+            "Doutorado"});
+    }
+    
+    /**
+     * @return Uma lista com os estados brasileiros.
+     */
     public static List<String> getStateNames()
     {
         return Arrays.asList(new String[] { 
@@ -19,6 +44,9 @@ public class Util
             "SE", "SP", "TO" });
     }
     
+    /**
+     * @return Uma lista com os países.
+     */
     public static List<String> getCountryNames()
     {
         Set<String> countryNames = new HashSet<String>();
