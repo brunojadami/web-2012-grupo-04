@@ -6,7 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import webproject.validation.AcademicValidator;
+import webproject.misc.Util;
+import webproject.validation.Validator;
 
 /**
  * Academic servlet.
@@ -38,11 +39,9 @@ public class Academic extends HttpServlet
         String scholarshipAgency = (String) request.getParameter("scholarshipAgency");
         String miscInfo = (String) request.getParameter("miscInfo");
         
-        AcademicValidator validator = new AcademicValidator();
+        Validator validator = new Validator();
         
-        String validatorMessage = validator.validateAcademicLevel(generalLevel, "");
-        validatorMessage = validatorMessage == null 
-                ? validator.validateAcademicLevel(generalLevel, "") : validatorMessage;
+        String validatorMessage = validator.validateListOption(generalLevel, Util.getAcademicLevelNames(), "");
         validatorMessage = validatorMessage == null 
                 ? validator.validate(generalType, null, 0, 0, "") : validatorMessage;
         validatorMessage = validatorMessage == null 
@@ -50,7 +49,7 @@ public class Academic extends HttpServlet
         validatorMessage = validatorMessage == null 
                 ? validator.validate(generalCourse, null, 0, 0, "") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateAcademicStatus(generalStatus, "") : validatorMessage;
+                ? validator.validateListOption(generalStatus, Util.getAcademicStatusNames(), "") : validatorMessage;
         validatorMessage = validatorMessage == null 
                 ? validator.validateDate(periodStartDate, "") : validatorMessage;
         validatorMessage = validatorMessage == null 
