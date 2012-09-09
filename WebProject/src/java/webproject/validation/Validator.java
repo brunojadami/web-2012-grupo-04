@@ -1,5 +1,7 @@
 package webproject.validation;
 
+import java.util.List;
+
 /**
  * Validador.
  */
@@ -26,6 +28,11 @@ public class Validator
         result = result && string.length() >= minLength && string.length() <= maxLength;
         
         return result ? null : errorMessage;
+    }
+    
+    public String validateListOption(String string, List<String> list, String errorMessage)
+    {
+        return list.contains(string) ? null : errorMessage;
     }
     
     /**
@@ -57,5 +64,20 @@ public class Validator
     {
         return validate(email, ".*\\@.*\\..{2,4}", 
                 Size.EMAIL.getMinLength(), Size.EMAIL.getMaxLength(), errorMessage);
+    }
+    
+    public String validateState(String state, String errorMessage)
+    {
+        return null;
+    }
+    
+    public String validateCountry(String country, String errorMessage)
+    {
+        return null;
+    }
+    
+    public String validateSex(String sex, String errorMessage)
+    {
+        return null;
     }
 }
