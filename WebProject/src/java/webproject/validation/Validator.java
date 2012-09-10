@@ -1,6 +1,7 @@
 package webproject.validation;
 
 import java.util.List;
+import webproject.misc.Util;
 
 /**
  * Validador.
@@ -10,22 +11,17 @@ public class Validator
     /**
      * @param string String a validar.
      * @param regex Regex para checar. Se nulo, não será checado.
-     * @param minLength Tamanho mínimo.
-     * @param maxLength Tamanho máximo.
      * @param errorMessage Mensagem de erro.
      * @return Nulo se sucesso, a mensagem de erro caso erro.
      */
-    public String validate(String string, String regex, int minLength, int maxLength, 
-            String errorMessage)
+    public String validate(String string, String regex, String errorMessage)
     {
         boolean result = string != null;
         
         if (regex != null)
         {
-            result = result && string.matches(regex);
+            result = result && string.toLowerCase().matches(regex);
         }
-        
-        result = result && string.length() >= minLength && string.length() <= maxLength;
         
         return result ? null : errorMessage;
     }
@@ -42,7 +38,8 @@ public class Validator
      */
     public String validateDate(String date, String errorMessage)
     {
-        return null;
+        return date.toString().matches("[0-9]{1,2}\\/[0-9]{1,2}\\/[0-9]{2,4}")
+                ? null : errorMessage;
     }
     
     /**
@@ -52,7 +49,8 @@ public class Validator
      */
     public String validateYesNoOption(String yesNo, String errorMessage)
     {
-        return null;
+        return yesNo.toLowerCase().matches("[(yes)(no)]")
+                ? null : errorMessage;
     }
     
     /**
@@ -62,22 +60,39 @@ public class Validator
      */
     public String validateEmail(String email, String errorMessage)
     {
-        return validate(email, ".*\\@.*\\..{2,4}", 
-                Size.EMAIL.getMinLength(), Size.EMAIL.getMaxLength(), errorMessage);
+        return validate(email, ".*\\@.*\\..{2,4}", errorMessage);
     }
     
+    /**
+     * @param state Estado.
+     * @param errorMessage Mensagem de erro.
+     * @return Nulo se sucesso, a mensagem de erro caso erro.
+     */
     public String validateState(String state, String errorMessage)
     {
-        return null;
+        return Util.getStateNames().contains(state)
+                ? null : errorMessage;
     }
     
+    /**
+     * @param country País.
+     * @param errorMessage Mensagem de erro.
+     * @return Nulo se sucesso, a mensagem de erro caso erro.
+     */
     public String validateCountry(String country, String errorMessage)
     {
-        return null;
+        return Util.getCountryNames().contains(country)
+                ? null : errorMessage;
     }
     
+    /**
+     * @param sex Sexo.
+     * @param errorMessage Mensagem de erro.
+     * @return Nulo se sucesso, a mensagem de erro caso erro.
+     */
     public String validateSex(String sex, String errorMessage)
     {
-        return null;
+        return sex.toLowerCase().matches("[(male)(female)]")
+                ? null : errorMessage;
     }
 }
