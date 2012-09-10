@@ -35,7 +35,7 @@ public class Login extends HttpServlet
         
         String validatorMessage = validator.validateEmail(email, "Email e senha incorretos.");
         validatorMessage = validatorMessage == null
-                ? validator.validate(password, null, 0, 100, "Email e senha incorretos") : validatorMessage;
+                ? validator.validate(password, ".{6,30}", "Email e senha incorretos") : validatorMessage;
         
         RequestDispatcher dispatcher;
         if (validatorMessage == null)

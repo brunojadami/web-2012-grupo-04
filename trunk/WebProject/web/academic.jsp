@@ -1,7 +1,7 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-15"%>
 <%@page import="webproject.misc.Util"%>
 <%@page import="java.util.List"%>
-<% pageContext.setAttribute("pageTitle", "FormaÃ§Ã£o acadÃªmica"); %>
+<% pageContext.setAttribute("pageTitle", "Formação acadêmica"); %>
 <% pageContext.setAttribute("pageType", PageType.ANY); %>
 <%@ include file="session.jsp" %>
 <!DOCTYPE html>
@@ -11,12 +11,20 @@
         <script type="text/javascript" src="script/validation.js"></script>
         <script type="text/javascript" src="script/academic.js"></script>
         
-        <h1>FormaÃ§Ã£o acadÃªmica</h1>
+        <h1>Formação acadêmica</h1>
         
-        <form name="form" method="POST" action="./PersonalInfo" onsubmit="return validateForm();">
+        <%
+        String message = (String) request.getAttribute("message");
+        if (message != null)
+        {
+            out.println(message);
+        }
+        %>
+        
+        <form name="form" method="POST" action="./Academic" onsubmit="return validateForm();">
             
             <h3>Geral</h3>
-            NÃ­vel:
+            Nível:
             <select name="generalLevel">
                 <%
                 List<String> levelNames = Util.getAcademicLevelNames();
@@ -25,13 +33,13 @@
                     out.println("<option value='#'>#</option>".replaceAll("#", levelName));
                 }
                 %>
-            </select><br/>
+            </select> Escolha uma opção<br/>
             Tipo:
-            <input type="text" name="generalType"/><br/>
+            <input type="text" name="generalType"/> Aceita letras e espaços. Tamanho de 5 a 50<br/>
             Instituto:
-            <input type="text" name="generalInstitute"/><br/>
+            <input type="text" name="generalInstitute"/> Aceita letras e espaços. Tamanho de 2 a 30<br/>
             Curso:
-            <input type="text" name="generalCourse"/><br/>
+            <input type="text" name="generalCourse"/> Aceita letras e espaços. Tamanho de 4 a 40<br/>
             Estado:
             <select name="generalStatus">
                 <%
@@ -41,25 +49,25 @@
                     out.println("<option value='#'>#</option>".replaceAll("#", statusName));
                 }
                 %>
-            </select><br/>
+            </select> Escolha uma opção<br/>
             
-            <h3>PerÃ­odo</h3>
-            InÃ­cio:
-            <input type="text" name="periodStartDate"/><br/>
-            TÃ©rmino:
-            <input type="text" name="periodEndDate"/><br/>
+            <h3>Período</h3>
+            Início:
+            <input type="text" name="periodStartDate"/> Exemplo: 25/05/1990 ou 25/5/1990 ou 25/05/90<br/>
+            Término:
+            <input type="text" name="periodEndDate"/> Exemplo: 25/05/1990 ou 25/5/1990 ou 25/05/90<br/>
             
             <h3>Bolsa</h3>
             Com bolsa?
             <select name="scholarshipPresence">
-                <option value="0">NÃ£o</option>
-                <option value="1">Sim</option>
-            </select><br/>
-            AgÃªncia financiadora:
-            <input type="text" name="scholarshipAgency"/><br/>
+                <option value="no">Não</option>
+                <option value="yes">Sim</option>
+            </select> Escolha uma opção<br/>
+            Agência financiadora:
+            <input type="text" name="scholarshipAgency"/> Aceita letras e espaços. Tamanho de 2 a 30<br/>
             
-            InformaÃ§Ãµes adicionais:
-            <textarea name="miscInfo"></textarea><br/>
+            Informações adicionais:
+            <textarea name="miscInfo"></textarea> Aceita todos os caracteres. Tamanho até 300<br/>
             
             <input type="submit" value="Adicionar"/>
             

@@ -1,6 +1,7 @@
 package webproject.page;
 
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,25 +42,38 @@ public class Academic extends HttpServlet
         
         Validator validator = new Validator();
         
-        String validatorMessage = validator.validateListOption(generalLevel, Util.getAcademicLevelNames(), "");
+        String validatorMessage = validator.validateListOption(generalLevel, Util.getAcademicLevelNames(), "Nível inválido.");
         validatorMessage = validatorMessage == null 
-                ? validator.validate(generalType, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(generalType, "[a-z ]{5,50}", "Tipo inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(generalInstitute, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(generalInstitute, "[a-z ]{2,30}", "Instituto inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(generalCourse, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(generalCourse, "[a-z ]{4,40}", "Curso inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateListOption(generalStatus, Util.getAcademicStatusNames(), "") : validatorMessage;
+                ? validator.validateListOption(generalStatus, Util.getAcademicStatusNames(), "Estado inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateDate(periodStartDate, "") : validatorMessage;
+                ? validator.validateDate(periodStartDate, "Data de início inválida.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateDate(periodEndDate, "") : validatorMessage;
+                ? validator.validateDate(periodEndDate, "Data de término inválida.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateYesNoOption(scholarshipPresence, "") : validatorMessage;
+                ? validator.validateYesNoOption(scholarshipPresence, "Com bolsa? inválida.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(scholarshipAgency, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(scholarshipAgency, "[a-z ]{2,30}", "Agência inválida.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(miscInfo, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(miscInfo, ".{0,300}", "Informações adicionais inválidas.") : validatorMessage;
+    
+        RequestDispatcher dispatcher;
+        if (validatorMessage == null)
+        {
+            dispatcher = request.getRequestDispatcher("show_operation.jsp");
+        }
+        else
+        {
+            dispatcher = request.getRequestDispatcher("academic.jsp");
+            request.setAttribute("message", validatorMessage);
+        }
+        
+        dispatcher.forward(request, response);
     }
 
     /**

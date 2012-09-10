@@ -1,6 +1,7 @@
 package webproject.page;
 
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -66,77 +67,90 @@ public class PersonalInfo extends HttpServlet
         
         Validator validator = new Validator();
         
-        String validatorMessage = validator.validate(generalName, null, 0, 0, "");
+        String validatorMessage = validator.validate(generalName, "[a-z ]{2,30}", "Nome inválido.");
         validatorMessage = validatorMessage == null 
-                ? validator.validate(generalCitationName, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(generalCitationName, "[a-z. ]{2,30}", "Nome de citação inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateCountry(generalCountry, "") : validatorMessage;
+                ? validator.validateCountry(generalCountry, "País inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(generalCpf, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(generalCpf, "[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{2}", "CPF inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateSex(generalSex, "") : validatorMessage;
+                ? validator.validateSex(generalSex, "Sexo inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(idNumber, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(idNumber, "[0-9]{8,9}", "Número da identidade inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(idEmissioner, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(idEmissioner, "[a-z ]{2,10}", "Emissor da identidade inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateState(idState, "") : validatorMessage;
+                ? validator.validateState(idState, "Estado da identidade inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateDate(idEmissionDate, "") : validatorMessage;
+                ? validator.validateDate(idEmissionDate, "Data de emissão da identidade inválida.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateCountry(birthCountry, "") : validatorMessage;
+                ? validator.validateCountry(birthCountry, "País de nascimento inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateState(birthState, "") : validatorMessage;
+                ? validator.validateState(birthState, "Estado de nascimento inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(birthCity, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(birthCity, "[a-z ]{2,40}", "Cidade de nascimento inválida.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateDate(birthDate, "") : validatorMessage;
+                ? validator.validateDate(birthDate, "Data de nascimento inválida.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(passportNumber, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(passportNumber, "[a-z]{2}[0-9]{6}", "Número do passaporte inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateDate(passportValidityDate, "") : validatorMessage;
+                ? validator.validateDate(passportValidityDate, "Data de validade do passaporte inválida.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateDate(passportEmissionDate, "") : validatorMessage;
+                ? validator.validateDate(passportEmissionDate, "Data de emissão do passaporte inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateCountry(passportCountry, "") : validatorMessage;
+                ? validator.validateCountry(passportCountry, "País do passaporte inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(filiationFatherName, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(filiationFatherName, "[a-z ]{2,30}", "Nome do pai inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(filiationMotherName, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(filiationMotherName, "[a-z ]{2,30}", "Nome da mãe inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(addressStreet, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(addressStreet, "[a-z0-9 ]{4,50}", "Rua do endereço inválida.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(addressZipCode, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(addressZipCode, "[0-9]{6,30}", "CEP do endereço inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(addressCity, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(addressCity, "[a-z ]{2,40}", "Cidade do endereço inválida.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateCountry(addressCountry, "") : validatorMessage;
+                ? validator.validateCountry(addressCountry, "País do endereço inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(addressDistrict, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(addressDistrict, "[a-z ]{2,40}", "Bairro do endereço inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateState(addressState, "") : validatorMessage;
+                ? validator.validateState(addressState, "Estado do endereço inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(addressPhone, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(addressPhone, "[0-9]{6,30}", "Telefone do endereço inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(professionalAddressCompany, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(professionalAddressCompany, "[a-z ]{2,40}", "Empresa do endereço profissional inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(professionalAddressUnit, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(professionalAddressUnit, "[a-z0-9 ]{2,30}", "Unidade do endereço profissional inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(professionalAddressStreet, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(professionalAddressStreet, "[a-z0-9 ]{4,50}", "Rua do endereço profissional inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(professionalAddressZipCode, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(professionalAddressZipCode, "[0-9]{6,30}", "CEP do endereço profissional inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(professionalAddressCity, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(professionalAddressCity, "[a-z ]{2,40}", "Cidade do endereço profissional inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateCountry(professionalAddressCountry, "") : validatorMessage;
+                ? validator.validateCountry(professionalAddressCountry, "País do endereço profissional inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(professionalAddressDistrict, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(professionalAddressDistrict, "[a-z ]{2,40}", "Bairro do endereço profissional inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateState(professionalAddressState, "") : validatorMessage;
+                ? validator.validateState(professionalAddressState, "Estado do endereço profissional inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(professionalAddressPhone, null, 0, 0, "") : validatorMessage;
+                ? validator.validate(professionalAddressPhone, "[0-9]{6,30}", "Telefone do endereço profissional inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateEmail(miscEmail, "") : validatorMessage;
+                ? validator.validateEmail(miscEmail, "Email inválido.") : validatorMessage;
+        
+        RequestDispatcher dispatcher;
+        if (validatorMessage == null)
+        {
+            dispatcher = request.getRequestDispatcher("show_operation.jsp");
+        }
+        else
+        {
+            dispatcher = request.getRequestDispatcher("personal_info.jsp");
+            request.setAttribute("message", validatorMessage);
+        }
+        
+        dispatcher.forward(request, response);
     }
 
     /**
