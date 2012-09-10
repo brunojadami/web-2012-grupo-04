@@ -49,7 +49,7 @@ public class Validator
      */
     public String validateYesNoOption(String yesNo, String errorMessage)
     {
-        return yesNo.toLowerCase().matches("[(yes)(no)]")
+        return yesNo.toLowerCase().matches("(yes)|(no)")
                 ? null : errorMessage;
     }
     
@@ -92,7 +92,7 @@ public class Validator
      */
     public String validateSex(String sex, String errorMessage)
     {
-        return sex.toLowerCase().matches("[(male)(female)]")
+        return sex.toLowerCase().matches("(male)|(female)")
                 ? null : errorMessage;
     }
 }
