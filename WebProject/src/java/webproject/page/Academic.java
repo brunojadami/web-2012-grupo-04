@@ -63,9 +63,21 @@ public class Academic extends HttpServlet
                 ? validator.validate(miscInfo, ".{0,300}", "Informações adicionais inválidas.") : validatorMessage;
     
         RequestDispatcher dispatcher;
+        
+        // OBS: há uma certa 'repetição' de comandos. Isso será removido quando o 'Model' for implementado.
         if (validatorMessage == null)
         {
             dispatcher = request.getRequestDispatcher("show_operation.jsp");
+            request.setAttribute("Attribute:00.Nível", generalLevel);
+            request.setAttribute("Attribute:01.Tipo", generalType);
+            request.setAttribute("Attribute:02.Instituto", generalInstitute);
+            request.setAttribute("Attribute:03.Curso", generalCourse);
+            request.setAttribute("Attribute:04.Estado", generalStatus);
+            request.setAttribute("Attribute:05.Data de Início", periodStartDate);
+            request.setAttribute("Attribute:06.Data de Término", periodEndDate);
+            request.setAttribute("Attribute:07.Com Bolsa?", scholarshipPresence);
+            request.setAttribute("Attribute:08.Agência", scholarshipAgency);
+            request.setAttribute("Attribute:09.Outros", miscInfo);
         }
         else
         {

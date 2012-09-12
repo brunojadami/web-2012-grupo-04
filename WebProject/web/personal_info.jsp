@@ -9,27 +9,29 @@
 <html>
     <%@ include file="head.jsp" %>
     <body>
-        <script type="text/javascript" src="script/validation.js"></script>
-        <script type="text/javascript" src="script/personal_info.js"></script>
+        <script type="text/javascript" src="script/validation.js" charset="utf-8"></script>
+        <script type="text/javascript" src="script/personal_info.js" charset="utf-8"></script>
         
         <h1>Informações pessoais e endereço</h1>
         
-        <%
+        <label class="Error" id="errorLabel"><%
         String message = (String) request.getAttribute("message");
         if (message != null)
         {
             out.println(message);
         }
-        %>
+        %></label>
         
         <form name="form" method="POST" action="./PersonalInfo" onsubmit="return validateForm();">
             
             <h3>Geral</h3>
-            Nome:
-            <input type="text" name="generalName"/> Aceita letras e espaços. Tamanho de 2 a 30<br/>
-            Nome de citação:
-            <input type="text" name="generalCitationName"/> Aceita letras, espaços e pontos. Tamanho de 2 a 30<br/>
-            País:
+            <label>Nome:</label>
+            <input type="text" name="generalName"/> 
+            <label class="Small">Aceita letras e espaços. Tamanho de 2 a 30</label>
+            <label>Nome de citação:</label>
+            <input type="text" name="generalCitationName"/> 
+            <label class="Small">Aceita letras, espaços e pontos. Tamanho de 2 a 30</label>
+            <label>País:</label>
             <select name="generalCountry">
                 <%
                 List<String> countryNames = Util.getCountryNames();
@@ -38,21 +40,26 @@
                     out.println("<option value='#'>#</option>".replaceAll("#", countryName));
                 }
                 %>
-            </select> Escolha uma opção<br/>
-            CPF:
-            <input type="text" name="generalCpf"/> Exemplo: 111.222.333-44<br/>
-            Sexo:
+            </select> 
+            <label class="Small">Escolha uma opção</label>
+            <label>CPF:</label>
+            <input type="text" name="generalCpf"/> 
+            <label class="Small">Exemplo: 111.222.333-44</label>
+            <label>Sexo:</label>
             <select name="generalSex">
                 <option value="male">Homem</option>
                 <option value="female">Mulher</option>
-            </select> Escolha uma opção<br/>
+            </select> 
+            <label class="Small">Escolha uma opção</label>
             
             <h3>Identidade</h3>
-            Número:
-            <input type="text" name="idNumber"/> Exemplo: 123456789 ou 12345678<br/>
-            Emissor:
-            <input type="text" name="idEmissioner"/> Aceita letras e espaços. Tamanho de 2 a 10<br/>
-            Estado:
+            <label>Número:</label>
+            <input type="text" name="idNumber"/> 
+            <label class="Small">Exemplo: 123456789 ou 12345678</label>
+            <label>Emissor:</label>
+            <input type="text" name="idEmissioner"/> 
+            <label class="Small">Aceita letras e espaços. Tamanho de 2 a 10</label>
+            <label>Estado:</label>
             <select name="idState">
             <%
                 List<String> stateNames = Util.getStateNames();
@@ -61,12 +68,14 @@
                     out.println("<option value='#'>#</option>".replaceAll("#", stateName));
                 }
             %>
-            </select> Escolha uma opção<br/>
-            Data de emissão:
-            <input type="text" name="idEmissionDate"/> Exemplo: 25/05/1990 ou 25/5/1990 ou 25/05/90<br/>
+            </select> 
+            <label class="Small">Escolha uma opção</label>
+            <label>Data de emissão:</label>
+            <input type="text" name="idEmissionDate"/> 
+            <label class="Small">Exemplo: 25/05/1990 ou 25/5/1990 ou 25/05/90</label>
             
             <h3>Nascimento</h3>
-            País:
+            <label>País:</label>
             <select name="birthCountry">
                 <%
                 for (String countryName : countryNames)
@@ -74,8 +83,9 @@
                     out.println("<option value='#'>#</option>".replaceAll("#", countryName));
                 }
                 %>
-            </select> Escolha uma opção<br/>
-            Estado:
+            </select> 
+            <label class="Small">Escolha uma opção</label>
+            <label>Estado:</label>
             <select name="birthState">
                 <%
                     for (String stateName : stateNames)
@@ -83,20 +93,26 @@
                         out.println("<option value='#'>#</option>".replaceAll("#", stateName));
                     }
                 %>
-            </select> Escolha uma opção<br/>
-            Cidade:
-            <input type="text" name="birthCity"/> Aceita letras e espaços. Tamanho de 2 a 40<br/>
-            Data:
-            <input type="text" name="birthDate"/> Exemplo: 25/05/1990 ou 25/5/1990 ou 25/05/90<br/>
+            </select> 
+            <label class="Small">Escolha uma opção</label>
+            <label>Cidade:</label>
+            <input type="text" name="birthCity"/> 
+            <label class="Small">Aceita letras e espaços. Tamanho de 2 a 40</label>
+            <label>Data:</label>
+            <input type="text" name="birthDate"/> 
+            <label class="Small">Exemplo: 25/05/1990 ou 25/5/1990 ou 25/05/90</label>
             
             <h3>Passaporte</h3>
-            Número:
-            <input type="text" name="passportNumber"/> Segue o modelo XXxxxxxx. Exemplo: AB123456<br/>
-            Data de validade:
-            <input type="text" name="passportValidityDate"/> Exemplo: 25/05/1990 ou 25/5/1990 ou 25/05/90<br/>
-            Data de emissão:
-            <input type="text" name="passportEmissionDate"/> Exemplo: 25/05/1990 ou 25/5/1990 ou 25/05/90<br/>
-            País:
+            <label>Número:</label>
+            <input type="text" name="passportNumber"/> 
+            <label class="Small">Segue o modelo XXxxxxxx. Exemplo: AB123456</label>
+            <label>Data de validade:</label>
+            <input type="text" name="passportValidityDate"/> 
+            <label class="Small">Exemplo: 25/05/1990 ou 25/5/1990 ou 25/05/90</label>
+            <label>Data de emissão:</label>
+            <input type="text" name="passportEmissionDate"/> 
+            <label class="Small">Exemplo: 25/05/1990 ou 25/5/1990 ou 25/05/90</label>
+            <label>País:</label>
             <select name="passportCountry">
                 <%
                 for (String countryName : countryNames)
@@ -104,22 +120,28 @@
                     out.println("<option value='#'>#</option>".replaceAll("#", countryName));
                 }
                 %>
-            </select> Escolha uma opção<br/>
+            </select> 
+            <label class="Small">Escolha uma opção</label>
             
             <h3>Filiação</h3>
-            Pai:
-            <input type="text" name="filiationFatherName"/> Aceita letras e espaços. Tamanho de 2 a 30<br/>
-            Mãe:
-            <input type="text" name="filiationMotherName"/> Aceita letras e espaços. Tamanho de 2 a 30<br/>
+            <label>Pai:</label>
+            <input type="text" name="filiationFatherName"/> 
+            <label class="Small">Aceita letras e espaços. Tamanho de 2 a 30</label>
+            <label>Mãe:</label>
+            <input type="text" name="filiationMotherName"/> 
+            <label class="Small">Aceita letras e espaços. Tamanho de 2 a 30</label>
             
             <h3>Endereço</h3>
-            Logradouro:
-            <input type="text" name="addressStreet"/> Aceita letras, espaços e números. Tamanho de 4 a 50<br/>
-            CEP:
-            <input type="text" name="addressZipCode"/> Aceita números. Tamanho de 6 a 30<br/>
-            Cidade:
-            <input type="text" name="addressCity"/> Aceita letras e espaços. Tamanho de 2 a 40<br/>
-            País:
+            <label>Logradouro:</label>
+            <input type="text" name="addressStreet"/> 
+            <label class="Small">Aceita letras, espaços e números. Tamanho de 4 a 50</label>
+            <label>CEP:</label>
+            <input type="text" name="addressZipCode"/> 
+            <label class="Small">Aceita números. Tamanho de 6 a 30</label>
+            <label>Cidade:</label>
+            <input type="text" name="addressCity"/> 
+            <label class="Small">Aceita letras e espaços. Tamanho de 2 a 40</label>
+            <label>País:</label>
             <select name="addressCountry">
                 <%
                 for (String countryName : countryNames)
@@ -127,10 +149,12 @@
                     out.println("<option value='#'>#</option>".replaceAll("#", countryName));
                 }
                 %>
-            </select> Escolha uma opção<br/>
-            Bairro:
-            <input type="text" name="addressDistrict"/> Aceita letras e espaços. Tamanho de 2 a 40<br/>
-            Estado:
+            </select> 
+            <label class="Small">Escolha uma opção</label>
+            <label>Bairro:</label>
+            <input type="text" name="addressDistrict"/> 
+            <label class="Small">Aceita letras e espaços. Tamanho de 2 a 40</label>
+            <label>Estado:</label>
             <select name="addressState">
                 <%
                     for (String stateName : stateNames)
@@ -138,22 +162,29 @@
                         out.println("<option value='#'>#</option>".replaceAll("#", stateName));
                     }
                 %>
-            </select> Escolha uma opção<br/>
-            Telefone:
-            <input type="text" name="addressPhone"/> Aceita números. Tamanho de 6 a 30<br/>
+            </select> 
+            <label class="Small">Escolha uma opção</label>
+            <label>Telefone:</label>
+            <input type="text" name="addressPhone"/> 
+            <label class="Small">Aceita números. Tamanho de 6 a 30</label>
             
             <h3>Endereço Profissional</h3>
-            Empresa:
-            <input type="text" name="professionalAddressCompany"/> Aceita letras e espaços. Tamanho de 2 a 40<br/>
-            Unidade:
-            <input type="text" name="professionalAddressUnit"/> Aceita letras, espaços e números. Tamanho de 2 a 30<br/>
-            Rua:
-            <input type="text" name="professionalAddressStreet"/> Aceita letras, espaços e números. Tamanho de 4 a 50<br/>
-            CEP:
-            <input type="text" name="professionalAddressZipCode"/> Aceita números. Tamanho de 6 a 30<br/>
-            Cidade:
-            <input type="text" name="professionalAddressCity"/> Aceita letras e espaços. Tamanho de 2 a 40<br/>
-            País:
+            <label>Empresa:</label>
+            <input type="text" name="professionalAddressCompany"/> 
+            <label class="Small">Aceita letras e espaços. Tamanho de 2 a 40</label>
+            <label>Unidade:</label>
+            <input type="text" name="professionalAddressUnit"/> 
+            <label class="Small">Aceita letras, espaços e números. Tamanho de 2 a 30</label>
+            <label>Rua:</label>
+            <input type="text" name="professionalAddressStreet"/> 
+            <label class="Small">Aceita letras, espaços e números. Tamanho de 4 a 50</label>
+            <label>CEP:</label>
+            <input type="text" name="professionalAddressZipCode"/> 
+            <label class="Small">Aceita números. Tamanho de 6 a 30</label>
+            <label>Cidade:</label>
+            <input type="text" name="professionalAddressCity"/> 
+            <label class="Small">Aceita letras e espaços. Tamanho de 2 a 40</label>
+            <label>País:</label>
             <select name="professionalAddressCountry">
                 <%
                 for (String countryName : countryNames)
@@ -161,10 +192,12 @@
                     out.println("<option value='#'>#</option>".replaceAll("#", countryName));
                 }
                 %>
-            </select> Escolha uma opção<br/>
-            Bairro:
-            <input type="text" name="professionalAddressDistrict"/> Aceita letras e espaços. Tamanho de 2 a 40<br/>
-            Estado:
+            </select> 
+            <label class="Small">Escolha uma opção</label>
+            <label>Bairro:</label>
+            <input type="text" name="professionalAddressDistrict"/>
+            <label class="Small">Aceita letras e espaços. Tamanho de 2 a 40</label>
+            <label>Estado:</label>
             <select name="professionalAddressState">
                 <%
                     for (String stateName : stateNames)
@@ -172,13 +205,16 @@
                         out.println("<option value='#'>#</option>".replaceAll("#", stateName));
                     }
                 %>
-            </select> Escolha uma opção<br/>
-            Telefone:
-            <input type="text" name="professionalAddressPhone"/> Aceita números. Tamanho de 6 a 30<br/>
+            </select> 
+            <label class="Small">Escolha uma opção</label>
+            <label>Telefone:</label>
+            <input type="text" name="professionalAddressPhone"/> 
+            <label class="Small">Aceita números. Tamanho de 6 a 30</label>
             
             <h3>Outros</h3>
-            Email:
-            <input type="text" name="miscEmail"/> Qualquer email válido. Exemplo: test@test.com<br/>
+            <label>Email:</label>
+            <input type="text" name="miscEmail"/> 
+            <label class="Small">Qualquer email válido. Exemplo: test@test.com</label>
             
             <input type="submit" value="Enviar"/>
             
