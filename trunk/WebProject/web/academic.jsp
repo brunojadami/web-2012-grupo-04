@@ -8,23 +8,23 @@
 <html>
     <%@ include file="head.jsp" %>
     <body>
-        <script type="text/javascript" src="script/validation.js"></script>
-        <script type="text/javascript" src="script/academic.js"></script>
+        <script type="text/javascript" src="script/validation.js" charset="utf-8"></script>
+        <script type="text/javascript" src="script/academic.js" charset="utf-8"></script>
         
         <h1>Formação acadêmica</h1>
         
-        <%
+        <label class="Error"><%
         String message = (String) request.getAttribute("message");
         if (message != null)
         {
             out.println(message);
         }
-        %>
+        %></label>
         
         <form name="form" method="POST" action="./Academic" onsubmit="return validateForm();">
             
             <h3>Geral</h3>
-            Nível:
+            <label>Nível:</label>
             <select name="generalLevel">
                 <%
                 List<String> levelNames = Util.getAcademicLevelNames();
@@ -33,14 +33,18 @@
                     out.println("<option value='#'>#</option>".replaceAll("#", levelName));
                 }
                 %>
-            </select> Escolha uma opção<br/>
-            Tipo:
-            <input type="text" name="generalType"/> Aceita letras e espaços. Tamanho de 5 a 50<br/>
-            Instituto:
-            <input type="text" name="generalInstitute"/> Aceita letras e espaços. Tamanho de 2 a 30<br/>
-            Curso:
-            <input type="text" name="generalCourse"/> Aceita letras e espaços. Tamanho de 4 a 40<br/>
-            Estado:
+            </select> 
+            <label class="Small"> Escolha uma opção</label>
+            <label>Tipo:</label>
+            <input type="text" name="generalType"/> 
+            <label class="Small">Aceita letras e espaços. Tamanho de 5 a 50</label>
+            <label>Instituto:</label>
+            <input type="text" name="generalInstitute"/> 
+            <label class="Small">Aceita letras e espaços. Tamanho de 2 a 30</label>
+            <label>Curso:</label>
+            <input type="text" name="generalCourse"/> 
+            <label class="Small">Aceita letras e espaços. Tamanho de 4 a 40</label>
+            <label>Estado:</label>
             <select name="generalStatus">
                 <%
                 List<String> statusNames = Util.getAcademicStatusNames();
@@ -49,25 +53,32 @@
                     out.println("<option value='#'>#</option>".replaceAll("#", statusName));
                 }
                 %>
-            </select> Escolha uma opção<br/>
+            </select> 
+            <label class="Small">Escolha uma opção</label>
             
             <h3>Período</h3>
-            Início:
-            <input type="text" name="periodStartDate"/> Exemplo: 25/05/1990 ou 25/5/1990 ou 25/05/90<br/>
-            Término:
-            <input type="text" name="periodEndDate"/> Exemplo: 25/05/1990 ou 25/5/1990 ou 25/05/90<br/>
+            <label>Início:</label>
+            <input type="text" name="periodStartDate"/> 
+            <label class="Small">Exemplo: 25/05/1990 ou 25/5/1990 ou 25/05/90</label>
+            <label>Término:</label>
+            <input type="text" name="periodEndDate"/> 
+            <label class="Small">Exemplo: 25/05/1990 ou 25/5/1990 ou 25/05/90</label>
             
             <h3>Bolsa</h3>
-            Com bolsa?
+            <label>Com bolsa?</label>
             <select name="scholarshipPresence">
                 <option value="no">Não</option>
                 <option value="yes">Sim</option>
-            </select> Escolha uma opção<br/>
-            Agência financiadora:
-            <input type="text" name="scholarshipAgency"/> Aceita letras e espaços. Tamanho de 2 a 30<br/>
+            </select> 
+            <label class="Small">Escolha uma opção</label>
+            <label>Agência financiadora:</label>
+            <input type="text" name="scholarshipAgency"/> 
+            <label class="Small">Aceita letras e espaços. Tamanho de 2 a 30</label>
             
-            Informações adicionais:
-            <textarea name="miscInfo"></textarea> Aceita todos os caracteres. Tamanho até 300<br/>
+            <h3>Outros</h3>
+            <label>Informações adicionais:</label>
+            <textarea name="miscInfo"></textarea> 
+            <label class="Small">Aceita todos os caracteres. Tamanho até 300</label>
             
             <input type="submit" value="Adicionar"/>
             

@@ -28,42 +28,42 @@ public class PersonalInfo extends HttpServlet
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        String generalName = (String) request.getAttribute("generalName");
-        String generalCitationName = (String) request.getAttribute("generalCitationName");
-        String generalCountry = (String) request.getAttribute("generalCountry");
-        String generalCpf = (String) request.getAttribute("generalCpf");
-        String generalSex = (String) request.getAttribute("generalSex");
-        String idNumber = (String) request.getAttribute("idNumber");
-        String idEmissioner = (String) request.getAttribute("idEmissioner");
-        String idState = (String) request.getAttribute("idState");
-        String idEmissionDate = (String) request.getAttribute("idEmissionDate");
-        String birthCountry = (String) request.getAttribute("birthCountry");
-        String birthState = (String) request.getAttribute("birthState");
-        String birthCity = (String) request.getAttribute("birthCity");
-        String birthDate = (String) request.getAttribute("birthDate");
-        String passportNumber = (String) request.getAttribute("passportNumber");
-        String passportValidityDate = (String) request.getAttribute("passportValidityDate");
-        String passportEmissionDate = (String) request.getAttribute("passportEmissionDate");
-        String passportCountry = (String) request.getAttribute("passportCountry");
-        String filiationFatherName = (String) request.getAttribute("filiationFatherName");
-        String filiationMotherName = (String) request.getAttribute("filiationMotherName");
-        String addressStreet = (String) request.getAttribute("addressStreet");
-        String addressZipCode = (String) request.getAttribute("addressZipCode");
-        String addressCity = (String) request.getAttribute("addressCity");
-        String addressCountry = (String) request.getAttribute("addressCountry");
-        String addressDistrict = (String) request.getAttribute("addressDistrict");
-        String addressState = (String) request.getAttribute("addressState");
-        String addressPhone = (String) request.getAttribute("addressPhone");
-        String professionalAddressCompany = (String) request.getAttribute("professionalAddressCompany");
-        String professionalAddressUnit = (String) request.getAttribute("professionalAddressUnit");
-        String professionalAddressStreet = (String) request.getAttribute("professionalAddressStreet");
-        String professionalAddressZipCode = (String) request.getAttribute("professionalAddressZipCode");
-        String professionalAddressCity = (String) request.getAttribute("professionalAddressCity");
-        String professionalAddressCountry = (String) request.getAttribute("professionalAddressCountry");
-        String professionalAddressDistrict = (String) request.getAttribute("professionalAddressDistrict");
-        String professionalAddressState = (String) request.getAttribute("professionalAddressState");
-        String professionalAddressPhone = (String) request.getAttribute("professionalAddressPhone");
-        String miscEmail = (String) request.getAttribute("miscEmail");
+        String generalName = (String) request.getParameter("generalName");
+        String generalCitationName = (String) request.getParameter("generalCitationName");
+        String generalCountry = (String) request.getParameter("generalCountry");
+        String generalCpf = (String) request.getParameter("generalCpf");
+        String generalSex = (String) request.getParameter("generalSex");
+        String idNumber = (String) request.getParameter("idNumber");
+        String idEmissioner = (String) request.getParameter("idEmissioner");
+        String idState = (String) request.getParameter("idState");
+        String idEmissionDate = (String) request.getParameter("idEmissionDate");
+        String birthCountry = (String) request.getParameter("birthCountry");
+        String birthState = (String) request.getParameter("birthState");
+        String birthCity = (String) request.getParameter("birthCity");
+        String birthDate = (String) request.getParameter("birthDate");
+        String passportNumber = (String) request.getParameter("passportNumber");
+        String passportValidityDate = (String) request.getParameter("passportValidityDate");
+        String passportEmissionDate = (String) request.getParameter("passportEmissionDate");
+        String passportCountry = (String) request.getParameter("passportCountry");
+        String filiationFatherName = (String) request.getParameter("filiationFatherName");
+        String filiationMotherName = (String) request.getParameter("filiationMotherName");
+        String addressStreet = (String) request.getParameter("addressStreet");
+        String addressZipCode = (String) request.getParameter("addressZipCode");
+        String addressCity = (String) request.getParameter("addressCity");
+        String addressCountry = (String) request.getParameter("addressCountry");
+        String addressDistrict = (String) request.getParameter("addressDistrict");
+        String addressState = (String) request.getParameter("addressState");
+        String addressPhone = (String) request.getParameter("addressPhone");
+        String professionalAddressCompany = (String) request.getParameter("professionalAddressCompany");
+        String professionalAddressUnit = (String) request.getParameter("professionalAddressUnit");
+        String professionalAddressStreet = (String) request.getParameter("professionalAddressStreet");
+        String professionalAddressZipCode = (String) request.getParameter("professionalAddressZipCode");
+        String professionalAddressCity = (String) request.getParameter("professionalAddressCity");
+        String professionalAddressCountry = (String) request.getParameter("professionalAddressCountry");
+        String professionalAddressDistrict = (String) request.getParameter("professionalAddressDistrict");
+        String professionalAddressState = (String) request.getParameter("professionalAddressState");
+        String professionalAddressPhone = (String) request.getParameter("professionalAddressPhone");
+        String miscEmail = (String) request.getParameter("miscEmail");
         
         Validator validator = new Validator();
         
@@ -140,9 +140,47 @@ public class PersonalInfo extends HttpServlet
                 ? validator.validateEmail(miscEmail, "Email inválido.") : validatorMessage;
         
         RequestDispatcher dispatcher;
+        
+        // OBS: há uma certa 'repetição' de comandos. Isso será removido quando o 'Model' for implementado.
         if (validatorMessage == null)
         {
             dispatcher = request.getRequestDispatcher("show_operation.jsp");
+            request.setAttribute("Attribute:00.Nome", generalName);
+            request.setAttribute("Attribute:01.Nome de CItação", generalCitationName);
+            request.setAttribute("Attribute:02.País", generalCountry);
+            request.setAttribute("Attribute:03.CPF", generalCpf);
+            request.setAttribute("Attribute:04.Sexo", generalSex);
+            request.setAttribute("Attribute:05.Número", idNumber);
+            request.setAttribute("Attribute:06.Emissor", idEmissioner);
+            request.setAttribute("Attribute:07.Estado", idState);
+            request.setAttribute("Attribute:08.Data de Emissão", idEmissionDate);
+            request.setAttribute("Attribute:09.País", birthCountry);
+            request.setAttribute("Attribute:10.Estado", birthState);
+            request.setAttribute("Attribute:11.Cidade", birthCity);
+            request.setAttribute("Attribute:12.Data de Aniversário", birthDate);
+            request.setAttribute("Attribute:13.Número do Passaporte", passportNumber);
+            request.setAttribute("Attribute:14.Data de Validade", passportValidityDate);
+            request.setAttribute("Attribute:15.Data de Emissão", passportEmissionDate);
+            request.setAttribute("Attribute:16.País", passportCountry);
+            request.setAttribute("Attribute:17.Nome do Pai", filiationFatherName);
+            request.setAttribute("Attribute:18.Nome da Mãe", filiationMotherName);
+            request.setAttribute("Attribute:19.Logradouro", addressStreet);
+            request.setAttribute("Attribute:20.CEP", addressZipCode);
+            request.setAttribute("Attribute:21.Cidade", addressCity);
+            request.setAttribute("Attribute:22.País", addressCountry);
+            request.setAttribute("Attribute:23.Bairro", addressDistrict);
+            request.setAttribute("Attribute:24.Estado", addressState);
+            request.setAttribute("Attribute:25.Telefone", addressPhone);
+            request.setAttribute("Attribute:26.Empresa", professionalAddressCompany);
+            request.setAttribute("Attribute:27.Unidade", professionalAddressUnit);
+            request.setAttribute("Attribute:28.Logradouro", professionalAddressStreet);
+            request.setAttribute("Attribute:29.CEP", professionalAddressZipCode);
+            request.setAttribute("Attribute:30.Cidade", professionalAddressCity);
+            request.setAttribute("Attribute:31.País", professionalAddressCountry);
+            request.setAttribute("Attribute:32.Bairro", professionalAddressDistrict);
+            request.setAttribute("Attribute:33.Estado", professionalAddressState);
+            request.setAttribute("Attribute:34.Telefone", professionalAddressPhone);
+            request.setAttribute("Attribute:35.Email", miscEmail);
         }
         else
         {

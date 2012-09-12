@@ -6,9 +6,10 @@
  */
 function validate(value, regex, message)
 {
-    if (!regex.test(value))
+    if (regex != null && !regex.test(value))
     {
-        alert(message);
+        document.getElementById('errorLabel').innerHTML = message;
+        window.scrollTo(0, 0);
         return false;
     }
     return true;

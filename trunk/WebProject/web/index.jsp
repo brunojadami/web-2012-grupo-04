@@ -7,25 +7,30 @@
 <html>
     <%@ include file="head.jsp" %>
     <body>
-        <script type="text/javascript" src="script/validation.js"></script>
-        <script type="text/javascript" src="script/index.js"></script>
+        <script type="text/javascript" src="script/validation.js" charset="utf-8"></script>
+        <script type="text/javascript" src="script/index.js" charset="utf-8"></script>
         
         <h1>Entrar</h1>
         
-        <%
+        <label class="Error"><%
         String message = (String) request.getAttribute("message");
         if (message != null)
         {
             out.println(message);
         }
-        %>
+        %></label>
         
         <form name="form" method="POST" action="./Login" onsubmit="return validateForm();">
-            Email:
-            <input type="text" name="email"/> Qualquer email válido. Exemplo: test@test.com<br/>
-            Senha:
-            <input type="password" name="password"/> Aceita todos os tipos de caracteres. Tamanho de 6 a 30<br/>
-            <input type="submit" value="Entrar"/><br/>
+            
+            <h3>Entrar</h3>
+            <label>Email:</label>
+            <input type="text" name="email"/>
+            <label class="Small">Qualquer email válido. Exemplo: test@test.com</label>
+            <label>Senha:</label>
+            <input type="password" name="password"/> 
+            <label class="Small">Aceita todos os tipos de caracteres. Tamanho de 6 a 30</label>
+            <input type="submit" value="Entrar"/>
+            
         </form>
     </body>
 </html>
