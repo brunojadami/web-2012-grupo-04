@@ -11,6 +11,8 @@
         <script type="text/javascript" src="script/validation.js" charset="utf-8"></script>
         <script type="text/javascript" src="script/production.js" charset="utf-8"></script>
         
+        <h1>Produções bibliográficas</h1>
+        
 	<label class="Error" id="errorLabel">
         <%
         String message = (String) request.getAttribute("message");
@@ -20,6 +22,8 @@
         }
         %>
 	</label>
+        
+        <br/><br/><br/>
         
 	<h1>Artigos completos publicados em periódicos</h1>
 	
