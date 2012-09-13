@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import webproject.misc.Util;
 import webproject.validation.Validator;
 
 /**
@@ -40,6 +39,8 @@ public class Experience extends HttpServlet
         String periodYear = (String) request.getParameter("periodYear");
         String otherInfo = (String) request.getParameter("otherInfo");
         
+        // Nota: a validação no servidor ainda não é feita nessa parte do trabalho.
+        // A única coisa validada aqui são os combo boxes.
         Validator validator = new Validator();
         
         String validatorMessage = validator.validateYesNoOption(bondEmployment, "Possui vínculo empregatício? inválido.");
@@ -49,6 +50,7 @@ public class Experience extends HttpServlet
                 ? validator.validateYesNoOption(periodFinished, "Estado do período inválido.") : validatorMessage;
     
         RequestDispatcher dispatcher;
+        
         // OBS: há uma certa 'repetição' de comandos. Isso será removido quando o 'Model' for implementado.
         if (validatorMessage == null)
         {

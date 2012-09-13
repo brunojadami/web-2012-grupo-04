@@ -16,6 +16,7 @@ function validateAcceptedForm()
 {
     var form = document.forms["acceptedForm"];
     
+    // Nota: todos os campos do tipo 'select' possuem a validação null. Eles só são validados no servidor.
     return validate(form["generalTitle"].value, /^[a-z ]{4,40}$/i, "Título inválido.")
 	&& validate(form["generalLanguage"].value, null, "Idioma inválido.")
 	&& validate(form["generalYear"].value, /^[0-9]{2,4}$/i, "Ano previsto para publicação inválido.")
@@ -33,6 +34,7 @@ function validateBookForm()
 {
     var form = document.forms["bookForm"];
     
+    // Nota: todos os campos do tipo 'select' possuem a validação null. Eles só são validados no servidor.
     return validate(form["bookType"].value, null, "Tipo de produção inválido.")
 	&& validate(form["bookISSN"].value, /[a-z0-9 ]{4,40}$/i, "DOI ou ISSN inválido.");
 }
