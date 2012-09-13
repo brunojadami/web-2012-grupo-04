@@ -38,7 +38,7 @@ public class Validator
      */
     public String validateDate(String date, String errorMessage)
     {
-        return date.toString().matches("[0-9]{1,2}\\/[0-9]{1,2}\\/[0-9]{2,4}")
+        return date.toString().matches("^[0-9]{1,2}\\/[0-9]{1,2}\\/[0-9]{2,4}")
                 ? null : errorMessage;
     }
     
@@ -49,7 +49,7 @@ public class Validator
      */
     public String validateYesNoOption(String yesNo, String errorMessage)
     {
-        return yesNo.toLowerCase().matches("(yes)|(no)")
+        return yesNo.toLowerCase().matches("yes|no")
                 ? null : errorMessage;
     }
     
@@ -60,7 +60,7 @@ public class Validator
      */
     public String validateEmail(String email, String errorMessage)
     {
-        return validate(email, ".*\\@.*\\..{2,4}", errorMessage);
+        return validate(email, "^.*\\@.*\\..{2,4}$", errorMessage);
     }
     
     /**
@@ -92,7 +92,7 @@ public class Validator
      */
     public String validateSex(String sex, String errorMessage)
     {
-        return sex.toLowerCase().matches("(male)|(female)")
+        return sex.toLowerCase().matches("male|female")
                 ? null : errorMessage;
     }
 
