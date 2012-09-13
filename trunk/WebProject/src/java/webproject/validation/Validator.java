@@ -95,4 +95,16 @@ public class Validator
         return sex.toLowerCase().matches("(male)|(female)")
                 ? null : errorMessage;
     }
+
+    /**
+     * 
+     * @param formType A string do tipo do form a ser validado.
+     * @param errorMessage Mensagem de erro.
+     * @return Nulo se sucesso, a mensagem de erro caso erro.
+     */
+    public String validateProductionFormType(String formType, String errorMessage)
+    {
+	return (formType.equals("published") || formType.equals("accepted") || formType.equals("book"))
+		? null : errorMessage;
+    }
 }

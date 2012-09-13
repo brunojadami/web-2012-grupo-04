@@ -41,6 +41,7 @@ form, ul, table
     padding: 15px;
     width: 50%;
     margin: auto;
+    margin-bottom: 5%;
     display: block;
     background-color: blue;
 }

@@ -34,6 +34,15 @@ public class Util
     }
     
     /**
+     * @return Uma lista com os níveis de formação complementares.
+     */
+    public static List<String> getComplementaryLevelNames()
+    {
+        return Arrays.asList(new String[] { 
+            "Curso De Curta Duração", "Extensão Universitária", "MBA", "Outros"});
+    }
+    
+    /**
      * @return Uma lista com os estados brasileiros.
      */
     public static List<String> getStateNames()
@@ -67,5 +76,14 @@ public class Util
         Collections.sort(countryNames_);
         
         return countryNames_;
+    }
+    
+    /**
+     * @return Uma lista com os idiomas disponíveis.
+     */
+    public static List<String> getLanguages()
+    {
+        return Arrays.asList(new String[] { 
+            "Português"});
     }
 }
