@@ -54,10 +54,10 @@ public class Complementary extends HttpServlet
             request.setAttribute("Attribute:01.Instituição", generalInstitution);
             request.setAttribute("Attribute:02.Curso", generalCourse);
             request.setAttribute("Attribute:03.Estado", generalStatus);
-	    request.setAttribute("Attribute:04.Carga Horária", generalTime);
-            request.setAttribute("Attribute:05.Ano de Início", periodBegin);
-            request.setAttribute("Attribute:06.Ano de Término", periodEnd);
-            request.setAttribute("Attribute:07.Com Bolsa?", scholarshipPresence);
+	    request.setAttribute("Attribute:04.Carga horária", generalTime);
+            request.setAttribute("Attribute:05.Ano de início", periodBegin);
+            request.setAttribute("Attribute:06.Ano de término", periodEnd);
+            request.setAttribute("Attribute:07.Com bolsa?", scholarshipPresence);
             request.setAttribute("Attribute:08.Agência", scholarshipAgency);
         }
         else
