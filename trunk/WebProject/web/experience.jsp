@@ -39,26 +39,25 @@
                 <option value="no">Não</option>
                 <option value="yes">Sim</option>
             </select> 
-	    <label class="Small">Selecione uma opção.</label>
+	    <label class="Small">Selecione uma opção</label>
             <label>Enquadramento funcional:</label>
             <input type="text" name="bondFunctional"/> 
 	    <label class="Small">Aceita letras e espaços. Tamanho de 4 a 40</label>
             <label>Carga horária:</label>
             <input type="text" name="bondTime"/> 
-	    <label class="Small">Em horas semanais (ex: 8).</label>
+	    <label class="Small">Em horas semanais. Exemplo: 8</label>
             <label>Dedicação exclusiva:</label>
             <select name="bondExclusive">
                 <option value="no">Não</option>
                 <option value="yes">Sim</option>
             </select> 
-	    <label class="Small">Selecione uma opção.</label>
+	    <label class="Small">Selecione uma opção</label>
             
             <h3>Período</h3>
-            <label>Início:</label>
-            <label>Mês:</label>
+            <label>Mês de início:</label>
 	    <input type="text" name="periodMonth"/>
-	    <label class="Small">Use números. Ex: 08 (agosto)</label>
-            <label>Ano:</label>
+	    <label class="Small">Use números. Exemplo: 8 (agosto)</label>
+            <label>Ano de início:</label>
 	    <input type="text" name="periodYear"/>
 	    <label class="Small">Ex: 2012</label>
 	    <label>Finalizado?</label>
@@ -66,7 +65,7 @@
                 <option value="no">Atual (não finalizado)</option>
                 <option value="yes">Anterior (finalizado)</option>
             </select> 
-	    <label class="Small">Selecione uma opção.</label>
+	    <label class="Small">Selecione uma opção</label>
             
             <h3>Outras informações</h3>
             <textarea name="otherInfo"></textarea> 

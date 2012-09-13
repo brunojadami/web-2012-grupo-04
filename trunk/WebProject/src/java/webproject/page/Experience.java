@@ -51,16 +51,16 @@ public class Experience extends HttpServlet
         if (validatorMessage == null)
         {
             dispatcher = request.getRequestDispatcher("show_operation.jsp");
-            request.setAttribute("Attribute:00.Instituição", profInstitution);
-            request.setAttribute("Attribute:01.Tipo do Vínculo", bondType);
-            request.setAttribute("Attribute:02.Vínculo Empregatício?", bondEmployment);
-            request.setAttribute("Attribute:03.Enquadramento Funcional", bondFunctional);
-	    request.setAttribute("Attribute:04.Carga Horária", bondTime);
-            request.setAttribute("Attribute:05.Dedicação Exclusiva?", bondExclusive);
-            request.setAttribute("Attribute:06.Mês de Início", periodMonth);
-	    request.setAttribute("Attribute:07.Ano de Início", periodYear);
+            request.setAttribute("Attribute:00.instituição", profInstitution);
+            request.setAttribute("Attribute:01.Tipo do vínculo", bondType);
+            request.setAttribute("Attribute:02.Vínculo empregatício?", bondEmployment);
+            request.setAttribute("Attribute:03.Enquadramento funcional", bondFunctional);
+	    request.setAttribute("Attribute:04.Carga horária", bondTime);
+            request.setAttribute("Attribute:05.Dedicação exclusiva?", bondExclusive);
+            request.setAttribute("Attribute:06.Mês de início", periodMonth);
+	    request.setAttribute("Attribute:07.Ano de início", periodYear);
             request.setAttribute("Attribute:08.Finalizado?", periodFinished);
-	    request.setAttribute("Attribute:09.Outras Informações", otherInfo);
+	    request.setAttribute("Attribute:09.Outras informações", otherInfo);
         }
         else
         {

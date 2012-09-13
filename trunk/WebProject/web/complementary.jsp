@@ -56,15 +56,15 @@
 	    <label class="Small">Escolha uma opção</label>
             <label>Carga horária:</label>
             <input type="text" name="generalTime"/> 
-	    <label class="Small">Em horas semanais (ex: 8).</label>
+	    <label class="Small">Em horas semanais. Exemplo: 8</label>
             
             <h3>Período</h3>
             <label>Ano de início:</label>
             <input type="text" name="periodBegin"/>
-	    <label class="Small">Ex: 2010</label>
+	    <label class="Small">Exemplo: 2010</label>
             <label>Ano de término:</label>
             <input type="text" name="periodEnd"/>
-	    <label class="Small">Ex: 2012</label>
+	    <label class="Small">Exemplo: 2012</label>
             
             <h3>Bolsa</h3>
             <label>Com bolsa?</label>
@@ -72,7 +72,7 @@
                 <option value="no">Não</option>
                 <option value="yes">Sim</option>
             </select> 
-	    <label class="Small">Selecione uma opção.</label>
+	    <label class="Small">Selecione uma opção</label>
             <label>Agência financiadora:</label>
             <input type="text" name="scholarshipAgency"/> 
 	    <label class="Small">Aceita letras e espaços. Tamanho de 4 a 40</label>

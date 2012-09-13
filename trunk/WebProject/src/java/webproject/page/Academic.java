@@ -61,9 +61,9 @@ public class Academic extends HttpServlet
             request.setAttribute("Attribute:02.Instituto", generalInstitute);
             request.setAttribute("Attribute:03.Curso", generalCourse);
             request.setAttribute("Attribute:04.Estado", generalStatus);
-            request.setAttribute("Attribute:05.Data de Início", periodStartDate);
-            request.setAttribute("Attribute:06.Data de Término", periodEndDate);
-            request.setAttribute("Attribute:07.Com Bolsa?", scholarshipPresence);
+            request.setAttribute("Attribute:05.Data de início", periodStartDate);
+            request.setAttribute("Attribute:06.Data de término", periodEndDate);
+            request.setAttribute("Attribute:07.Com bolsa?", scholarshipPresence);
             request.setAttribute("Attribute:08.Agência", scholarshipAgency);
             request.setAttribute("Attribute:09.Outros", miscInfo);
         }

@@ -41,7 +41,7 @@ public class Production extends HttpServlet
         String formType = (String) request.getParameter("formType");
         
         Validator validator = new Validator();
-	String validatorMessage = validator.validateProductionFormType(formType, "Invalid form type.");
+	String validatorMessage = validator.validateProductionFormType(formType, "Tipo do formulário inválido.");
     
         RequestDispatcher dispatcher;
         if (validatorMessage == null)
@@ -49,20 +49,20 @@ public class Production extends HttpServlet
             dispatcher = request.getRequestDispatcher("show_operation.jsp");
 	    if (formType.equals("published"))
 	    {
-		request.setAttribute("Attribute:00.DOI, ISSN ou parte do nome do Periódico", completeName);
+		request.setAttribute("Attribute:00.DOI, ISSN ou parte do nome do periódico", completeName);
 	    }
 	    else if (formType.equals("accepted"))
 	    {
 		request.setAttribute("Attribute:00.Título", generalTitle);
 		request.setAttribute("Attribute:01.Idioma", generalLanguage);
-		request.setAttribute("Attribute:02.Ano previsto para Publicação", generalYear);
-		request.setAttribute("Attribute:03.Título do periódico/revista em que o artigo será Publicado", detailedTitle);
+		request.setAttribute("Attribute:02.Ano previsto para publicação", generalYear);
+		request.setAttribute("Attribute:03.Título do periódico/revista em que o artigo será publicado", detailedTitle);
 		request.setAttribute("Attribute:04.ISSN", detailedISSN);
-		request.setAttribute("Attribute:05.Outras Informações", otherInfo);
+		request.setAttribute("Attribute:05.Outras informações", otherInfo);
 	    }
 	    else if (formType.equals("book"))
 	    {
-		request.setAttribute("Attribute:00.Tipo de Produção", bookType);
+		request.setAttribute("Attribute:00.Tipo de produção", bookType);
 		request.setAttribute("Attribute:01.DOI ou ISSN", bookISSN);
 	    }
         }
