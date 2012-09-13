@@ -11,6 +11,9 @@
         <ul>
             <li><a href="personal_info.jsp">Informações pessoais e endereço</a></li>
             <li><a href="academic.jsp">Formação acadêmica</a></li>
+	    <li><a href="complementary.jsp">Formação complementar</a></li>
+	    <li><a href="experience.jsp">Atuação profissional</a></li>
+	    <li><a href="production.jsp">Produção bibliográfica</a></li>
         </ul>
     </body>
 </html>
