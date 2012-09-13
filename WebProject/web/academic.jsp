@@ -13,7 +13,7 @@
         
         <h1>Formação acadêmica</h1>
         
-        <label class="Error"><%
+        <label class="Error" id="errorLabel"><%
         String message = (String) request.getAttribute("message");
         if (message != null)
         {
