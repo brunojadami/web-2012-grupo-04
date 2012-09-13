@@ -65,79 +65,29 @@ public class PersonalInfo extends HttpServlet
         String professionalAddressPhone = (String) request.getParameter("professionalAddressPhone");
         String miscEmail = (String) request.getParameter("miscEmail");
         
+        // Nota: a validação no servidor ainda não é feita nessa parte do trabalho.
+        // A única coisa validada aqui são os combo boxes.
         Validator validator = new Validator();
         
-        String validatorMessage = validator.validate(generalName, "[a-z ]{2,30}", "Nome inválido.");
-        validatorMessage = validatorMessage == null 
-                ? validator.validate(generalCitationName, "[a-z. ]{2,30}", "Nome de citação inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validateCountry(generalCountry, "País inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validate(generalCpf, "[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{2}", "CPF inválido.") : validatorMessage;
+        String validatorMessage = validator.validateCountry(generalCountry, "País inválido.");
         validatorMessage = validatorMessage == null 
                 ? validator.validateSex(generalSex, "Sexo inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(idNumber, "[0-9]{8,9}", "Número da identidade inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validate(idEmissioner, "[a-z ]{2,10}", "Emissor da identidade inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
                 ? validator.validateState(idState, "Estado da identidade inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validateDate(idEmissionDate, "Data de emissão da identidade inválida.") : validatorMessage;
         validatorMessage = validatorMessage == null 
                 ? validator.validateCountry(birthCountry, "País de nascimento inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
                 ? validator.validateState(birthState, "Estado de nascimento inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(birthCity, "[a-z ]{2,40}", "Cidade de nascimento inválida.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validateDate(birthDate, "Data de nascimento inválida.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validate(passportNumber, "[a-z]{2}[0-9]{6}", "Número do passaporte inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validateDate(passportValidityDate, "Data de validade do passaporte inválida.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validateDate(passportEmissionDate, "Data de emissão do passaporte inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
                 ? validator.validateCountry(passportCountry, "País do passaporte inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validate(filiationFatherName, "[a-z ]{2,30}", "Nome do pai inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validate(filiationMotherName, "[a-z ]{2,30}", "Nome da mãe inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validate(addressStreet, "[a-z0-9 ]{4,50}", "Rua do endereço inválida.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validate(addressZipCode, "[0-9]{6,30}", "CEP do endereço inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validate(addressCity, "[a-z ]{2,40}", "Cidade do endereço inválida.") : validatorMessage;
         validatorMessage = validatorMessage == null 
                 ? validator.validateCountry(addressCountry, "País do endereço inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(addressDistrict, "[a-z ]{2,40}", "Bairro do endereço inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
                 ? validator.validateState(addressState, "Estado do endereço inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validate(addressPhone, "[0-9]{6,30}", "Telefone do endereço inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validate(professionalAddressCompany, "[a-z ]{2,40}", "Empresa do endereço profissional inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validate(professionalAddressUnit, "[a-z0-9 ]{2,30}", "Unidade do endereço profissional inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validate(professionalAddressStreet, "[a-z0-9 ]{4,50}", "Rua do endereço profissional inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validate(professionalAddressZipCode, "[0-9]{6,30}", "CEP do endereço profissional inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validate(professionalAddressCity, "[a-z ]{2,40}", "Cidade do endereço profissional inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
                 ? validator.validateCountry(professionalAddressCountry, "País do endereço profissional inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validate(professionalAddressDistrict, "[a-z ]{2,40}", "Bairro do endereço profissional inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
                 ? validator.validateState(professionalAddressState, "Estado do endereço profissional inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validate(professionalAddressPhone, "[0-9]{6,30}", "Telefone do endereço profissional inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validateEmail(miscEmail, "Email inválido.") : validatorMessage;
         
         RequestDispatcher dispatcher;
         

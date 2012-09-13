@@ -12,7 +12,7 @@
         
         <h1>Entrar</h1>
         
-        <label class="Error"><%
+        <label class="Error" id="errorLabel"><%
         String message = (String) request.getAttribute("message");
         if (message != null)
         {

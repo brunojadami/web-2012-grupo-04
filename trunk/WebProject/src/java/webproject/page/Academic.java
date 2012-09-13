@@ -40,28 +40,16 @@ public class Academic extends HttpServlet
         String scholarshipAgency = (String) request.getParameter("scholarshipAgency");
         String miscInfo = (String) request.getParameter("miscInfo");
         
+        // Nota: a validação no servidor ainda não é feita nessa parte do trabalho.
+        // A única coisa validada aqui são os combo boxes.
         Validator validator = new Validator();
         
         String validatorMessage = validator.validateListOption(generalLevel, Util.getAcademicLevelNames(), "Nível inválido.");
         validatorMessage = validatorMessage == null 
-                ? validator.validate(generalType, "[a-z ]{5,50}", "Tipo inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validate(generalInstitute, "[a-z ]{2,30}", "Instituto inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validate(generalCourse, "[a-z ]{4,40}", "Curso inválido.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
                 ? validator.validateListOption(generalStatus, Util.getAcademicStatusNames(), "Estado inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateDate(periodStartDate, "Data de início inválida.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validateDate(periodEndDate, "Data de término inválida.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
                 ? validator.validateYesNoOption(scholarshipPresence, "Com bolsa? inválida.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validate(scholarshipAgency, "[a-z ]{2,30}", "Agência inválida.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validate(miscInfo, ".{0,300}", "Informações adicionais inválidas.") : validatorMessage;
-    
+        
         RequestDispatcher dispatcher;
         
         // OBS: há uma certa 'repetição' de comandos. Isso será removido quando o 'Model' for implementado.

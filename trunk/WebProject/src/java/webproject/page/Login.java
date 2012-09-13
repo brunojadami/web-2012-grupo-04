@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import webproject.validation.Validator;
 
 /**
  * Login servlet.
@@ -31,23 +30,11 @@ public class Login extends HttpServlet
         String email = (String) request.getParameter("email");
         String password = (String) request.getParameter("password");
         
-        Validator validator = new Validator();
+        // Nota: a validação no servidor ainda não é feita nessa parte do trabalho.
+        // A única coisa validada aqui são os combo boxes.
+        RequestDispatcher dispatcher = request.getRequestDispatcher("control_panel.jsp");
         
-        String validatorMessage = validator.validateEmail(email, "Email e senha incorretos.");
-        validatorMessage = validatorMessage == null
-                ? validator.validate(password, ".{6,30}", "Email e senha incorretos") : validatorMessage;
-        
-        RequestDispatcher dispatcher;
-        if (validatorMessage == null)
-        {
-            dispatcher = request.getRequestDispatcher("control_panel.jsp");
-            request.getSession().setAttribute("email", email);
-        }
-        else
-        {
-            dispatcher = request.getRequestDispatcher("index.jsp");
-            request.setAttribute("message", validatorMessage);
-        }
+        request.getSession().setAttribute("email", email);
         
         dispatcher.forward(request, response);
     }
