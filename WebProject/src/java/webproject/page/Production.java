@@ -42,6 +42,17 @@ public class Production extends HttpServlet
         
         Validator validator = new Validator();
 	String validatorMessage = validator.validateProductionFormType(formType, "Tipo do formulário inválido.");
+	
+	if (formType.equals("accepted"))
+	{
+	    validatorMessage = validatorMessage == null 
+                ? validator.validateListOption(generalLanguage, Util.getLanguages(), "Idioma inválido.") : validatorMessage;
+	}
+	else if (formType.equals("book"))
+	{
+	    validatorMessage = validatorMessage == null 
+                ? validator.validateListOption(bookType, Util.getProductionTypes(), "Tipo de produção inválido.") : validatorMessage;
+	}
     
         RequestDispatcher dispatcher;
         if (validatorMessage == null)
