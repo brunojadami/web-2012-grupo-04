@@ -5,7 +5,7 @@ function validateForm()
 {
     var form = document.forms["form"];
     
-    // Nota: todos os campos do tipo 'select' possuem a validação /(*)$/i. Eles só são validados no servidor.
+    // Nota: todos os campos do tipo 'select' possuem a validação null. Eles só são validados no servidor.
     return validate(form["profInstitution"].value, /^[a-z ]{4,40}$/i, "Instituição inválida.")
         
 	&& validate(form["bondType"].value, /^[a-z ]{4,40}$/i, "Tipo de vínculo inválido.")

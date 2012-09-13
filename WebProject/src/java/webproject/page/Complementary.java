@@ -39,6 +39,8 @@ public class Complementary extends HttpServlet
         String scholarshipPresence = (String) request.getParameter("scholarshipPresence");
         String scholarshipAgency = (String) request.getParameter("scholarshipAgency");
         
+        // Nota: a validação no servidor ainda não é feita nessa parte do trabalho.
+        // A única coisa validada aqui são os combo boxes.
         Validator validator = new Validator();
         
         String validatorMessage = validator.validateListOption(generalLevel, Util.getComplementaryLevelNames(), "Nível inválido.");
@@ -48,6 +50,7 @@ public class Complementary extends HttpServlet
                 ? validator.validateYesNoOption(scholarshipPresence, "Com bolsa? inválido.") : validatorMessage;
     
         RequestDispatcher dispatcher;
+        
         // OBS: há uma certa 'repetição' de comandos. Isso será removido quando o 'Model' for implementado.
         if (validatorMessage == null)
         {
