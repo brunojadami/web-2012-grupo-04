@@ -44,6 +44,8 @@ public class Complementary extends HttpServlet
         String validatorMessage = validator.validateListOption(generalLevel, Util.getComplementaryLevelNames(), "Nível inválido.");
         validatorMessage = validatorMessage == null 
                 ? validator.validateListOption(generalStatus, Util.getAcademicStatusNames(), "Estado inválido.") : validatorMessage;
+	validatorMessage = validatorMessage == null 
+                ? validator.validateYesNoOption(scholarshipPresence, "Com bolsa? inválido.") : validatorMessage;
     
         RequestDispatcher dispatcher;
         // OBS: há uma certa 'repetição' de comandos. Isso será removido quando o 'Model' for implementado.

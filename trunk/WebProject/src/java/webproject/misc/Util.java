@@ -84,6 +84,15 @@ public class Util
     public static List<String> getLanguages()
     {
         return Arrays.asList(new String[] { 
-            "Português"});
+            "Português", "Inglês", "Espanhol"});
+    }
+    
+    /**
+     * @return Uma lista com os tipos de produção válidos.
+     */
+    public static List<String> getProductionTypes()
+    {
+        return Arrays.asList(new String[] { 
+            "Livro", "Capítulo"});
     }
 }

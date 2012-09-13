@@ -43,6 +43,8 @@ public class Experience extends HttpServlet
         Validator validator = new Validator();
         
         String validatorMessage = validator.validateYesNoOption(bondEmployment, "Possui vínculo empregatício? inválido.");
+	validatorMessage = validatorMessage == null 
+                ? validator.validateYesNoOption(bondExclusive, "Dedicação exclusiva inválida.") : validatorMessage;
         validatorMessage = validatorMessage == null 
                 ? validator.validateYesNoOption(periodFinished, "Estado do período inválido.") : validatorMessage;
     

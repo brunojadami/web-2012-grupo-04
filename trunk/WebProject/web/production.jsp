@@ -77,10 +77,16 @@
 
 	    <h3>Geral</h3>
             <label>Tipo de produção:</label>
-            <input type="radio" name="bookType" value="book">
-	    <label class="Small">Livro</label>
-            <input type="radio" name="bookType" value="chapter" checked>
-	    <label class="Small">Capítulo de livro</label>
+            <select name="bookType">
+                <%
+                List<String> productions = Util.getProductionTypes();
+                for (String statusName : productions)
+                {
+                    out.println("<option value='#'>#</option>".replaceAll("#", statusName));
+                }
+                %>
+            </select> 
+	    <label class="Small">Escolha uma opção</label>
             <label>Informe o DOI ou ISSN:</label>
             <input type="text" name="bookISSN"/> 
 	    <label class="Small">Aceita letras, números e espaços. Tamanho de 4 a 40</label>
