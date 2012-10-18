@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import webproject.bean.Bean;
 import webproject.validation.Validator;
 
 /**
@@ -28,109 +29,74 @@ public class PersonalInfo extends HttpServlet
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        String generalName = (String) request.getParameter("generalName");
-        String generalCitationName = (String) request.getParameter("generalCitationName");
-        String generalCountry = (String) request.getParameter("generalCountry");
-        String generalCpf = (String) request.getParameter("generalCpf");
-        String generalSex = (String) request.getParameter("generalSex");
-        String idNumber = (String) request.getParameter("idNumber");
-        String idEmissioner = (String) request.getParameter("idEmissioner");
-        String idState = (String) request.getParameter("idState");
-        String idEmissionDate = (String) request.getParameter("idEmissionDate");
-        String birthCountry = (String) request.getParameter("birthCountry");
-        String birthState = (String) request.getParameter("birthState");
-        String birthCity = (String) request.getParameter("birthCity");
-        String birthDate = (String) request.getParameter("birthDate");
-        String passportNumber = (String) request.getParameter("passportNumber");
-        String passportValidityDate = (String) request.getParameter("passportValidityDate");
-        String passportEmissionDate = (String) request.getParameter("passportEmissionDate");
-        String passportCountry = (String) request.getParameter("passportCountry");
-        String filiationFatherName = (String) request.getParameter("filiationFatherName");
-        String filiationMotherName = (String) request.getParameter("filiationMotherName");
-        String addressStreet = (String) request.getParameter("addressStreet");
-        String addressZipCode = (String) request.getParameter("addressZipCode");
-        String addressCity = (String) request.getParameter("addressCity");
-        String addressCountry = (String) request.getParameter("addressCountry");
-        String addressDistrict = (String) request.getParameter("addressDistrict");
-        String addressState = (String) request.getParameter("addressState");
-        String addressPhone = (String) request.getParameter("addressPhone");
-        String professionalAddressCompany = (String) request.getParameter("professionalAddressCompany");
-        String professionalAddressUnit = (String) request.getParameter("professionalAddressUnit");
-        String professionalAddressStreet = (String) request.getParameter("professionalAddressStreet");
-        String professionalAddressZipCode = (String) request.getParameter("professionalAddressZipCode");
-        String professionalAddressCity = (String) request.getParameter("professionalAddressCity");
-        String professionalAddressCountry = (String) request.getParameter("professionalAddressCountry");
-        String professionalAddressDistrict = (String) request.getParameter("professionalAddressDistrict");
-        String professionalAddressState = (String) request.getParameter("professionalAddressState");
-        String professionalAddressPhone = (String) request.getParameter("professionalAddressPhone");
-        String miscEmail = (String) request.getParameter("miscEmail");
+        webproject.bean.PersonalInfo personalInfo = new webproject.bean.PersonalInfo();
+        personalInfo.setGeneralName(Bean.createField("Nome", 0, (String) request.getParameter("generalName")));
+        personalInfo.setGeneralCitationName(Bean.createField("Nome de citação", 1, (String) request.getParameter("generalCitationName")));
+        personalInfo.setGeneralCountry(Bean.createField("País", 2, (String) request.getParameter("generalCountry")));
+        personalInfo.setGeneralCpf(Bean.createField("CPF", 3, (String) request.getParameter("generalCpf")));
+        personalInfo.setGeneralSex(Bean.createField("Sexo", 4, (String) request.getParameter("generalSex")));
+        personalInfo.setIdNumber(Bean.createField("Número", 5, (String) request.getParameter("idNumber")));
+        personalInfo.setIdEmissioner(Bean.createField("Emissor", 6, (String) request.getParameter("idEmissioner")));
+        personalInfo.setIdState(Bean.createField("Estado", 7, (String) request.getParameter("idState")));
+        personalInfo.setIdEmissionDate(Bean.createField("Data de emissão", 8, (String) request.getParameter("idEmissionDate")));
+        personalInfo.setBirthCountry(Bean.createField("País", 9, (String) request.getParameter("birthCountry")));
+        personalInfo.setBirthState(Bean.createField("Estado", 10, (String) request.getParameter("birthState")));
+        personalInfo.setBirthCity(Bean.createField("Cidade", 11, (String) request.getParameter("birthCity")));
+        personalInfo.setBirthDate(Bean.createField("Data de aniversário", 12, (String) request.getParameter("birthDate")));
+        personalInfo.setPassportNumber(Bean.createField("Passaporte", 13, (String) request.getParameter("passportNumber")));
+        personalInfo.setPassportValidityDate(Bean.createField("Data de validade", 14, (String) request.getParameter("passportValidityDate")));
+        personalInfo.setPassportEmissionDate(Bean.createField("Data de emissão", 15, (String) request.getParameter("passportEmissionDate")));
+        personalInfo.setPassportCountry(Bean.createField("País", 16, (String) request.getParameter("passportCountry")));
+        personalInfo.setFiliationFatherName(Bean.createField("Nome do pai", 17, (String) request.getParameter("filiationFatherName")));
+        personalInfo.setFiliationMotherName(Bean.createField("Nome da mãe", 18, (String) request.getParameter("filiationMotherName")));
+        personalInfo.setAddressCity(Bean.createField("Logradouro", 19, (String) request.getParameter("addressStreet")));
+        personalInfo.setAddressZipCode(Bean.createField("CEP", 20, (String) request.getParameter("addressZipCode")));
+        personalInfo.setAddressCity(Bean.createField("Cidade", 21, (String) request.getParameter("addressCity")));
+        personalInfo.setAddressCountry(Bean.createField("País", 22, (String) request.getParameter("addressCountry")));
+        personalInfo.setAddressDistrict(Bean.createField("Bairro", 23, (String) request.getParameter("addressDistrict")));
+        personalInfo.setAddressState(Bean.createField("Estado", 24, (String) request.getParameter("addressState")));
+        personalInfo.setAddressPhone(Bean.createField("Telefone", 25, (String) request.getParameter("addressPhone")));
+        personalInfo.setProfessionalAddressCompany(Bean.createField("Empresa", 26, (String) request.getParameter("professionalAddressCompany")));
+        personalInfo.setProfessionalAddressUnit(Bean.createField("Unidade", 27, (String) request.getParameter("professionalAddressUnit")));
+        personalInfo.setProfessionalAddressStreet(Bean.createField("Logradouro", 28, (String) request.getParameter("professionalAddressStreet")));
+        personalInfo.setProfessionalAddressZipCode(Bean.createField("CEP", 29, (String) request.getParameter("professionalAddressZipCode")));
+        personalInfo.setProfessionalAddressCity(Bean.createField("Cidade", 30, (String) request.getParameter("professionalAddressCity")));
+        personalInfo.setProfessionalAddressCountry(Bean.createField("País", 31, (String) request.getParameter("professionalAddressCountry")));
+        personalInfo.setProfessionalAddressDistrict(Bean.createField("Bairro", 32, (String) request.getParameter("professionalAddressDistrict")));
+        personalInfo.setProfessionalAddressState(Bean.createField("Estado", 33, (String) request.getParameter("professionalAddressState")));
+        personalInfo.setProfessionalAddressPhone(Bean.createField("Telefone", 34, (String) request.getParameter("professionalAddressPhone")));
+        personalInfo.setMiscEmail(Bean.createField("Email", 35, (String) request.getParameter("miscEmail")));
         
         // Nota: a validação no servidor ainda não é feita nessa parte do trabalho.
         // A única coisa validada aqui são os combo boxes.
         Validator validator = new Validator();
         
-        String validatorMessage = validator.validateCountry(generalCountry, "País inválido.");
+        String validatorMessage = validator.validateCountry(personalInfo.getGeneralCountry(), "País inválido.");
         validatorMessage = validatorMessage == null 
-                ? validator.validateSex(generalSex, "Sexo inválido.") : validatorMessage;
+                ? validator.validateSex(Bean.getFieldValue(personalInfo.getGeneralSex()), "Sexo inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateState(idState, "Estado da identidade inválido.") : validatorMessage;
+                ? validator.validateState(Bean.getFieldValue(personalInfo.getIdState()), "Estado da identidade inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateCountry(birthCountry, "País de nascimento inválido.") : validatorMessage;
+                ? validator.validateCountry(Bean.getFieldValue(personalInfo.getBirthCountry()), "País de nascimento inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateState(birthState, "Estado de nascimento inválido.") : validatorMessage;
+                ? validator.validateState(Bean.getFieldValue(personalInfo.getBirthState()), "Estado de nascimento inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateCountry(passportCountry, "País do passaporte inválido.") : validatorMessage;
+                ? validator.validateCountry(Bean.getFieldValue(personalInfo.getPassportCountry()), "País do passaporte inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateCountry(addressCountry, "País do endereço inválido.") : validatorMessage;
+                ? validator.validateCountry(Bean.getFieldValue(personalInfo.getAddressCountry()), "País do endereço inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateState(addressState, "Estado do endereço inválido.") : validatorMessage;
+                ? validator.validateState(Bean.getFieldValue(personalInfo.getAddressState()), "Estado do endereço inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateCountry(professionalAddressCountry, "País do endereço profissional inválido.") : validatorMessage;
+                ? validator.validateCountry(Bean.getFieldValue(personalInfo.getProfessionalAddressCountry()), "País do endereço profissional inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateState(professionalAddressState, "Estado do endereço profissional inválido.") : validatorMessage;
+                ? validator.validateState(Bean.getFieldValue(personalInfo.getProfessionalAddressState()), "Estado do endereço profissional inválido.") : validatorMessage;
         
         RequestDispatcher dispatcher;
         
-        // OBS: há uma certa 'repetição' de comandos. Isso será removido quando o 'Model' for implementado.
         if (validatorMessage == null)
         {
             dispatcher = request.getRequestDispatcher("show_operation.jsp");
-            request.setAttribute("Attribute:00.Nome", generalName);
-            request.setAttribute("Attribute:01.Nome de citação", generalCitationName);
-            request.setAttribute("Attribute:02.País", generalCountry);
-            request.setAttribute("Attribute:03.CPF", generalCpf);
-            request.setAttribute("Attribute:04.Sexo", generalSex);
-            request.setAttribute("Attribute:05.Número", idNumber);
-            request.setAttribute("Attribute:06.Emissor", idEmissioner);
-            request.setAttribute("Attribute:07.Estado", idState);
-            request.setAttribute("Attribute:08.Data de emissão", idEmissionDate);
-            request.setAttribute("Attribute:09.País", birthCountry);
-            request.setAttribute("Attribute:10.Estado", birthState);
-            request.setAttribute("Attribute:11.Cidade", birthCity);
-            request.setAttribute("Attribute:12.Data de aniversário", birthDate);
-            request.setAttribute("Attribute:13.Número do passaporte", passportNumber);
-            request.setAttribute("Attribute:14.Data de validade", passportValidityDate);
-            request.setAttribute("Attribute:15.Data de emissão", passportEmissionDate);
-            request.setAttribute("Attribute:16.País", passportCountry);
-            request.setAttribute("Attribute:17.Nome do pai", filiationFatherName);
-            request.setAttribute("Attribute:18.Nome da mãe", filiationMotherName);
-            request.setAttribute("Attribute:19.Logradouro", addressStreet);
-            request.setAttribute("Attribute:20.CEP", addressZipCode);
-            request.setAttribute("Attribute:21.Cidade", addressCity);
-            request.setAttribute("Attribute:22.País", addressCountry);
-            request.setAttribute("Attribute:23.Bairro", addressDistrict);
-            request.setAttribute("Attribute:24.Estado", addressState);
-            request.setAttribute("Attribute:25.Telefone", addressPhone);
-            request.setAttribute("Attribute:26.Empresa", professionalAddressCompany);
-            request.setAttribute("Attribute:27.Unidade", professionalAddressUnit);
-            request.setAttribute("Attribute:28.Logradouro", professionalAddressStreet);
-            request.setAttribute("Attribute:29.CEP", professionalAddressZipCode);
-            request.setAttribute("Attribute:30.Cidade", professionalAddressCity);
-            request.setAttribute("Attribute:31.País", professionalAddressCountry);
-            request.setAttribute("Attribute:32.Bairro", professionalAddressDistrict);
-            request.setAttribute("Attribute:33.Estado", professionalAddressState);
-            request.setAttribute("Attribute:34.Telefone", professionalAddressPhone);
-            request.setAttribute("Attribute:35.Email", miscEmail);
+            request.setAttribute("object", personalInfo); 
         }
         else
         {

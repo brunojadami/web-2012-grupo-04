@@ -1,3 +1,6 @@
+<%@page import="java.util.LinkedList"%>
+<%@page import="webproject.bean.Bean"%>
+<%@page import="java.lang.reflect.Method"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-15"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -15,26 +18,31 @@
         
         <table>
         <%
-        Enumeration<String> eNames = request.getAttributeNames();
-        List<String> names = Collections.list(eNames);
-        Collections.sort(names);
+        Object object = request.getAttribute("object");
+        List<String> fields = new LinkedList<String>();
         
-        for (String name : names)
+        for (Method method : object.getClass().getDeclaredMethods())
         {
-            if (name.startsWith("Attribute:"))
+            if (method.getParameterTypes().length == 0)
             {
-                out.print("<tr>");
-                
-                String attributeValue = (String) request.getAttribute(name);
-                String attributeName = name.substring("Attribute:xx.".length());
-
-                out.print("<td>" + attributeName + "</td>");
-                out.print("<td>" + attributeValue + "</td>");
-
-                out.print("</tr>\n");
+                String field = (String) method.invoke(object);
+                fields.add(field);
             }
+        }
+        
+        Collections.sort(fields, new Bean.FieldComparator());
+        
+        for (String field : fields)
+        {
+            out.print("<tr>");
+
+            out.print("<td>" + Bean.getFieldName(field) + "</td>");
+            out.print("<td>" + Bean.getFieldValue(field) + "</td>");
+
+            out.print("</tr>\n");
         }
         %>
         </table>
+        <a href="control_panel.jsp">Painel de controle</a>
     </body>
 </html>

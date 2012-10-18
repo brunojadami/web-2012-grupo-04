@@ -28,8 +28,8 @@ public class Login extends HttpServlet
             throws ServletException, IOException
     {
         webproject.bean.Login login = new webproject.bean.Login();
-        login.setEmail((String) request.getParameter("email"));
-        login.setPassword((String) request.getParameter("password"));
+        login.setEmail("Email::" + (String) request.getParameter("email"));
+        login.setPassword("Senha::" + (String) request.getParameter("password"));
         
         // Nota: a validação no servidor ainda não é feita nessa parte do trabalho.
         // A única coisa validada aqui são os combo boxes.
