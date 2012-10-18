@@ -27,14 +27,15 @@ public class Login extends HttpServlet
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        String email = (String) request.getParameter("email");
-        String password = (String) request.getParameter("password");
+        webproject.bean.Login login = new webproject.bean.Login();
+        login.setEmail((String) request.getParameter("email"));
+        login.setPassword((String) request.getParameter("password"));
         
         // Nota: a validação no servidor ainda não é feita nessa parte do trabalho.
         // A única coisa validada aqui são os combo boxes.
         RequestDispatcher dispatcher = request.getRequestDispatcher("control_panel.jsp");
         
-        request.getSession().setAttribute("email", email);
+        request.getSession().setAttribute("login", login);
         
         dispatcher.forward(request, response);
     }

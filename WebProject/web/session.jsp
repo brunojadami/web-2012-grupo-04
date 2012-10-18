@@ -1,13 +1,14 @@
+<%@page import="webproject.bean.Login"%>
 <%@page import="webproject.misc.PageType"%>
 <% 
 PageType pageType = (PageType) pageContext.getAttribute("pageType");
-String email = (String) session.getAttribute("email");
+Login login = (Login) session.getAttribute("login");
 
-if (pageType == pageType.INDEX && email != null)
+if (pageType == pageType.INDEX && login != null)
 {
     pageContext.forward("control_panel.jsp");
 }
-else if (pageType != pageType.INDEX && email == null)
+else if (pageType != pageType.INDEX && login == null)
 {
     pageContext.forward("index.jsp");
 }
