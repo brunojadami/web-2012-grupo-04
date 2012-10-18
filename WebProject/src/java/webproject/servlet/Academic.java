@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import webproject.bean.Bean;
 import webproject.misc.Util;
 import webproject.validation.Validator;
 
@@ -29,43 +30,34 @@ public class Academic extends HttpServlet
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        String generalLevel = (String) request.getParameter("generalLevel");
-        String generalType = (String) request.getParameter("generalType");
-        String generalInstitute = (String) request.getParameter("generalInstitute");
-        String generalCourse = (String) request.getParameter("generalCourse");
-        String generalStatus = (String) request.getParameter("generalStatus");
-        String periodStartDate = (String) request.getParameter("periodStartDate");
-        String periodEndDate = (String) request.getParameter("periodEndDate");
-        String scholarshipPresence = (String) request.getParameter("scholarshipPresence");
-        String scholarshipAgency = (String) request.getParameter("scholarshipAgency");
-        String miscInfo = (String) request.getParameter("miscInfo");
+        webproject.bean.Academic academic = new webproject.bean.Academic();
+        academic.setGeneralLevel(Bean.createField("Nível", 0, request.getParameter("generalLevel")));
+        academic.setGeneralType(Bean.createField("Tipo", 1, request.getParameter("generalType")));
+        academic.setGeneralInstitute(Bean.createField("Instituto", 2, request.getParameter("generalInstitute")));
+        academic.setGeneralCourse(Bean.createField("Curso", 3, request.getParameter("generalCourse")));
+        academic.setGeneralStatus(Bean.createField("Estado", 4, request.getParameter("generalStatus")));
+        academic.setPeriodStartDate(Bean.createField("Data de início", 5, request.getParameter("periodStartDate")));
+        academic.setPeriodEndDate(Bean.createField("Data de término", 6, request.getParameter("periodEndDate")));
+        academic.setScholarshipPresence(Bean.createField("Com bolsa?", 7, request.getParameter("scholarshipPresence")));
+        academic.setScholarshipAgency(Bean.createField("Agência", 8, request.getParameter("scholarshipAgency")));
+        academic.setMiscInfo(Bean.createField("Outros", 9, request.getParameter("miscInfo")));
         
         // Nota: a validação no servidor ainda não é feita nessa parte do trabalho.
         // A única coisa validada aqui são os combo boxes.
         Validator validator = new Validator();
         
-        String validatorMessage = validator.validateListOption(generalLevel, Util.getAcademicLevelNames(), "Nível inválido.");
+        String validatorMessage = validator.validateListOption(Bean.getFieldValue(academic.getGeneralLevel()), Util.getAcademicLevelNames(), "Nível inválido.");
         validatorMessage = validatorMessage == null 
-                ? validator.validateListOption(generalStatus, Util.getAcademicStatusNames(), "Estado inválido.") : validatorMessage;
+                ? validator.validateListOption(Bean.getFieldValue(academic.getGeneralStatus()), Util.getAcademicStatusNames(), "Estado inválido.") : validatorMessage;
         validatorMessage = validatorMessage == null 
-                ? validator.validateYesNoOption(scholarshipPresence, "Com bolsa? inválida.") : validatorMessage;
+                ? validator.validateYesNoOption(Bean.getFieldValue(academic.getScholarshipPresence()), "Com bolsa? inválida.") : validatorMessage;
         
         RequestDispatcher dispatcher;
         
-        // OBS: há uma certa 'repetição' de comandos. Isso será removido quando o 'Model' for implementado.
         if (validatorMessage == null)
         {
             dispatcher = request.getRequestDispatcher("show_operation.jsp");
-            request.setAttribute("Attribute:00.Nível", generalLevel);
-            request.setAttribute("Attribute:01.Tipo", generalType);
-            request.setAttribute("Attribute:02.Instituto", generalInstitute);
-            request.setAttribute("Attribute:03.Curso", generalCourse);
-            request.setAttribute("Attribute:04.Estado", generalStatus);
-            request.setAttribute("Attribute:05.Data de início", periodStartDate);
-            request.setAttribute("Attribute:06.Data de término", periodEndDate);
-            request.setAttribute("Attribute:07.Com bolsa?", scholarshipPresence);
-            request.setAttribute("Attribute:08.Agência", scholarshipAgency);
-            request.setAttribute("Attribute:09.Outros", miscInfo);
+            request.setAttribute("object", academic);
         }
         else
         {
