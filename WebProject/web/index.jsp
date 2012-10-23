@@ -12,13 +12,15 @@
         
         <h1>Entrar</h1>
         
-        <label class="Error" id="errorLabel"><%
-        String message = (String) request.getAttribute("message");
-        if (message != null)
-        {
-            out.println(message);
-        }
-        %></label>
+        <label class="Error" id="errorLabel">
+            <%
+            String message = (String) request.getAttribute("errorMessage");
+            if (message != null)
+            {
+                out.println(message);
+            }
+            %>
+        </label>
         
         <form name="form" method="POST" action="./Login" onsubmit="return validateForm();">
             
