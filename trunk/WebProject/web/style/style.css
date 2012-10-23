@@ -51,30 +51,53 @@ form input
     display: block;
 }
 
-ul
-{
-    list-style: none;
-}
-
-ul li
-{
-    text-align: center;
-}
-
-ul li a
+a
 {
     font-weight: bold;
     text-decoration: none;
-    color: white;
+    color: blue;
 }
 
-ul li a:hover
+a:hover
 {
     text-decoration: underline;
 }
 
-table
+table tr td a
 {
     color: white;
+}
+
+table
+{
+    table-layout: fixed;
+    color: white;
     font-weight: bold;
+    border-collapse: collapse;
+}
+
+table td
+{
+    width: 10%;
+}
+
+table td.Right
+{
+    text-align: right;
+}
+
+table tr:hover
+{
+    background-color: white;
+    color: blue;
+}
+
+table#optionsTable
+{
+    margin-bottom: 5px;
+}
+
+img
+{
+    border: 5px;
 }

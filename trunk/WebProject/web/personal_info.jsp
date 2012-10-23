@@ -1,3 +1,4 @@
+<%@page import="webproject.bean.Bean"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-15"%>
 <%@page import="webproject.misc.PageType"%>
 <%@page import="webproject.misc.Util"%>
@@ -14,13 +15,22 @@
         
         <h1>Informações pessoais e endereço</h1>
         
-        <label class="Error" id="errorLabel"><%
-        String message = (String) request.getAttribute("message");
-        if (message != null)
-        {
-            out.println(message);
-        }
-        %></label>
+        <label class="Error" id="errorLabel">
+            <%
+            String message = (String) request.getAttribute("errorMessage");
+            if (message != null)
+            {
+                out.println(message);
+            }
+            %>
+        </label>
+        
+        <table id="optionsTable">
+            <tr>
+                <td>Opções</td>
+                <td class="Right"><a href="control_panel.jsp"><img src="image/control_panel.png" title="Painel de controle"/></a></td>
+            </tr>
+        </table>
         
         <form name="form" method="POST" action="./PersonalInfo" onsubmit="return validateForm();">
             
@@ -216,8 +226,15 @@
             <input type="text" name="miscEmail"/> 
             <label class="Small">Qualquer email válido. Exemplo: test@test.com</label>
             
-            <input type="submit" value="Enviar"/>
+            <%
+            Bean bean = (Bean) request.getAttribute("bean");
+            %>
+            
+            <input type="hidden" name="action" value="update"/>
+            <input type="hidden" name="id" value="<% out.print(bean.getId()); %>"/>
+            <input type="submit" value="Confirmar"/>
             
         </form>
+        <a href="control_panel.jsp">Painel de controle</a>
     </body>
 </html>

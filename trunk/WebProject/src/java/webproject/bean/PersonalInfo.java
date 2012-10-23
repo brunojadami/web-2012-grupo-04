@@ -33,7 +33,6 @@ public class PersonalInfo extends Bean
 
     private String passportNumber;
 
-    ;
     private String passportValidityDate;
 
     private String passportEmissionDate;

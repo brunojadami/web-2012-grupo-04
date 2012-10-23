@@ -8,12 +8,42 @@
     <%@ include file="head.jsp" %>
     <body>
         <h1>Painel de controle</h1>
-        <ul>
-            <li><a href="personal_info.jsp">Informações pessoais e endereço</a></li>
-            <li><a href="academic.jsp">Formação acadêmica</a></li>
-	    <li><a href="complementary.jsp">Formação complementar</a></li>
-	    <li><a href="experience.jsp">Atuação profissional</a></li>
-	    <li><a href="production.jsp">Produção bibliográfica</a></li>
-        </ul>
+        <table>
+            <tr>
+                <td>Informações pessoais e endereço</td>
+                <td class="Right">
+                    <a href="PersonalInfo?action=edit&amp;id=0"><img src="image/edit.png" title="Modificar"/></a>
+                    <a href="PersonalInfo?action=view&amp;id=0"><img src="image/view.png" title="Visualizar"/></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Formação acadêmica</td>
+                <td class="Right">
+                    <a href="Academic?action=edit&amp;id=-1"><img src="image/new.png" title="Novo"/></a>
+                    <a href="Academic?action=list_view&amp;id=-1"><img src="image/list.png" title="Lista"/></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Formação complementar</td>
+                <td class="Right">
+                    <a href="complementary.jsp?id=-1"><img src="image/new.png" title="Novo"/></a>
+                    <a href=""><img src="image/list.png" title="Lista"/></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Atuação profissional</td>
+                <td class="Right">
+                    <a href="experience.jsp?id=-1"><img src="image/new.png" title="Novo"/></a>
+                    <a href=""><img src="image/list.png" title="Lista"/></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Produção bibliográfica</td>
+                <td class="Right">
+                    <a href="production.jsp?id=-1"><img src="image/new.png" title="Novo"/></a>
+                    <a href=""><img src="image/list.png" title="Lista"/></a>
+                </td>
+            </tr>
+        </table>
     </body>
 </html>
