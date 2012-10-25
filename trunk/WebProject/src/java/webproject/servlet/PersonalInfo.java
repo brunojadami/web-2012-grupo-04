@@ -112,6 +112,7 @@ public class PersonalInfo extends HttpServlet
                 dispatcher = request.getRequestDispatcher("show_bean.jsp");
                 request.setAttribute("bean", personalInfo);
                 request.setAttribute("message", "Informações atualizadas com sucesso");
+                request.setAttribute("servletName", "PersonalInfo");
 
                 try
                 {
@@ -125,6 +126,7 @@ public class PersonalInfo extends HttpServlet
             else
             {
                 dispatcher = request.getRequestDispatcher("personal_info.jsp");
+                request.setAttribute("bean", personalInfo);
                 request.setAttribute("errorMessage", validatorMessage);
             }
         }
