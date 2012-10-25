@@ -73,6 +73,7 @@ public class Academic extends HttpServlet
                 dispatcher = request.getRequestDispatcher("show_bean.jsp");
                 request.setAttribute("bean", academic);
                 request.setAttribute("message", "Operação realizada com sucesso");
+                request.setAttribute("servletName", "Academic");
 
                 try
                 {
@@ -86,6 +87,7 @@ public class Academic extends HttpServlet
             else
             {
                 dispatcher = request.getRequestDispatcher("academic.jsp");
+                request.setAttribute("bean", academic);
                 request.setAttribute("errorMessage", validatorMessage);
             }
         }
@@ -96,7 +98,6 @@ public class Academic extends HttpServlet
                 dispatcher = request.getRequestDispatcher("show_bean.jsp");
                 request.setAttribute("bean", BeanIO.getInstance().load(academic));
                 request.setAttribute("message", "Visualizar registro acadêmico");
-                // O nome do servlet é passado para o JSP para criar possíveis ações.
                 request.setAttribute("servletName", "Academic");
             }
             catch (Exception ex)
@@ -111,7 +112,6 @@ public class Academic extends HttpServlet
                 dispatcher = request.getRequestDispatcher("show_beans.jsp");
                 request.setAttribute("list", BeanIO.getInstance().loadAll(academic.getClass()));
                 request.setAttribute("message", "Visualizar registros acadêmicos");
-                // O nome do servlet é passado para o JSP para criar possíveis ações.
                 request.setAttribute("servletName", "Academic");
             }
             catch (Exception ex)

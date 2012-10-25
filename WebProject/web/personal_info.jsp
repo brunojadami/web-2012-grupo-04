@@ -235,6 +235,5 @@
             <input type="submit" value="Confirmar"/>
             
         </form>
-        <a href="control_panel.jsp">Painel de controle</a>
     </body>
 </html>
