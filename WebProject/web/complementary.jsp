@@ -1,3 +1,4 @@
+<%@page import="webproject.bean.Bean"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-15"%>
 <%@page import="webproject.misc.Util"%>
 <%@page import="java.util.List"%>
@@ -15,13 +16,20 @@
         
 	<label class="Error" id="errorLabel">
         <%
-        String message = (String) request.getAttribute("message");
+        String message = (String) request.getAttribute("errorMessage");
         if (message != null)
         {
             out.println(message);
         }
         %>
         </label>
+	
+	<table id="optionsTable">
+            <tr>
+                <td>Opções</td>
+                <td class="Right"><a href="control_panel.jsp"><img src="image/control_panel.png" title="Painel de controle"/></a></td>
+            </tr>
+        </table>
 	
         <form name="form" method="POST" action="./Complementary" onsubmit="return validateForm();">
             
@@ -77,7 +85,13 @@
             <input type="text" name="scholarshipAgency"/> 
 	    <label class="Small">Aceita letras e espaços. Tamanho de 4 a 40</label>
             
-            <input type="submit" value="Adicionar"/>
+            <%
+            Bean bean = (Bean) request.getAttribute("bean");
+            %>
+            
+            <input type="hidden" name="action" value="update"/>
+            <input type="hidden" name="id" value="<% out.print(bean.getId()); %>"/>
+            <input type="submit" value="Confirmar"/>
             
         </form>
     </body>

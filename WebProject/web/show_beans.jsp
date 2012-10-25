@@ -45,9 +45,9 @@
             }
 
             Collections.sort(fields, new Bean.FieldComparator());
-            fields = fields.subList(0, 4);
+            fields = fields.subList(0, Math.min(4, fields.size()));
 
-            out.print("<td>" + (id) + "</td>");
+            out.print("<tr><td>" + (id) + "</td>");
             
             for (String field : fields)
             {
@@ -55,7 +55,7 @@
             }
             
             out.print("<td>...</td>");
-            out.print("<td style=\"text-align: right;\"><a href=\"" + request.getAttribute("servletName") + "?action=view&id=" + id + "\"><img src=\"image/view.png\" title=\"Visualizar\"/>");
+            out.print("<td style=\"text-align: right;\"><a href=\"" + request.getAttribute("servletName") + "?action=view&id=" + id + "\"><img src=\"image/view.png\" title=\"Visualizar\"/></td>");
             out.print("</tr>\n");
             
             id++;

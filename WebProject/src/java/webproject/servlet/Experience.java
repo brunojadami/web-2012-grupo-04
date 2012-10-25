@@ -7,6 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import webproject.bean.Bean;
+import webproject.misc.BeanIO;
 import webproject.validation.Validator;
 
 /**
@@ -28,49 +30,95 @@ public class Experience extends HttpServlet
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        String profInstitution = (String) request.getParameter("profInstitution");
-        String bondType = (String) request.getParameter("bondType");
-        String bondEmployment = (String) request.getParameter("bondEmployment");
-        String bondFunctional = (String) request.getParameter("bondFunctional");
-        String bondTime = (String) request.getParameter("bondTime");
-        String bondExclusive = (String) request.getParameter("bondExclusive");
-        String periodMonth = (String) request.getParameter("periodMonth");
-	String periodFinished = (String) request.getParameter("periodFinished");
-        String periodYear = (String) request.getParameter("periodYear");
-        String otherInfo = (String) request.getParameter("otherInfo");
-        
-        // Nota: a validação no servidor ainda não é feita nessa parte do trabalho.
-        // A única coisa validada aqui são os combo boxes.
-        Validator validator = new Validator();
-        
-        String validatorMessage = validator.validateYesNoOption(bondEmployment, "Possui vínculo empregatício? inválido.");
-	validatorMessage = validatorMessage == null 
-                ? validator.validateYesNoOption(bondExclusive, "Dedicação exclusiva inválida.") : validatorMessage;
-        validatorMessage = validatorMessage == null 
-                ? validator.validateYesNoOption(periodFinished, "Estado do período inválido.") : validatorMessage;
-    
-        RequestDispatcher dispatcher;
-        
-        // OBS: há uma certa 'repetição' de comandos. Isso será removido quando o 'Model' for implementado.
-        if (validatorMessage == null)
-        {
-            dispatcher = request.getRequestDispatcher("show_operation.jsp");
-            request.setAttribute("Attribute:00.instituição", profInstitution);
-            request.setAttribute("Attribute:01.Tipo do vínculo", bondType);
-            request.setAttribute("Attribute:02.Vínculo empregatício?", bondEmployment);
-            request.setAttribute("Attribute:03.Enquadramento funcional", bondFunctional);
-	    request.setAttribute("Attribute:04.Carga horária", bondTime);
-            request.setAttribute("Attribute:05.Dedicação exclusiva?", bondExclusive);
-            request.setAttribute("Attribute:06.Mês de início", periodMonth);
-	    request.setAttribute("Attribute:07.Ano de início", periodYear);
-            request.setAttribute("Attribute:08.Finalizado?", periodFinished);
-	    request.setAttribute("Attribute:09.Outras informações", otherInfo);
-        }
-        else
-        {
-            dispatcher = request.getRequestDispatcher("experience.jsp");
-            request.setAttribute("message", validatorMessage);
-        }
+	String action = request.getParameter("action");
+
+	RequestDispatcher dispatcher = null;
+
+	// Nota: toda a parte de Bean, IO e suas respectivas decisões de projeto
+	// estão descritas nas classes Bean.java e BeanIO.java.
+	webproject.bean.Experience experience = new webproject.bean.Experience();
+	experience.setId(Integer.parseInt(request.getParameter("id")));
+
+	if (action.equals("edit"))
+	{
+	    dispatcher = request.getRequestDispatcher("experience.jsp");
+	    request.setAttribute("bean", experience);
+	}
+	else if (action.equals("update"))
+	{
+	    experience.setProfInstitution(Bean.createField("Instituição", 0,request.getParameter("profInstitution")));
+	    experience.setBondType(Bean.createField("Tipo do vínculo", 1, request.getParameter("bondType")));
+	    experience.setBondEmployment(Bean.createField("Vínculo empregatício?", 2, request.getParameter("bondEmployment")));
+	    experience.setBondFunctional(Bean.createField("Enquadramento funcional", 3, request.getParameter("bondFunctional")));
+	    experience.setBondTime(Bean.createField("Carga horária", 4, request.getParameter("bondTime")));
+	    experience.setBondExclusive(Bean.createField("Dedicação exclusiva?", 5, request.getParameter("bondExclusive")));
+	    experience.setPeriodMonth(Bean.createField("Mês de início", 6, request.getParameter("periodMonth")));
+	    experience.setPeriodYear(Bean.createField("Ano de início", 7, request.getParameter("periodYear")));
+	    experience.setPeriodFinished(Bean.createField("Finalizado?", 8, request.getParameter("periodFinished")));
+	    experience.setOtherInfo(Bean.createField("Outras informações", 9, request.getParameter("otherInfo")));
+
+	    // Nota: a validação no servidor ainda não é feita nessa parte do trabalho.
+	    // A única coisa validada aqui são os combo boxes.
+	    Validator validator = new Validator();
+
+	    String validatorMessage = validator.validateYesNoOption(Bean.getFieldValue(experience.getBondEmployment()), "Possui vínculo empregatício? inválido.");
+	    validatorMessage = validatorMessage == null 
+		    ? validator.validateYesNoOption(Bean.getFieldValue(experience.getBondExclusive()), "Dedicação exclusiva inválida.") : validatorMessage;
+	    validatorMessage = validatorMessage == null 
+		    ? validator.validateYesNoOption(Bean.getFieldValue(experience.getPeriodFinished()), "Estado do período inválido.") : validatorMessage;
+
+	    request.setAttribute("bean", experience);
+	    if (validatorMessage == null)
+            {
+                dispatcher = request.getRequestDispatcher("show_bean.jsp");
+		request.setAttribute("servletName", "Experience");
+                request.setAttribute("message", "Operação realizada com sucesso");
+
+                try
+                {
+                    BeanIO.getInstance().save(experience);
+                }
+                catch (Exception ex)
+                {
+                    throw new ServletException(ex);
+                }
+            }
+            else
+            {
+                dispatcher = request.getRequestDispatcher("experience.jsp");
+                request.setAttribute("errorMessage", validatorMessage);
+            }
+	}
+	else if (action.equals("view"))
+	{
+	    try
+	    {
+		dispatcher = request.getRequestDispatcher("show_bean.jsp");
+		request.setAttribute("bean", BeanIO.getInstance().load(experience));
+		request.setAttribute("message", "Visualizar atuação profissional");
+		// O nome do servlet é passado para o JSP para criar possíveis ações.
+		request.setAttribute("servletName", "Experience");
+	    }
+	    catch (Exception ex)
+	    {
+		throw new ServletException(ex);
+	    }
+	}
+	else if (action.equals("list_view"))
+	{
+	    try
+	    {
+		dispatcher = request.getRequestDispatcher("show_beans.jsp");
+		request.setAttribute("list", BeanIO.getInstance().loadAll(experience.getClass()));
+		request.setAttribute("message", "Visualizar atuações profissionais");
+		// O nome do servlet é passado para o JSP para criar possíveis ações.
+		request.setAttribute("servletName", "Experience");
+	    }
+	    catch (Exception ex)
+	    {
+		throw new ServletException(ex);
+	    }
+	}
         
         dispatcher.forward(request, response);
     }
