@@ -31,7 +31,7 @@
             </tr>
         </table>
 	
-	<form name="bookForm" method="POST" action="./Book" onsubmit="return validateForm();">
+	<form name="form" method="POST" action="./Book" onsubmit="return validateForm();">
 
 	    <h3>Geral</h3>
             <label>Tipo de produção:</label>

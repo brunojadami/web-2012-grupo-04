@@ -20,7 +20,7 @@
             <tr>
                 <td>Opções</td>
                 <td style="text-align: right;">
-                    <a href="<% out.print((String) request.getAttribute("servletName") + "?action=update&id=-1");%>"><img src="image/new.png" title="Novo"/></a>
+                    <a href="<% out.print((String) request.getAttribute("servletName") + "?action=edit&id=-1");%>"><img src="image/new.png" title="Novo"/></a>
                     <a href="control_panel.jsp"><img src="image/control_panel.png" title="Painel de controle"/></a>
                 </td>
             </tr>

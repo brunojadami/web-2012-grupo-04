@@ -78,7 +78,7 @@ table
 
 table td
 {
-    width: 10%;
+    min-width: 5%;
 }
 
 table td.Right

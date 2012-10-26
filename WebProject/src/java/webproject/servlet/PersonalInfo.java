@@ -132,6 +132,7 @@ public class PersonalInfo extends HttpServlet
         }
         else if (action.equals("view"))
         {
+            // Importante: não há uma proteção quando não existe nenhum Bean criado.
             try
             {
                 dispatcher = request.getRequestDispatcher("show_bean.jsp");
