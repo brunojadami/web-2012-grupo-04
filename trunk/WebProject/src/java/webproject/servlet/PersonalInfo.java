@@ -132,13 +132,23 @@ public class PersonalInfo extends HttpServlet
         }
         else if (action.equals("view"))
         {
-            // Importante: não há uma proteção quando não existe nenhum Bean criado.
+            // Importante: quando não há nenhum Bean criado aqui, retorna para o painel de controle.
             try
             {
-                dispatcher = request.getRequestDispatcher("show_bean.jsp");
-                request.setAttribute("bean", BeanIO.getInstance().load(personalInfo));
-                request.setAttribute("message", "Visualizar informações pessoais");
-                request.setAttribute("servletName", "PersonalInfo");
+                boolean personalInfoBeanCreated = 
+                        BeanIO.getInstance().loadAll(personalInfo.getClass()).size() > 0;
+                
+                if (personalInfoBeanCreated)
+                {
+                    dispatcher = request.getRequestDispatcher("show_bean.jsp");
+                    request.setAttribute("bean", BeanIO.getInstance().load(personalInfo));
+                    request.setAttribute("message", "Visualizar informações pessoais");
+                    request.setAttribute("servletName", "PersonalInfo");
+                }
+                else
+                {
+                    dispatcher = request.getRequestDispatcher("control_panel.jsp");
+                }
             }
             catch (Exception ex)
             {
