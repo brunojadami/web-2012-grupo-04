@@ -15,7 +15,8 @@ import webproject.bean.Bean;
 public class BeanIO
 {
     /**
-     * Diretório que armazena os Beans.
+     * Diretório que armazena os Beans. 
+     * OBS: os Beans serão salvos na pasta bin do Tomcat.
      */
     private static final String DATA_PATH = "data/";
     
