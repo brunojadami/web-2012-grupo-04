@@ -7,8 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.Session;
 import webproject.bean.Bean;
-import webproject.misc.BeanIO;
+import webproject.misc.HibernateUtil;
 import webproject.validation.Validator;
 
 /**
@@ -34,8 +35,6 @@ public class PersonalInfo extends HttpServlet
         
         RequestDispatcher dispatcher = null;
         
-        // Nota: toda a parte de Bean, IO e suas respectivas decisões de projeto
-        // estão descritas nas classes Bean.java e BeanIO.java.
         webproject.bean.PersonalInfo personalInfo = new webproject.bean.PersonalInfo();
         personalInfo.setId(Integer.parseInt(request.getParameter("id")));
         
@@ -46,66 +45,64 @@ public class PersonalInfo extends HttpServlet
         }
         else if (action.equals("update"))
         {
-            personalInfo.setGeneralName(Bean.createField("Nome", 0, (String) request.getParameter("generalName")));
-            personalInfo.setGeneralCitationName(Bean.createField("Nome de citação", 1, (String) request.getParameter("generalCitationName")));
-            personalInfo.setGeneralCountry(Bean.createField("País", 2, (String) request.getParameter("generalCountry")));
-            personalInfo.setGeneralCpf(Bean.createField("CPF", 3, (String) request.getParameter("generalCpf")));
-            personalInfo.setGeneralSex(Bean.createField("Sexo", 4, (String) request.getParameter("generalSex")));
-            personalInfo.setIdNumber(Bean.createField("Número", 5, (String) request.getParameter("idNumber")));
-            personalInfo.setIdEmissioner(Bean.createField("Emissor", 6, (String) request.getParameter("idEmissioner")));
-            personalInfo.setIdState(Bean.createField("Estado", 7, (String) request.getParameter("idState")));
-            personalInfo.setIdEmissionDate(Bean.createField("Data de emissão", 8, (String) request.getParameter("idEmissionDate")));
-            personalInfo.setBirthCountry(Bean.createField("País", 9, (String) request.getParameter("birthCountry")));
-            personalInfo.setBirthState(Bean.createField("Estado", 10, (String) request.getParameter("birthState")));
-            personalInfo.setBirthCity(Bean.createField("Cidade", 11, (String) request.getParameter("birthCity")));
-            personalInfo.setBirthDate(Bean.createField("Data de aniversário", 12, (String) request.getParameter("birthDate")));
-            personalInfo.setPassportNumber(Bean.createField("Passaporte", 13, (String) request.getParameter("passportNumber")));
-            personalInfo.setPassportValidityDate(Bean.createField("Data de validade", 14, (String) request.getParameter("passportValidityDate")));
-            personalInfo.setPassportEmissionDate(Bean.createField("Data de emissão", 15, (String) request.getParameter("passportEmissionDate")));
-            personalInfo.setPassportCountry(Bean.createField("País", 16, (String) request.getParameter("passportCountry")));
-            personalInfo.setFiliationFatherName(Bean.createField("Nome do pai", 17, (String) request.getParameter("filiationFatherName")));
-            personalInfo.setFiliationMotherName(Bean.createField("Nome da mãe", 18, (String) request.getParameter("filiationMotherName")));
-            personalInfo.setAddressStreet(Bean.createField("Logradouro", 19, (String) request.getParameter("addressStreet")));
-            personalInfo.setAddressZipCode(Bean.createField("CEP", 20, (String) request.getParameter("addressZipCode")));
-            personalInfo.setAddressCity(Bean.createField("Cidade", 21, (String) request.getParameter("addressCity")));
-            personalInfo.setAddressCountry(Bean.createField("País", 22, (String) request.getParameter("addressCountry")));
-            personalInfo.setAddressDistrict(Bean.createField("Bairro", 23, (String) request.getParameter("addressDistrict")));
-            personalInfo.setAddressState(Bean.createField("Estado", 24, (String) request.getParameter("addressState")));
-            personalInfo.setAddressPhone(Bean.createField("Telefone", 25, (String) request.getParameter("addressPhone")));
-            personalInfo.setProfessionalAddressCompany(Bean.createField("Empresa", 26, (String) request.getParameter("professionalAddressCompany")));
-            personalInfo.setProfessionalAddressUnit(Bean.createField("Unidade", 27, (String) request.getParameter("professionalAddressUnit")));
-            personalInfo.setProfessionalAddressStreet(Bean.createField("Logradouro", 28, (String) request.getParameter("professionalAddressStreet")));
-            personalInfo.setProfessionalAddressZipCode(Bean.createField("CEP", 29, (String) request.getParameter("professionalAddressZipCode")));
-            personalInfo.setProfessionalAddressCity(Bean.createField("Cidade", 30, (String) request.getParameter("professionalAddressCity")));
-            personalInfo.setProfessionalAddressCountry(Bean.createField("País", 31, (String) request.getParameter("professionalAddressCountry")));
-            personalInfo.setProfessionalAddressDistrict(Bean.createField("Bairro", 32, (String) request.getParameter("professionalAddressDistrict")));
-            personalInfo.setProfessionalAddressState(Bean.createField("Estado", 33, (String) request.getParameter("professionalAddressState")));
-            personalInfo.setProfessionalAddressPhone(Bean.createField("Telefone", 34, (String) request.getParameter("professionalAddressPhone")));
-            personalInfo.setMiscEmail(Bean.createField("Email", 35, (String) request.getParameter("miscEmail")));
+            personalInfo.setGeneralName(request.getParameter("generalName"));
+            personalInfo.setGeneralCitationName(request.getParameter("generalCitationName"));
+            personalInfo.setGeneralCountry(request.getParameter("generalCountry"));
+            personalInfo.setGeneralCpf(request.getParameter("generalCpf"));
+            personalInfo.setGeneralSex(request.getParameter("generalSex"));
+            personalInfo.setIdNumber(request.getParameter("idNumber"));
+            personalInfo.setIdEmissioner(request.getParameter("idEmissioner"));
+            personalInfo.setIdState(request.getParameter("idState"));
+            personalInfo.setIdEmissionDate(request.getParameter("idEmissionDate"));
+            personalInfo.setBirthCountry(request.getParameter("birthCountry"));
+            personalInfo.setBirthState(request.getParameter("birthState"));
+            personalInfo.setBirthCity(request.getParameter("birthCity"));
+            personalInfo.setBirthDate(request.getParameter("birthDate"));
+            personalInfo.setPassportNumber(request.getParameter("passportNumber"));
+            personalInfo.setPassportValidityDate(request.getParameter("passportValidityDate"));
+            personalInfo.setPassportEmissionDate(request.getParameter("passportEmissionDate"));
+            personalInfo.setPassportCountry(request.getParameter("passportCountry"));
+            personalInfo.setFiliationFatherName(request.getParameter("filiationFatherName"));
+            personalInfo.setFiliationMotherName(request.getParameter("filiationMotherName"));
+            personalInfo.setAddressStreet(request.getParameter("addressStreet"));
+            personalInfo.setAddressZipCode(request.getParameter("addressZipCode"));
+            personalInfo.setAddressCity(request.getParameter("addressCity"));
+            personalInfo.setAddressCountry(request.getParameter("addressCountry"));
+            personalInfo.setAddressDistrict(request.getParameter("addressDistrict"));
+            personalInfo.setAddressState(request.getParameter("addressState"));
+            personalInfo.setAddressPhone(request.getParameter("addressPhone"));
+            personalInfo.setProfessionalAddressCompany(request.getParameter("professionalAddressCompany"));
+            personalInfo.setProfessionalAddressUnit(request.getParameter("professionalAddressUnit"));
+            personalInfo.setProfessionalAddressStreet(request.getParameter("professionalAddressStreet"));
+            personalInfo.setProfessionalAddressZipCode(request.getParameter("professionalAddressZipCode"));
+            personalInfo.setProfessionalAddressCity(request.getParameter("professionalAddressCity"));
+            personalInfo.setProfessionalAddressCountry(request.getParameter("professionalAddressCountry"));
+            personalInfo.setProfessionalAddressDistrict(request.getParameter("professionalAddressDistrict"));
+            personalInfo.setProfessionalAddressState(request.getParameter("professionalAddressState"));
+            personalInfo.setProfessionalAddressPhone(request.getParameter("professionalAddressPhone"));
+            personalInfo.setMiscEmail(request.getParameter("miscEmail"));
 
-            // Nota: a validação no servidor ainda não é feita nessa parte do trabalho.
-            // A única coisa validada aqui são os combo boxes.
             Validator validator = new Validator();
 
-            String validatorMessage = validator.validateCountry(Bean.getFieldValue(personalInfo.getGeneralCountry()), "País inválido.");
+            String validatorMessage = validator.validateCountry(personalInfo.getGeneralCountry(), "País inválido.");
             validatorMessage = validatorMessage == null 
-                    ? validator.validateSex(Bean.getFieldValue(personalInfo.getGeneralSex()), "Sexo inválido.") : validatorMessage;
+                    ? validator.validateSex(personalInfo.getGeneralSex(), "Sexo inválido.") : validatorMessage;
             validatorMessage = validatorMessage == null 
-                    ? validator.validateState(Bean.getFieldValue(personalInfo.getIdState()), "Estado da identidade inválido.") : validatorMessage;
+                    ? validator.validateState(personalInfo.getIdState(), "Estado da identidade inválido.") : validatorMessage;
             validatorMessage = validatorMessage == null 
-                    ? validator.validateCountry(Bean.getFieldValue(personalInfo.getBirthCountry()), "País de nascimento inválido.") : validatorMessage;
+                    ? validator.validateCountry(personalInfo.getBirthCountry(), "País de nascimento inválido.") : validatorMessage;
             validatorMessage = validatorMessage == null 
-                    ? validator.validateState(Bean.getFieldValue(personalInfo.getBirthState()), "Estado de nascimento inválido.") : validatorMessage;
+                    ? validator.validateState(personalInfo.getBirthState(), "Estado de nascimento inválido.") : validatorMessage;
             validatorMessage = validatorMessage == null 
-                    ? validator.validateCountry(Bean.getFieldValue(personalInfo.getPassportCountry()), "País do passaporte inválido.") : validatorMessage;
+                    ? validator.validateCountry(personalInfo.getPassportCountry(), "País do passaporte inválido.") : validatorMessage;
             validatorMessage = validatorMessage == null 
-                    ? validator.validateCountry(Bean.getFieldValue(personalInfo.getAddressCountry()), "País do endereço inválido.") : validatorMessage;
+                    ? validator.validateCountry(personalInfo.getAddressCountry(), "País do endereço inválido.") : validatorMessage;
             validatorMessage = validatorMessage == null 
-                    ? validator.validateState(Bean.getFieldValue(personalInfo.getAddressState()), "Estado do endereço inválido.") : validatorMessage;
+                    ? validator.validateState(personalInfo.getAddressState(), "Estado do endereço inválido.") : validatorMessage;
             validatorMessage = validatorMessage == null 
-                    ? validator.validateCountry(Bean.getFieldValue(personalInfo.getProfessionalAddressCountry()), "País do endereço profissional inválido.") : validatorMessage;
+                    ? validator.validateCountry(personalInfo.getProfessionalAddressCountry(), "País do endereço profissional inválido.") : validatorMessage;
             validatorMessage = validatorMessage == null 
-                    ? validator.validateState(Bean.getFieldValue(personalInfo.getProfessionalAddressState()), "Estado do endereço profissional inválido.") : validatorMessage;
+                    ? validator.validateState(personalInfo.getProfessionalAddressState(), "Estado do endereço profissional inválido.") : validatorMessage;
 
             if (validatorMessage == null)
             {
@@ -114,14 +111,11 @@ public class PersonalInfo extends HttpServlet
                 request.setAttribute("message", "Informações atualizadas com sucesso");
                 request.setAttribute("servletName", "PersonalInfo");
 
-                try
-                {
-                    BeanIO.getInstance().save(personalInfo);
-                }
-                catch (Exception ex)
-                {
-                    throw new ServletException(ex);
-                }
+                Session session = HibernateUtil.getSessionFactory().openSession();
+                
+                session.save(personalInfo);
+                
+                session.close();
             }
             else
             {
@@ -132,28 +126,23 @@ public class PersonalInfo extends HttpServlet
         }
         else if (action.equals("view"))
         {
-            // Importante: quando não há nenhum Bean criado aqui, retorna para o painel de controle.
-            try
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            
+            Bean bean = (Bean) session.get(webproject.bean.PersonalInfo.class, personalInfo.getId());
+            if (bean != null)
             {
-                boolean personalInfoBeanCreated = 
-                        BeanIO.getInstance().loadAll(personalInfo.getClass()).size() > 0;
-                
-                if (personalInfoBeanCreated)
-                {
-                    dispatcher = request.getRequestDispatcher("show_bean.jsp");
-                    request.setAttribute("bean", BeanIO.getInstance().load(personalInfo));
-                    request.setAttribute("message", "Visualizar informações pessoais");
-                    request.setAttribute("servletName", "PersonalInfo");
-                }
-                else
-                {
-                    dispatcher = request.getRequestDispatcher("control_panel.jsp");
-                }
+                dispatcher = request.getRequestDispatcher("show_bean.jsp");
+                request.setAttribute("bean", bean);
+                request.setAttribute("message", "Visualizar informações pessoais");
+                request.setAttribute("servletName", "PersonalInfo");
             }
-            catch (Exception ex)
+            else
             {
-                throw new ServletException(ex);
+                // Nenhuma informação pessoal foi gravada ainda.
+                dispatcher = request.getRequestDispatcher("control_panel.jsp");
             }
+            
+            session.close();
         }
         
         dispatcher.forward(request, response);

@@ -1,3 +1,4 @@
+<%@page import="java.util.Map"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="webproject.bean.Bean"%>
 <%@page import="java.lang.reflect.Method"%>
@@ -32,25 +33,16 @@
                 
         <table>
             <%
-            List<String> fields = new LinkedList<String>();
-
-            for (Method method : bean.getClass().getDeclaredMethods())
+            for (Map.Entry<String, Bean.Attribute> entry : bean.getAttributes().entrySet())
             {
-                if (method.getParameterTypes().length == 0 && method.getReturnType() == String.class)
-                {
-                    String field = (String) method.invoke(bean);
-                    fields.add(field);
-                }
-            }
-
-            Collections.sort(fields, new Bean.FieldComparator());
-
-            for (String field : fields)
-            {
+                String method = entry.getKey();
+                Bean.Attribute attribute = entry.getValue();
+                Object value = bean.getClass().getMethod(method).invoke(bean);
+                
                 out.print("<tr>");
 
-                out.print("<td>" + Bean.getFieldName(field) + "</td>");
-                out.print("<td class=\"Right\">" + Bean.getFieldValue(field) + "</td>");
+                out.print("<td>" + attribute.getShowingName() + "</td>");
+                out.print("<td class=\"Right\">" + value.toString() + "</td>");
 
                 out.print("</tr>\n");
             }
