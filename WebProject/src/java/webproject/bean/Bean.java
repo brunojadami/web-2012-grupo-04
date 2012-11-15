@@ -1,68 +1,43 @@
 package webproject.bean;
 
 import java.io.Serializable;
-import java.util.Comparator;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
- * A classe Bean pai. Todos os beans são filhos dela. Toda a parte de IO
- * foi abstraída para a classe BeanIO. Portanto o Bean é só um modelo "burro".
- * Note que todo atributo do Bean (com exceção do id) é do tipo String e segue
- * a regra "<nome>::<ordem de exibição>;;<valor>". Esse padrão foi criado para
- * facilitar a codificação do projeto. Além disso, essa abordagem não afeta a
- * performance nem fere os princípios MVC.
+ * A classe Bean pai. Todos os beans são filhos dela. 
+ * Note que todo atributo do Bean (com exceção do id) é do tipo String.
+ * Isso foi feito para simplificar a codificação (e não utilizar datas, ou outras
+ * estruturas).
  */
 public abstract class Bean implements Serializable
 {
-    /**
-     * Classe que compara os campos do Bean. Usada na ordenação para exibição.
-     */
-    public static class FieldComparator implements Comparator<String>
+    public static class Attribute implements Comparable<Attribute>
     {
-        @Override
-        public int compare(String a, String b)
+        private String name;
+        private int showingOrder;
+        private String showingName;
+        
+        public Attribute(String name, int showingOrder, String showingName)
         {
-            return getFieldShowingOrder(a) - getFieldShowingOrder(b);
-        } 
+            this.name = name;
+            this.showingOrder = showingOrder;
+            this.showingName = showingName;
+        }
+
+        @Override
+        public int compareTo(Attribute a)
+        {
+            return showingOrder - a.showingOrder;
+        }
+
+        public String getShowingName()
+        {
+            return showingName;
+        }
     }
     
-    /**
-     * Cria o atributo do Bean.
-     * @param name Nome do atributo.
-     * @param showingOrder Ordem de exibição.
-     * @param value Valor do atributo.
-     * @return A String que representa o atributo.
-     */
-    public static String createField(String name, int showingOrder, String value)
-    {
-        return name + "::" + showingOrder + ";;" + value;
-    }
-    
-    /**
-     * @param field Atributo.
-     * @return O valor do atributo.
-     */
-    public static String getFieldValue(String field)
-    {
-        return field.substring(field.indexOf(";;") + 2);
-    }
-    
-    /**
-     * @param field Atributo.
-     * @return O nome do atributo.
-     */
-    public static String getFieldName(String field)
-    {
-        return field.substring(0, field.indexOf("::"));
-    }
-    
-    /**
-     * @param field Atributo.
-     * @return A ordem de exibição do atributo.
-     */
-    public static int getFieldShowingOrder(String field)
-    {
-        return Integer.parseInt(field.substring(field.indexOf("::") + 2, field.indexOf(";;")));
-    }
+    protected Map<String, Attribute> attributes;
     
     /**
      * Id do Bean. Quando vale -1, significa que o id é desconhecido. Usado quando
@@ -70,6 +45,17 @@ public abstract class Bean implements Serializable
      * de salvar.
      */
     private int id;
+    
+    public Bean()
+    {
+        attributes = new TreeMap<String, Attribute>();
+        attributes.put("getId", new Attribute("id", 0, "ID"));
+    }
+    
+    public Map<String, Attribute> getAttributes()
+    {
+        return attributes;
+    }
 
     public int getId()
     {

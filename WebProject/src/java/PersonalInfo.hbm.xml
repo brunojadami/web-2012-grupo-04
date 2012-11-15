@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="webproject.bean.PersonalInfo" table="PersonalInfo">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="generalName" column="generalName"/>
+        <property name="generalCitationName" column="generalCitationName"/>
+        <property name="generalCountry" column="generalCountry"/>
+        <property name="generalCpf" column="generalCpf"/>
+        <property name="generalSex" column="generalSex"/>
+        <property name="idNumber" column="idNumber"/>
+        <property name="idEmissioner" column="idEmissioner"/>
+        <property name="idState" column="idState"/>
+        <property name="idEmissionDate" column="idEmissionDate"/>
+        <property name="birthCountry" column="birthCountry"/>
+        <property name="birthState" column="birthState"/>
+        <property name="birthCity" column="birthCity"/>
+        <property name="birthDate" column="birthDate"/>
+        <property name="passportNumber" column="passportNumber"/>
+        <property name="passportValidityDate" column="passportValidityDate"/>
+        <property name="passportEmissionDate" column="passportEmissionDate"/>
+        <property name="passportCountry" column="passportCountry"/>
+        <property name="filiationFatherName" column="filiationFatherName"/>
+        <property name="filiationMotherName" column="filiationMotherName"/>
+        <property name="addressStreet" column="addressStreet"/>
+        <property name="addressZipCode" column="addressZipCode"/>
+        <property name="addressCity" column="addressCity"/>
+        <property name="addressCountry" column="addressCountry"/>
+        <property name="addressDistrict" column="addressDistrict"/>
+        <property name="addressState" column="addressState"/>
+        <property name="addressPhone" column="addressPhone"/>
+        <property name="professionalAddressCompany" column="professionalAddressCompany"/>
+        <property name="professionalAddressUnit" column="professionalAddressUnit"/>
+        <property name="professionalAddressStreet" column="professionalAddressStreet"/>
+        <property name="professionalAddressZipCode" column="professionalAddressZipCode"/>
+        <property name="professionalAddressCity" column="professionalAddressCity"/>
+        <property name="professionalAddressCountry" column="professionalAddressCountry"/>
+        <property name="professionalAddressDistrict" column="professionalAddressDistrict"/>
+        <property name="professionalAddressState" column="professionalAddressState"/>
+        <property name="professionalAddressPhone" column="professionalAddressPhone"/>
+        <property name="miscEmail" column="miscEmail"/>
+    </class>
+</hibernate-mapping>

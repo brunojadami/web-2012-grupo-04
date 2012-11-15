@@ -12,8 +12,8 @@
             <tr>
                 <td>Informações pessoais e endereço</td>
                 <td class="Right">
-                    <a href="PersonalInfo?action=edit&amp;id=0"><img src="image/edit.png" title="Modificar"/></a>
-                    <a href="PersonalInfo?action=view&amp;id=0"><img src="image/view.png" title="Visualizar"/></a>
+                    <a href="PersonalInfo?action=edit&amp;id=1"><img src="image/edit.png" title="Modificar"/></a>
+                    <a href="PersonalInfo?action=view&amp;id=1"><img src="image/view.png" title="Visualizar"/></a>
                 </td>
             </tr>
             <tr>
