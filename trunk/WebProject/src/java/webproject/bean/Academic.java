@@ -25,6 +25,20 @@ public class Academic extends Bean
 
     private String miscInfo;
 
+    public Academic()
+    {
+        attributes.put("getGeneralLevel", new Bean.Attribute("generalLevel", 1, "Nível"));
+        attributes.put("getGeneralType", new Bean.Attribute("generalType", 2, "Tipo"));
+        attributes.put("getGeneralInstitute", new Bean.Attribute("generalInstitute", 3, "Instituto"));
+        attributes.put("getGeneralCourse", new Bean.Attribute("generalCourse", 4, "Curso"));
+        attributes.put("getGeneralStatus", new Bean.Attribute("generalStatus", 5, "Estado"));
+        attributes.put("getPeriodStartDate", new Bean.Attribute("periodStartDate", 6, "Data de início"));
+        attributes.put("getPeriodEndDate", new Bean.Attribute("periodEndDate", 7, "Data de término"));
+        attributes.put("getScholarshipPresence", new Bean.Attribute("scholarshipPresence", 8, "Com bolsa?"));
+        attributes.put("getScholarshipAgency", new Bean.Attribute("scholarshipAgency", 9, "Agência"));
+        attributes.put("getMiscInfo", new Bean.Attribute("miscInfo", 10, "Outros"));
+    }
+    
     public String getGeneralLevel()
     {
         return generalLevel;

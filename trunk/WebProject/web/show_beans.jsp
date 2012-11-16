@@ -1,3 +1,4 @@
+<%@page import="java.util.Map"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="webproject.bean.Bean"%>
 <%@page import="java.lang.reflect.Method"%>
@@ -30,35 +31,26 @@
         <%
         List<Bean> beans = (List<Bean>) request.getAttribute("list");
         
-        int id = 0;
         for (Bean bean : beans)
         {
-            List<String> fields = new LinkedList<String>();
+            int count = 3;
             
-            for (Method method : bean.getClass().getDeclaredMethods())
-            {
-                if (method.getParameterTypes().length == 0 && method.getReturnType() == String.class)
-                {
-                    String field = (String) method.invoke(bean);
-                    fields.add(field);
-                }
-            }
-
-            Collections.sort(fields, new Bean.FieldComparator());
-            fields = fields.subList(0, Math.min(4, fields.size()));
-
-            out.print("<tr><td>" + (id) + "</td>");
+            out.print("<tr><td>" + bean.getId() + "</td>");
             
-            for (String field : fields)
+            for (Map.Entry<String, Bean.Attribute> entry : bean.getAttributes().entrySet())
             {
-                out.print("<td>" + Bean.getFieldValue(field) + "</td>");
+                String method = entry.getKey();
+                Object value = bean.getClass().getMethod(method).invoke(bean);
+                
+                out.print("<td class=\"Right\">" + value.toString() + "</td>");
+                
+                if (count-- < 0)
+                    break;
             }
             
             out.print("<td>...</td>");
-            out.print("<td style=\"text-align: right;\"><a href=\"" + request.getAttribute("servletName") + "?action=view&id=" + id + "\"><img src=\"image/view.png\" title=\"Visualizar\"/></td>");
+            out.print("<td style=\"text-align: right;\"><a href=\"" + request.getAttribute("servletName") + "?action=view&id=" + bean.getId() + "\"><img src=\"image/view.png\" title=\"Visualizar\"/></td>");
             out.print("</tr>\n");
-            
-            id++;
         }
         %>
         </table>

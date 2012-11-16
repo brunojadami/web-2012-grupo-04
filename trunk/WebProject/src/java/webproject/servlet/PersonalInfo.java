@@ -34,6 +34,7 @@ public class PersonalInfo extends HttpServlet
         String action = request.getParameter("action");
         
         RequestDispatcher dispatcher = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
         
         webproject.bean.PersonalInfo personalInfo = new webproject.bean.PersonalInfo();
         personalInfo.setId(Integer.parseInt(request.getParameter("id")));
@@ -111,11 +112,7 @@ public class PersonalInfo extends HttpServlet
                 request.setAttribute("message", "Informações atualizadas com sucesso");
                 request.setAttribute("servletName", "PersonalInfo");
 
-                Session session = HibernateUtil.getSessionFactory().openSession();
-                
                 session.save(personalInfo);
-                
-                session.close();
             }
             else
             {
@@ -126,8 +123,6 @@ public class PersonalInfo extends HttpServlet
         }
         else if (action.equals("view"))
         {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            
             Bean bean = (Bean) session.get(webproject.bean.PersonalInfo.class, personalInfo.getId());
             if (bean != null)
             {
@@ -141,11 +136,10 @@ public class PersonalInfo extends HttpServlet
                 // Nenhuma informação pessoal foi gravada ainda.
                 dispatcher = request.getRequestDispatcher("control_panel.jsp");
             }
-            
-            session.close();
         }
         
         dispatcher.forward(request, response);
+        session.close();
     }
 
     /**
