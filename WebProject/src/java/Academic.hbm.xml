@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="webproject.bean.Academic" table="Academic">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="generalLevel" column="generalLevel"/>
+        <property name="generalType" column="generalType"/>
+        <property name="generalInstitute" column="generalInstitute"/>
+        <property name="generalCourse" column="generalCourse"/>
+        <property name="generalStatus" column="generalStatus"/>
+        <property name="periodStartDate" column="periodStartDate"/>
+        <property name="periodEndDate" column="periodEndDate"/>
+        <property name="scholarshipPresence" column="scholarshipPresence"/>
+        <property name="scholarshipAgency" column="scholarshipAgency"/>
+        <property name="miscInfo" column="miscInfo"/>
+    </class>
+</hibernate-mapping>
