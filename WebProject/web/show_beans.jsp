@@ -49,7 +49,9 @@
             }
             
             out.print("<td>...</td>");
-            out.print("<td style=\"text-align: right;\"><a href=\"" + request.getAttribute("servletName") + "?action=view&id=" + bean.getId() + "\"><img src=\"image/view.png\" title=\"Visualizar\"/></td>");
+            out.print("<td style=\"text-align: right;\">");
+            out.print("<a href=\"" + request.getAttribute("servletName") + "?action=view&id=" + bean.getId() + "\"><img src=\"image/view.png\" title=\"Visualizar\"/>\n<a href=\"" + request.getAttribute("servletName") + "?action=delete&id=" + bean.getId() + "\"><img src=\"image/delete.png\" title=\"Remover\"/>");
+            out.print("</td>");
             out.print("</tr>\n");
         }
         %>
