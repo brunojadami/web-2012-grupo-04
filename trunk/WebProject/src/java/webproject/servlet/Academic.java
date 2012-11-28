@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import webproject.misc.HibernateUtil;
 import webproject.misc.Util;
 import webproject.validation.Validator;
@@ -74,7 +75,6 @@ public class Academic extends HttpServlet
                 request.setAttribute("servletName", "Academic");
 
                 session.save(academic);
-                session.close();
             }
             else
             {
@@ -90,11 +90,21 @@ public class Academic extends HttpServlet
             request.setAttribute("message", "Visualizar registro acadêmico");
             request.setAttribute("servletName", "Academic");
         }
+        else if (action.equals("delete"))
+        {
+            Transaction transaction = session.beginTransaction();
+            session.delete(academic);
+            transaction.commit();
+            
+            List<webproject.bean.Academic> academics = session.createQuery("from Academic").list();
+            dispatcher = request.getRequestDispatcher("show_beans.jsp");
+            request.setAttribute("list", academics);
+            request.setAttribute("message", "Visualizar registros acadêmicos");
+            request.setAttribute("servletName", "Academic");
+        }
         else if (action.equals("list_view"))
         {
             List<webproject.bean.Academic> academics = session.createQuery("from Academic").list();
-            session.close();
-            
             dispatcher = request.getRequestDispatcher("show_beans.jsp");
             request.setAttribute("list", academics);
             request.setAttribute("message", "Visualizar registros acadêmicos");
