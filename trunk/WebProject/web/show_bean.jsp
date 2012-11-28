@@ -25,7 +25,8 @@
             <tr>
                 <td>Opções</td>
                 <td class="Right">
-                    <a style="margin: auto;" href="<% out.print((String) request.getAttribute("servletName") + "?action=edit&id=" + bean.getId());%>"><img src="image/edit.png" title="Modificar"/></a>
+                    <a href="<% out.print(request.getAttribute("servletName") + "?action=delete&id=" + bean.getId()); %>"><img src="image/delete.png" title="Remover"/></a>
+                    <a href="<% out.print(request.getAttribute("servletName") + "?action=edit&id=" + bean.getId());%>"><img src="image/edit.png" title="Modificar"/></a>
                     <a href="control_panel.jsp"><img src="image/control_panel.png" title="Painel de controle"/></a>
                 </td>
             </tr>
