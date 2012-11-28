@@ -17,7 +17,7 @@ public class Complementary extends User
     {
 	attributes.put("getGeneralLevel", new Bean.Attribute("generalLevel", 0+1, "Nível"));
 	attributes.put("getGeneralInstitution", new Bean.Attribute("generalInstitution", 1+1, "Instituição"));
-	attributes.put("getGeneralCourse ", new Bean.Attribute("generalCourse", 2+1, "Curso"));
+	attributes.put("getGeneralCourse", new Bean.Attribute("generalCourse", 2+1, "Curso"));
 	attributes.put("getGeneralStatus", new Bean.Attribute("generalStatus", 3+1, "Estado"));
 	attributes.put("getGeneralTime", new Bean.Attribute("generalTime", 4+1, "Carga horária"));
 	attributes.put("getPeriodBegin", new Bean.Attribute("periodBegin", 5+1, "Ano de início"));
