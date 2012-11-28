@@ -1,6 +1,6 @@
 package webproject.bean;
 
-public class Book extends Bean
+public class Book extends User
 {
 
     private String bookType;
@@ -8,6 +8,8 @@ public class Book extends Bean
 
     public Book()
     {
+	attributes.put("getBookType", new Bean.Attribute("bookType", 0+1, "Tipo de produção"));
+	attributes.put("getBookISSN", new Bean.Attribute("bookISSN", 1+1, "DOI ou ISSN"));
     }
 
     public String getBookType()

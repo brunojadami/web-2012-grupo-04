@@ -1,14 +1,18 @@
 package webproject.servlet;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import webproject.bean.Bean;
 import webproject.misc.BeanIO;
+import webproject.misc.HibernateUtil;
 import webproject.misc.Util;
 import webproject.validation.Validator;
 
@@ -35,12 +39,14 @@ public class Accepted extends HttpServlet
     {
 	String action = request.getParameter("action");
 
+	Session session = HibernateUtil.getSessionFactory().openSession();
 	RequestDispatcher dispatcher = null;
 
 	// Nota: toda a parte de Bean, IO e suas respectivas decisões de projeto
 	// estão descritas nas classes Bean.java e BeanIO.java.
 	webproject.bean.Accepted accepted = new webproject.bean.Accepted();
 	accepted.setId(Integer.parseInt(request.getParameter("id")));
+	accepted.setLogin((webproject.bean.Login) request.getSession().getAttribute("login"));
 
 	if (action.equals("edit"))
 	{
@@ -49,16 +55,16 @@ public class Accepted extends HttpServlet
 	}
 	else if (action.equals("update"))
 	{
-	    accepted.setGeneralTitle(Bean.createField("Título", 0, request.getParameter("generalTitle")));
-	    accepted.setGeneralLanguage(Bean.createField("Idioma", 1, request.getParameter("generalLanguage")));
-	    accepted.setGeneralYear(Bean.createField("Ano previsto para publicação", 2, request.getParameter("generalYear")));
-	    accepted.setDetailedTitle(Bean.createField("Título do periódico/revista em que o artigo será publicado", 3, request.getParameter("detailedTitle")));
-	    accepted.setDetailedISSN(Bean.createField("ISSN", 4, request.getParameter("detailedISSN")));
-	    accepted.setOtherInfo(Bean.createField("Outras informações", 5, request.getParameter("otherInfo")));
+	    accepted.setGeneralTitle(request.getParameter("generalTitle"));
+	    accepted.setGeneralLanguage(request.getParameter("generalLanguage"));
+	    accepted.setGeneralYear(request.getParameter("generalYear"));
+	    accepted.setDetailedTitle(request.getParameter("detailedTitle"));
+	    accepted.setDetailedISSN(request.getParameter("detailedISSN"));
+	    accepted.setOtherInfo(request.getParameter("otherInfo"));
 
 	    Validator validator = new Validator();
 
-	    String validatorMessage = validator.validateListOption(Bean.getFieldValue(accepted.getGeneralLanguage()), Util.getLanguages(), "Idioma inválido.");
+	    String validatorMessage = validator.validateListOption(accepted.getGeneralLanguage(), Util.getLanguages(), "Idioma inválido.");
 
 	    request.setAttribute("bean", accepted);
 	    if (validatorMessage == null)
@@ -67,14 +73,9 @@ public class Accepted extends HttpServlet
 		request.setAttribute("servletName", "Accepted");
 		request.setAttribute("message", "Operação realizada com sucesso");
 
-		try
-		{
-		    BeanIO.getInstance().save(accepted);
-		}
-		catch (Exception ex)
-		{
-		    throw new ServletException(ex);
-		}
+		Transaction transaction = session.beginTransaction();
+                session.save(accepted);
+                transaction.commit();
 	    }
 	    else
 	    {
@@ -84,36 +85,35 @@ public class Accepted extends HttpServlet
 	}
 	else if (action.equals("view"))
 	{
-	    try
-	    {
-		dispatcher = request.getRequestDispatcher("show_bean.jsp");
-		request.setAttribute("bean", BeanIO.getInstance().load(accepted));
-		request.setAttribute("message", "Visualizar artigo aceito para publicação");
-		// O nome do servlet é passado para o JSP para criar possíveis ações.
-		request.setAttribute("servletName", "Accepted");
-	    }
-	    catch (Exception ex)
-	    {
-		throw new ServletException(ex);
-	    }
+	    dispatcher = request.getRequestDispatcher("show_bean.jsp");
+	    request.setAttribute("bean", session.load(webproject.bean.Accepted.class, accepted.getId()));
+	    request.setAttribute("message", "Visualizar artigo aceito para publicação");
+	    // O nome do servlet é passado para o JSP para criar possíveis ações.
+	    request.setAttribute("servletName", "Accepted");
 	}
+	else if (action.equals("delete"))
+        {
+            Transaction transaction = session.beginTransaction();
+            session.delete(accepted);
+            transaction.commit();
+            
+            List<webproject.bean.Accepted> accepteds = session.createQuery("from Accepted accepted where accepted.login.id = " + accepted.getLogin().getId()).list();
+            dispatcher = request.getRequestDispatcher("show_beans.jsp");
+            request.setAttribute("list", accepteds);
+            request.setAttribute("message", "Visualizar artigos aceitos para publicação");
+            request.setAttribute("servletName", "Accepted");
+        }
 	else if (action.equals("list_view"))
 	{
-	    try
-	    {
-		dispatcher = request.getRequestDispatcher("show_beans.jsp");
-		request.setAttribute("list", BeanIO.getInstance().loadAll(accepted.getClass()));
-		request.setAttribute("message", "Visualizar artigos aceitos para publicação");
-		// O nome do servlet é passado para o JSP para criar possíveis ações.
-		request.setAttribute("servletName", "Accepted");
-	    }
-	    catch (Exception ex)
-	    {
-		throw new ServletException(ex);
-	    }
+	    List<webproject.bean.Accepted> accepteds = session.createQuery("from Accepted accepted where accepted.login.id = " + accepted.getLogin().getId()).list();
+            dispatcher = request.getRequestDispatcher("show_beans.jsp");
+            request.setAttribute("list", accepteds);
+            request.setAttribute("message", "Visualizar artigos aceitos para publicação");
+            request.setAttribute("servletName", "Accepted");
 	}
 
 	dispatcher.forward(request, response);
+	session.close();
     }
 
     /**

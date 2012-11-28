@@ -1,6 +1,6 @@
 package webproject.bean;
 
-public class Experience extends Bean
+public class Experience extends User
 {
 
     private String profInstitution;
@@ -16,6 +16,16 @@ public class Experience extends Bean
 
     public Experience()
     {
+	attributes.put("getProfInstitution", new Bean.Attribute("profInstitution",  0+1, "Instituição"));
+	attributes.put("getBondType", new Bean.Attribute("bondType",  1+1, "Tipo do vínculo"));
+	attributes.put("getBondEmployment", new Bean.Attribute("bondEmployment",  2+1, "Vínculo empregatício?"));
+	attributes.put("getBondFunctional", new Bean.Attribute("bondFunctional",  3+1, "Enquadramento funcional"));
+	attributes.put("getBondTime", new Bean.Attribute("bondTime",  4+1, "Carga horária"));
+	attributes.put("getBondExclusive", new Bean.Attribute("bondExclusive",  5+1, "Dedicação exclusiva?"));
+	attributes.put("getPeriodMonth", new Bean.Attribute("periodMonth",  6+1, "Mês de início"));
+	attributes.put("getPeriodYear", new Bean.Attribute("periodYear",  7+1, "Ano de início"));
+	attributes.put("getPeriodFinished", new Bean.Attribute("periodFinished",  8+1, "Finalizado?"));
+	attributes.put("getOtherInfo", new Bean.Attribute("otherInfo",  9+1, "Outras informações"));
     }
 
     public String getProfInstitution()
