@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import webproject.bean.Bean;
 import webproject.misc.HibernateUtil;
 import webproject.validation.Validator;
@@ -37,7 +38,11 @@ public class PersonalInfo extends HttpServlet
         Session session = HibernateUtil.getSessionFactory().openSession();
         
         webproject.bean.PersonalInfo personalInfo = new webproject.bean.PersonalInfo();
+        // Para cada usuário, há um único 'personalInfo'. Por isso, o id é sempre igual ao
+        // loginId. Deviamos ter feito uma PK-FK única. Mas estava dando alguns problemas
+        // e não deu tempo de solucionar o erro :)
         personalInfo.setId(Integer.parseInt(request.getParameter("id")));
+        personalInfo.setLogin((webproject.bean.Login) request.getSession().getAttribute("login"));
         
         if (action.equals("edit"))
         {
@@ -112,7 +117,9 @@ public class PersonalInfo extends HttpServlet
                 request.setAttribute("message", "Informações atualizadas com sucesso");
                 request.setAttribute("servletName", "PersonalInfo");
 
+                Transaction transaction = session.beginTransaction();
                 session.save(personalInfo);
+                transaction.commit();
             }
             else
             {

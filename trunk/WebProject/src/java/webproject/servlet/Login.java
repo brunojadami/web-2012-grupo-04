@@ -1,6 +1,7 @@
 package webproject.servlet;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,34 +30,46 @@ public class Login extends HttpServlet
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        String action = request.getParameter("action");
+        
         webproject.bean.Login login = new webproject.bean.Login();
-        // Nota: o único login criado é o de administrador, cujo id é 1.
-        login.setId(1);
-        login.setEmail((String) request.getParameter("email"));
-        login.setPassword((String) request.getParameter("password"));
+        login.setEmail(request.getParameter("email"));
+        login.setPassword(request.getParameter("password"));
         
         webproject.bean.Login loginCheck;
         
+        RequestDispatcher dispatcher = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         
-        loginCheck = (webproject.bean.Login) session.get(webproject.bean.Login.class, login.getId());
-        
-        RequestDispatcher dispatcher;
-        
-        if (!login.getEmail().equals(loginCheck.getEmail())
-            || !login.getPassword().equals(loginCheck.getPassword()))
+        if (action.equals("login"))
+        {
+            // Nota: assume-se que o email é único para cada usuário.
+            List logins = session.createQuery("from Login login where login.email like '" + login.getEmail() + "'").list();
+
+            loginCheck = logins.isEmpty() ? null : (webproject.bean.Login) logins.get(0);
+
+            
+
+            if (loginCheck == null 
+                    || !login.getEmail().equals(loginCheck.getEmail())
+                    || !login.getPassword().equals(loginCheck.getPassword()))
+            {
+                dispatcher = request.getRequestDispatcher("index.jsp");
+                request.setAttribute("errorMessage", "Usuário/senha incorreto.");
+            }
+            else
+            {
+                dispatcher = request.getRequestDispatcher("control_panel.jsp"); 
+                request.getSession().setAttribute("login", loginCheck);
+            }
+        }
+        else if (action.equals("logout"))
         {
             dispatcher = request.getRequestDispatcher("index.jsp");
-            request.setAttribute("errorMessage", "Usuário/senha incorreto.");
-        }
-        else
-        {
-            dispatcher = request.getRequestDispatcher("control_panel.jsp"); 
-            request.getSession().setAttribute("login", login);
+            request.getSession().removeAttribute("login");
         }
         
         dispatcher.forward(request, response);
-        
         session.close();
     }
 

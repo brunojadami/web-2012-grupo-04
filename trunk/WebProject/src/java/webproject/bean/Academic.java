@@ -3,7 +3,7 @@ package webproject.bean;
 /**
  * Bean que representa os dados acadêmicos.
  */
-public class Academic extends Bean
+public class Academic extends User
 {
     private String generalLevel;
 
