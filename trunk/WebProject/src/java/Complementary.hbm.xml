@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="webproject.bean.Complementary" table="Complementary">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+	<property name="generalLevel" column="generalLevel"/>
+	<property name="generalInstitution" column="generalInstitution"/>
+	<property name="generalCourse" column="generalCourse"/>
+	<property name="generalStatus" column="generalStatus"/>
+	<property name="generalTime" column="generalTime"/>
+	<property name="periodBegin" column="periodBegin"/>
+	<property name="periodEnd" column="periodEnd"/>
+	<property name="scholarshipPresence" column="scholarshipPresence"/>
+	<property name="scholarshipAgency" column="scholarshipAgency"/>
+	<many-to-one name="login" class="webproject.bean.Login" column="loginId"/>
+    </class>
+</hibernate-mapping>

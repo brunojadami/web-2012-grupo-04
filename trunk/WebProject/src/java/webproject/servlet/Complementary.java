@@ -1,14 +1,18 @@
 package webproject.servlet;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import webproject.bean.Bean;
 import webproject.misc.BeanIO;
+import webproject.misc.HibernateUtil;
 import webproject.misc.Util;
 import webproject.validation.Validator;
 
@@ -36,11 +40,13 @@ public class Complementary extends HttpServlet
 	String action = request.getParameter("action");
 
 	RequestDispatcher dispatcher = null;
+	Session session = HibernateUtil.getSessionFactory().openSession();
 
 	// Nota: toda a parte de Bean, IO e suas respectivas decisões de projeto
 	// estão descritas nas classes Bean.java e BeanIO.java.
 	webproject.bean.Complementary complementary = new webproject.bean.Complementary();
 	complementary.setId(Integer.parseInt(request.getParameter("id")));
+	complementary.setLogin((webproject.bean.Login) request.getSession().getAttribute("login"));
 
 	if (action.equals("edit"))
 	{
@@ -49,24 +55,24 @@ public class Complementary extends HttpServlet
 	}
 	else if (action.equals("update"))
 	{
-	    complementary.setGeneralLevel(Bean.createField("Nível", 0, request.getParameter("generalLevel")));
-	    complementary.setGeneralInstitution(Bean.createField("Instituição", 1, request.getParameter("generalInstitution")));
-	    complementary.setGeneralCourse (Bean.createField("Curso", 2, request.getParameter("generalCourse")));
-	    complementary.setGeneralStatus(Bean.createField("Estado", 3, request.getParameter("generalStatus")));
-	    complementary.setGeneralTime(Bean.createField("Carga horária", 4, request.getParameter("generalTime")));
-	    complementary.setPeriodBegin(Bean.createField("Ano de início", 5, request.getParameter("periodBegin")));
-	    complementary.setPeriodEnd(Bean.createField("Ano de término", 6, request.getParameter("periodEnd")));
-	    complementary.setScholarshipPresence(Bean.createField("Com bolsa?", 7, request.getParameter("scholarshipPresence")));
-	    complementary.setScholarshipAgency(Bean.createField("Agência", 8, request.getParameter("scholarshipAgency")));
+	    complementary.setGeneralLevel(request.getParameter("generalLevel"));
+	    complementary.setGeneralInstitution(request.getParameter("generalInstitution"));
+	    complementary.setGeneralCourse (request.getParameter("generalCourse"));
+	    complementary.setGeneralStatus(request.getParameter("generalStatus"));
+	    complementary.setGeneralTime(request.getParameter("generalTime"));
+	    complementary.setPeriodBegin(request.getParameter("periodBegin"));
+	    complementary.setPeriodEnd(request.getParameter("periodEnd"));
+	    complementary.setScholarshipPresence(request.getParameter("scholarshipPresence"));
+	    complementary.setScholarshipAgency(request.getParameter("scholarshipAgency"));
 	    // Nota: a validação no servidor ainda não é feita nessa parte do trabalho.
 	    // A única coisa validada aqui são os combo boxes.
 	    Validator validator = new Validator();
 
-	    String validatorMessage = validator.validateListOption(Bean.getFieldValue(complementary.getGeneralLevel()), Util.getComplementaryLevelNames(), "Nível inválido.");
+	    String validatorMessage = validator.validateListOption(complementary.getGeneralLevel(), Util.getComplementaryLevelNames(), "Nível inválido.");
 	    validatorMessage = validatorMessage == null
-		    ? validator.validateListOption(Bean.getFieldValue(complementary.getGeneralStatus()), Util.getAcademicStatusNames(), "Estado inválido.") : validatorMessage;
+		    ? validator.validateListOption(complementary.getGeneralStatus(), Util.getAcademicStatusNames(), "Estado inválido.") : validatorMessage;
 	    validatorMessage = validatorMessage == null
-		    ? validator.validateYesNoOption(Bean.getFieldValue(complementary.getScholarshipPresence()), "Com bolsa? inválido.") : validatorMessage;
+		    ? validator.validateYesNoOption(complementary.getScholarshipPresence(), "Com bolsa? inválido.") : validatorMessage;
 
 	    request.setAttribute("bean", complementary);
 	    if (validatorMessage == null)
@@ -75,14 +81,9 @@ public class Complementary extends HttpServlet
 		request.setAttribute("servletName", "Complementary");
                 request.setAttribute("message", "Operação realizada com sucesso");
 
-                try
-                {
-                    BeanIO.getInstance().save(complementary);
-                }
-                catch (Exception ex)
-                {
-                    throw new ServletException(ex);
-                }
+                Transaction transaction = session.beginTransaction();
+                session.save(complementary);
+                transaction.commit();
             }
             else
             {
@@ -92,36 +93,35 @@ public class Complementary extends HttpServlet
 	}
 	else if (action.equals("view"))
 	{
-	    try
-	    {
-		dispatcher = request.getRequestDispatcher("show_bean.jsp");
-		request.setAttribute("bean", BeanIO.getInstance().load(complementary));
-		request.setAttribute("message", "Visualizar formação complementar");
-		// O nome do servlet é passado para o JSP para criar possíveis ações.
-		request.setAttribute("servletName", "Complementary");
-	    }
-	    catch (Exception ex)
-	    {
-		throw new ServletException(ex);
-	    }
+	    dispatcher = request.getRequestDispatcher("show_bean.jsp");
+	    request.setAttribute("bean", session.load(webproject.bean.Complementary.class, complementary.getId()));
+	    request.setAttribute("message", "Visualizar formação complementar");
+	    // O nome do servlet é passado para o JSP para criar possíveis ações.
+	    request.setAttribute("servletName", "Complementary");
 	}
+	else if (action.equals("delete"))
+        {
+            Transaction transaction = session.beginTransaction();
+            session.delete(complementary);
+            transaction.commit();
+            
+            List<webproject.bean.Complementary> complementaries = session.createQuery("from Complementary complementary where complementary.login.id = " + complementary.getLogin().getId()).list();
+            dispatcher = request.getRequestDispatcher("show_beans.jsp");
+            request.setAttribute("list", complementaries);
+            request.setAttribute("message", "Visualizar formações complementares");
+            request.setAttribute("servletName", "Complementary");
+        }
 	else if (action.equals("list_view"))
 	{
-	    try
-	    {
-		dispatcher = request.getRequestDispatcher("show_beans.jsp");
-		request.setAttribute("list", BeanIO.getInstance().loadAll(complementary.getClass()));
-		request.setAttribute("message", "Visualizar formações complementares");
-		// O nome do servlet é passado para o JSP para criar possíveis ações.
-		request.setAttribute("servletName", "Complementary");
-	    }
-	    catch (Exception ex)
-	    {
-		throw new ServletException(ex);
-	    }
+	    List<webproject.bean.Complementary> complementaries = session.createQuery("from Complementary complementary where complementary.login.id = " + complementary.getLogin().getId()).list();
+            dispatcher = request.getRequestDispatcher("show_beans.jsp");
+            request.setAttribute("list", complementaries);
+            request.setAttribute("message", "Visualizar formações complementares");
+            request.setAttribute("servletName", "Complementary");
 	}
 
 	dispatcher.forward(request, response);
+	session.close();
     }
 
     /**

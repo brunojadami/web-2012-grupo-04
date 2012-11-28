@@ -1,14 +1,18 @@
 package webproject.servlet;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import webproject.bean.Bean;
 import webproject.misc.BeanIO;
+import webproject.misc.HibernateUtil;
 import webproject.misc.Util;
 import webproject.validation.Validator;
 
@@ -36,11 +40,13 @@ public class Published extends HttpServlet
 	String action = request.getParameter("action");
 
 	RequestDispatcher dispatcher = null;
+	Session session = HibernateUtil.getSessionFactory().openSession();
 
 	// Nota: toda a parte de Bean, IO e suas respectivas decisões de projeto
 	// estão descritas nas classes Bean.java e BeanIO.java.
 	webproject.bean.Published published = new webproject.bean.Published();
 	published.setId(Integer.parseInt(request.getParameter("id")));
+	published.setLogin((webproject.bean.Login) request.getSession().getAttribute("login"));
 
 	if (action.equals("edit"))
 	{
@@ -49,7 +55,7 @@ public class Published extends HttpServlet
 	}
 	else if (action.equals("update"))
 	{
-	    published.setCompleteName(Bean.createField("DOI, ISSN ou parte do nome do periódico", 0, request.getParameter("completeName")));
+	    published.setCompleteName(request.getParameter("completeName"));
 
 	    String validatorMessage = null;
 
@@ -60,14 +66,9 @@ public class Published extends HttpServlet
 		request.setAttribute("servletName", "Published");
 		request.setAttribute("message", "Operação realizada com sucesso");
 
-		try
-		{
-		    BeanIO.getInstance().save(published);
-		}
-		catch (Exception ex)
-		{
-		    throw new ServletException(ex);
-		}
+		Transaction transaction = session.beginTransaction();
+		session.save(published);
+		transaction.commit();
 	    }
 	    else
 	    {
@@ -77,36 +78,35 @@ public class Published extends HttpServlet
 	}
 	else if (action.equals("view"))
 	{
-	    try
-	    {
-		dispatcher = request.getRequestDispatcher("show_bean.jsp");
-		request.setAttribute("bean", BeanIO.getInstance().load(published));
-		request.setAttribute("message", "Visualizar produção bibliográfica");
-		// O nome do servlet é passado para o JSP para criar possíveis ações.
-		request.setAttribute("servletName", "Published");
-	    }
-	    catch (Exception ex)
-	    {
-		throw new ServletException(ex);
-	    }
+	    dispatcher = request.getRequestDispatcher("show_bean.jsp");
+	    request.setAttribute("bean", session.load(webproject.bean.Published.class, published.getId()));
+	    request.setAttribute("message", "Visualizar produção bibliográfica");
+	    // O nome do servlet é passado para o JSP para criar possíveis ações.
+	    request.setAttribute("servletName", "Published");
+	}
+	else if (action.equals("delete"))
+	{
+	    Transaction transaction = session.beginTransaction();
+	    session.delete(published);
+	    transaction.commit();
+
+	    List<webproject.bean.Published> publisheds = session.createQuery("from Published pub where pub.login.id = " + published.getLogin().getId()).list();
+	    dispatcher = request.getRequestDispatcher("show_beans.jsp");
+	    request.setAttribute("list", publisheds);
+	    request.setAttribute("message", "Visualizar produções bibliográficas");
+	    request.setAttribute("servletName", "Published");
 	}
 	else if (action.equals("list_view"))
 	{
-	    try
-	    {
-		dispatcher = request.getRequestDispatcher("show_beans.jsp");
-		request.setAttribute("list", BeanIO.getInstance().loadAll(published.getClass()));
-		request.setAttribute("message", "Visualizar produções bibliográficas");
-		// O nome do servlet é passado para o JSP para criar possíveis ações.
-		request.setAttribute("servletName", "Published");
-	    }
-	    catch (Exception ex)
-	    {
-		throw new ServletException(ex);
-	    }
+	    List<webproject.bean.Published> publisheds = session.createQuery("from Published pub where pub.login.id = " + published.getLogin().getId()).list();
+	    dispatcher = request.getRequestDispatcher("show_beans.jsp");
+	    request.setAttribute("list", publisheds);
+	    request.setAttribute("message", "Visualizar produções bibliográficas");
+	    request.setAttribute("servletName", "Published");
 	}
 
 	dispatcher.forward(request, response);
+	session.close();
     }
 
     /**

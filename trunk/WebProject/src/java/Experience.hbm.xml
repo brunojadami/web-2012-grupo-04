@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="webproject.bean.Experience" table="Experience">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+	<property name="profInstitution" column="profInstitution"/>
+	<property name="bondType" column="bondType"/>
+	<property name="bondEmployment" column="bondEmployment"/>
+	<property name="bondFunctional" column="bondFunctional"/>
+	<property name="bondTime" column="bondTime"/>
+	<property name="bondExclusive" column="bondExclusive"/>
+	<property name="periodMonth" column="periodMonth"/>
+	<property name="periodFinished" column="periodFinished"/>
+	<property name="periodYear" column="periodYear"/>
+	<property name="otherInfo" column="otherInfo"/>
+	<many-to-one name="login" class="webproject.bean.Login" column="loginId"/>
+    </class>
+</hibernate-mapping>

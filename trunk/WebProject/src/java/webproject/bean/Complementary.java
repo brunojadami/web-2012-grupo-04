@@ -1,6 +1,6 @@
 package webproject.bean;
 
-public class Complementary extends Bean
+public class Complementary extends User
 {
 
     private String generalLevel;
@@ -15,6 +15,15 @@ public class Complementary extends Bean
 
     public Complementary()
     {
+	attributes.put("getGeneralLevel", new Bean.Attribute("generalLevel", 0+1, "Nível"));
+	attributes.put("getGeneralInstitution", new Bean.Attribute("generalInstitution", 1+1, "Instituição"));
+	attributes.put("getGeneralCourse ", new Bean.Attribute("generalCourse", 2+1, "Curso"));
+	attributes.put("getGeneralStatus", new Bean.Attribute("generalStatus", 3+1, "Estado"));
+	attributes.put("getGeneralTime", new Bean.Attribute("generalTime", 4+1, "Carga horária"));
+	attributes.put("getPeriodBegin", new Bean.Attribute("periodBegin", 5+1, "Ano de início"));
+	attributes.put("getPeriodEnd", new Bean.Attribute("periodEnd", 6+1, "Ano de término"));
+	attributes.put("getScholarshipPresence", new Bean.Attribute("scholarshipPresence", 7+1, "Com bolsa?"));
+	attributes.put("getScholarshipAgency", new Bean.Attribute("scholarshipAgency", 8+1, "Agência"));
     }
 
     public String getGeneralLevel()
