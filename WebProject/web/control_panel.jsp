@@ -8,12 +8,22 @@
     <%@ include file="head.jsp" %>
     <body>
         <h1>Painel de controle</h1>
+        
+        <table id="optionsTable">
+            <tr>
+                <td>Opções</td>
+                <td class="Right">
+                    <a style="margin: auto;" href="Login?action=logout"><img src="image/exit.png" title="Sair"/></a>
+                </td>
+            </tr>
+        </table>
+                    
         <table>
             <tr>
                 <td>Informações pessoais e endereço</td>
                 <td class="Right">
-                    <a href="PersonalInfo?action=edit&amp;id=1"><img src="image/edit.png" title="Modificar"/></a>
-                    <a href="PersonalInfo?action=view&amp;id=1"><img src="image/view.png" title="Visualizar"/></a>
+                    <a href="PersonalInfo?action=edit&amp;id=<%=login.getId()%>"><img src="image/edit.png" title="Modificar"/></a>
+                    <a href="PersonalInfo?action=view&amp;id=<%=login.getId()%>"><img src="image/view.png" title="Visualizar"/></a>
                 </td>
             </tr>
             <tr>

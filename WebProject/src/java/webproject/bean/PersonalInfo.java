@@ -3,7 +3,7 @@ package webproject.bean;
 /**
  * Bean que representa a página de informações pessoais.
  */
-public class PersonalInfo extends Bean
+public class PersonalInfo extends User
 {
     private String generalName;
 

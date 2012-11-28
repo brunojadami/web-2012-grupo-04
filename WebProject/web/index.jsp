@@ -27,10 +27,11 @@
             <h3>Entrar</h3>
             <label>Email:</label>
             <input type="text" name="email"/>
-            <label class="Small">Email/senha válidos: admin@admin.com/123456</label>
+            <label class="Small">Email válido.</label>
             <label>Senha:</label>
             <input type="password" name="password"/> 
             <label class="Small">Aceita todos os tipos de caracteres. Tamanho de 6 a 30</label>
+            <input type="hidden" name="action" value="login"/>
             <input type="submit" value="Entrar"/>
             
         </form>

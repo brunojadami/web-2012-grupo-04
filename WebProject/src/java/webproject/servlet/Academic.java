@@ -40,6 +40,7 @@ public class Academic extends HttpServlet
         
         webproject.bean.Academic academic = new webproject.bean.Academic();
         academic.setId(Integer.parseInt(request.getParameter("id")));
+        academic.setLogin((webproject.bean.Login) request.getSession().getAttribute("login"));
         
         if (action.equals("edit"))
         {
@@ -74,7 +75,9 @@ public class Academic extends HttpServlet
                 request.setAttribute("message", "Operação realizada com sucesso");
                 request.setAttribute("servletName", "Academic");
 
+                Transaction transaction = session.beginTransaction();
                 session.save(academic);
+                transaction.commit();
             }
             else
             {
@@ -96,7 +99,7 @@ public class Academic extends HttpServlet
             session.delete(academic);
             transaction.commit();
             
-            List<webproject.bean.Academic> academics = session.createQuery("from Academic").list();
+            List<webproject.bean.Academic> academics = session.createQuery("from Academic academic where academic.login.id = " + academic.getLogin().getId()).list();
             dispatcher = request.getRequestDispatcher("show_beans.jsp");
             request.setAttribute("list", academics);
             request.setAttribute("message", "Visualizar registros acadêmicos");
@@ -104,7 +107,7 @@ public class Academic extends HttpServlet
         }
         else if (action.equals("list_view"))
         {
-            List<webproject.bean.Academic> academics = session.createQuery("from Academic").list();
+            List<webproject.bean.Academic> academics = session.createQuery("from Academic academic where academic.login.id = " + academic.getLogin().getId()).list();
             dispatcher = request.getRequestDispatcher("show_beans.jsp");
             request.setAttribute("list", academics);
             request.setAttribute("message", "Visualizar registros acadêmicos");
