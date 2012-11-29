@@ -1,13 +1,13 @@
 package webproject.bean;
 
-public class Published extends User
+public class Published extends LoginDependant
 {
 
     private String completeName;
 
     public Published()
     {
-	attributes.put("getProfInstitution", new Bean.Attribute("completeName",  1, "DOI, ISSN ou parte do nome do periódico"));
+	attributes.put(new Bean.Attribute("completeName",  1, "DOI, ISSN ou parte do nome do periódico"), "getProfInstitution");
     }
 
     public String getCompleteName()

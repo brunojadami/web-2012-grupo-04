@@ -37,7 +37,7 @@ public abstract class Bean implements Serializable
         }
     }
     
-    protected Map<String, Attribute> attributes;
+    protected Map<Attribute, String> attributes;
     
     /**
      * Id do Bean. Quando vale -1, significa que o id é desconhecido. Usado quando
@@ -48,11 +48,11 @@ public abstract class Bean implements Serializable
     
     public Bean()
     {
-        attributes = new TreeMap<String, Attribute>();
-        attributes.put("getId", new Attribute("id", 0, "ID"));
+        attributes = new TreeMap<Attribute, String>();
+        attributes.put(new Attribute("id", 0, "ID"), "getId");
     }
     
-    public Map<String, Attribute> getAttributes()
+    public Map<Attribute, String> getAttributes()
     {
         return attributes;
     }

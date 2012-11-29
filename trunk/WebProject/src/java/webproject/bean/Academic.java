@@ -3,40 +3,31 @@ package webproject.bean;
 /**
  * Bean que representa os dados acadêmicos.
  */
-public class Academic extends User
+public class Academic extends LoginDependant
 {
     private String generalLevel;
-
     private String generalType;
-
     private String generalInstitute;
-
     private String generalCourse;
-
     private String generalStatus;
-
     private String periodStartDate;
-
     private String periodEndDate;
-
     private String scholarshipPresence;
-
     private String scholarshipAgency;
-
     private String miscInfo;
 
     public Academic()
     {
-        attributes.put("getGeneralLevel", new Bean.Attribute("generalLevel", 1, "Nível"));
-        attributes.put("getGeneralType", new Bean.Attribute("generalType", 2, "Tipo"));
-        attributes.put("getGeneralInstitute", new Bean.Attribute("generalInstitute", 3, "Instituto"));
-        attributes.put("getGeneralCourse", new Bean.Attribute("generalCourse", 4, "Curso"));
-        attributes.put("getGeneralStatus", new Bean.Attribute("generalStatus", 5, "Estado"));
-        attributes.put("getPeriodStartDate", new Bean.Attribute("periodStartDate", 6, "Data de início"));
-        attributes.put("getPeriodEndDate", new Bean.Attribute("periodEndDate", 7, "Data de término"));
-        attributes.put("getScholarshipPresence", new Bean.Attribute("scholarshipPresence", 8, "Com bolsa?"));
-        attributes.put("getScholarshipAgency", new Bean.Attribute("scholarshipAgency", 9, "Agência"));
-        attributes.put("getMiscInfo", new Bean.Attribute("miscInfo", 10, "Outros"));
+        attributes.put(new Bean.Attribute("generalLevel", 1, "Nível"), "getGeneralLevel");
+        attributes.put(new Bean.Attribute("generalType", 2, "Tipo"), "getGeneralType");
+        attributes.put(new Bean.Attribute("generalInstitute", 3, "Instituto"), "getGeneralInstitute");
+        attributes.put(new Bean.Attribute("generalCourse", 4, "Curso"), "getGeneralCourse");
+        attributes.put(new Bean.Attribute("generalStatus", 5, "Estado"), "getGeneralStatus");
+        attributes.put(new Bean.Attribute("periodStartDate", 6, "Data de início"), "getPeriodStartDate");
+        attributes.put(new Bean.Attribute("periodEndDate", 7, "Data de término"), "getPeriodEndDate");
+        attributes.put(new Bean.Attribute("scholarshipPresence", 8, "Com bolsa?"), "getScholarshipPresence");
+        attributes.put(new Bean.Attribute("scholarshipAgency", 9, "Agência"), "getScholarshipAgency");
+        attributes.put(new Bean.Attribute("miscInfo", 10, "Outros"), "getMiscInfo");
     }
     
     public String getGeneralLevel()

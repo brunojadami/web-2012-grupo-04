@@ -5,8 +5,7 @@ package webproject.bean;
  */
 public class Login extends Bean
 {
-    private String email;
-    
+    private String email;   
     private String password;
 
     public String getEmail()

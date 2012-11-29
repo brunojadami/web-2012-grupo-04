@@ -1,9 +1,9 @@
 package webproject.bean;
 
 /**
- * User é o tipo de Bean que está ligado a um login.
+ * Esse é o tipo de Bean que está ligado a um login.
  */
-public class User extends Bean
+public class LoginDependant extends Bean
 {
     private Login login;
 

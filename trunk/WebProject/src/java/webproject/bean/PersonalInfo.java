@@ -3,117 +3,82 @@ package webproject.bean;
 /**
  * Bean que representa a página de informações pessoais.
  */
-public class PersonalInfo extends User
+public class PersonalInfo extends LoginDependant
 {
     private String generalName;
-
     private String generalCitationName;
-
     private String generalCountry;
-
     private String generalCpf;
-
     private String generalSex;
-
     private String idNumber;
-
     private String idEmissioner;
-
     private String idState;
-
     private String idEmissionDate;
-
     private String birthCountry;
-
     private String birthState;
-
     private String birthCity;
-
     private String birthDate;
-
     private String passportNumber;
-
     private String passportValidityDate;
-
     private String passportEmissionDate;
-
     private String passportCountry;
-
     private String filiationFatherName;
-
     private String filiationMotherName;
-
     private String addressStreet;
-
     private String addressZipCode;
-
     private String addressCity;
-
     private String addressCountry;
-
     private String addressDistrict;
-
     private String addressState;
-
     private String addressPhone;
-
     private String professionalAddressCompany;
-
     private String professionalAddressUnit;
-
     private String professionalAddressStreet;
-
     private String professionalAddressZipCode;
-
     private String professionalAddressCity;
-
     private String professionalAddressCountry;
-
     private String professionalAddressDistrict;
-
     private String professionalAddressState;
-
     private String professionalAddressPhone;
-
     private String miscEmail;
     
     public PersonalInfo()
     {
-        attributes.put("getGeneralName", new Bean.Attribute("generalName", 1, "Nome"));
-        attributes.put("getGeneralCitationName", new Bean.Attribute("generalCitationName", 2, "Nome de citação"));
-        attributes.put("getGeneralCountry", new Bean.Attribute("generalCountry", 3, "País"));
-        attributes.put("getGeneralCpf", new Bean.Attribute("generalCpf", 4, "CPF"));
-        attributes.put("getGeneralSex", new Bean.Attribute("generalSex", 5, "Sexo"));
-        attributes.put("getIdNumber", new Bean.Attribute("idNumber", 6, "Número da identidade"));
-        attributes.put("getIdEmissioner", new Bean.Attribute("idEmissioner", 7, "Emissor da identidade"));
-        attributes.put("getIdState", new Bean.Attribute("idState", 8, "Estado identidade"));
-        attributes.put("getIdEmissionDate", new Bean.Attribute("idEmissionDate", 9, "Data de emissão da identidade"));
-        attributes.put("getBirthCountry", new Bean.Attribute("birthCountry", 10, "País de nascimento"));
-        attributes.put("getBirthState", new Bean.Attribute("birthState", 11, "Estado de nascimento"));
-        attributes.put("getBirthCity", new Bean.Attribute("birthCity", 12, "Cidade de nascimento"));
-        attributes.put("getBirthDate", new Bean.Attribute("birthDate", 13, "Data de nascimento"));
-        attributes.put("getPassportNumber", new Bean.Attribute("passportNumber", 14, "Número do passaporte"));
-        attributes.put("getPassportValidityDate", new Bean.Attribute("passportValidityDate", 15, "Data de validade do passaporte"));
-        attributes.put("getPassportEmissionDate", new Bean.Attribute("passportEmissionDate", 16, "Data de emissão do passaporte"));
-        attributes.put("getFiliationFatherName", new Bean.Attribute("filiationFatherName", 17, "Pai"));
-        attributes.put("getFiliationMotherName", new Bean.Attribute("filiationMotherName", 18, "Mãe"));
-        attributes.put("getAddressStreet", new Bean.Attribute("addressStreet", 19, "Rua"));
-        attributes.put("getAddressZipCode", new Bean.Attribute("addressZipCode", 20, "CEP"));
-        attributes.put("getAddressCity", new Bean.Attribute("addressCity", 21, "Cidade"));
-        attributes.put("getAddressCountry", new Bean.Attribute("addressCountry", 22, "País"));
-        attributes.put("getAddressDistrict", new Bean.Attribute("addressDistrict", 23, "Bairro"));
-        attributes.put("getAddressState", new Bean.Attribute("addressState", 24, "Estado"));
-        attributes.put("getAddressPhone", new Bean.Attribute("addressPhone", 25, "Telefone"));
-        attributes.put("getProfessionalAddressCompany", new Bean.Attribute("professionalAddressCompany", 26, "Trabalho"));
-        attributes.put("getProfessionalAddressUnit", new Bean.Attribute("professionalAddressUnit", 27, "Unidade"));
-        attributes.put("getProfessionalAddressStreet", new Bean.Attribute("professionalAddressStreet", 28, "Rua"));
-        attributes.put("getProfessionalAddressZipCode", new Bean.Attribute("professionalAddressZipCode", 29, "CEP"));
-        attributes.put("getProfessionalAddressCity", new Bean.Attribute("professionalAddressCity", 30, "Cidade"));
-        attributes.put("getProfessionalAddressCountry", new Bean.Attribute("professionalAddressCountry", 31, "País"));
-        attributes.put("getProfessionalAddressDistrict", new Bean.Attribute("professionalAddressDistrict", 32, "Bairro"));
-        attributes.put("getProfessionalAddressState", new Bean.Attribute("professionalAddressState", 33, "Estado"));
-        attributes.put("getProfessionalAddressPhone", new Bean.Attribute("professionalAddressPhone", 34, "Telefone"));
-        attributes.put("getMiscEmail", new Bean.Attribute("miscEmail", 35, "Email"));
+        attributes.put(new Bean.Attribute("generalName", 1, "Nome"), "getGeneralName");
+        attributes.put(new Bean.Attribute("generalCitationName", 2, "Nome de citação"), "getGeneralCitationName");
+        attributes.put(new Bean.Attribute("generalCountry", 3, "País"), "getGeneralCountry");
+        attributes.put(new Bean.Attribute("generalCpf", 4, "CPF"), "getGeneralCpf");
+        attributes.put(new Bean.Attribute("generalSex", 5, "Sexo"), "getGeneralSex");
+        attributes.put(new Bean.Attribute("idNumber", 6, "Número da identidade"), "getIdNumber");
+        attributes.put(new Bean.Attribute("idEmissioner", 7, "Emissor da identidade"), "getIdEmissioner");
+        attributes.put(new Bean.Attribute("idState", 8, "Estado identidade"), "getIdState");
+        attributes.put(new Bean.Attribute("idEmissionDate", 9, "Data de emissão da identidade"), "getIdEmissionDate");
+        attributes.put(new Bean.Attribute("birthCountry", 10, "País de nascimento"), "getBirthCountry");
+        attributes.put(new Bean.Attribute("birthState", 11, "Estado de nascimento"), "getBirthState");
+        attributes.put(new Bean.Attribute("birthCity", 12, "Cidade de nascimento"), "getBirthCity");
+        attributes.put(new Bean.Attribute("birthDate", 13, "Data de nascimento"), "getBirthDate");
+        attributes.put(new Bean.Attribute("passportNumber", 14, "Número do passaporte"), "getPassportNumber");
+        attributes.put(new Bean.Attribute("passportValidityDate", 15, "Data de validade do passaporte"), "getPassportValidityDate");
+        attributes.put(new Bean.Attribute("passportEmissionDate", 16, "Data de emissão do passaporte"), "getPassportEmissionDate");
+        attributes.put(new Bean.Attribute("filiationFatherName", 17, "Pai"), "getFiliationFatherName");
+        attributes.put(new Bean.Attribute("filiationMotherName", 18, "Mãe"), "getFiliationMotherName");
+        attributes.put(new Bean.Attribute("addressStreet", 19, "Rua"), "getAddressStreet");
+        attributes.put(new Bean.Attribute("addressZipCode", 20, "CEP"), "getAddressZipCode");
+        attributes.put(new Bean.Attribute("addressCity", 21, "Cidade"), "getAddressCity");
+        attributes.put(new Bean.Attribute("addressCountry", 22, "País"), "getAddressCountry");
+        attributes.put(new Bean.Attribute("addressDistrict", 23, "Bairro"), "getAddressDistrict");
+        attributes.put(new Bean.Attribute("addressState", 24, "Estado"), "getAddressState");
+        attributes.put(new Bean.Attribute("addressPhone", 25, "Telefone"), "getAddressPhone");
+        attributes.put(new Bean.Attribute("professionalAddressCompany", 26, "Trabalho"), "getProfessionalAddressCompany");
+        attributes.put(new Bean.Attribute("professionalAddressUnit", 27, "Unidade"), "getProfessionalAddressUnit");
+        attributes.put(new Bean.Attribute("professionalAddressStreet", 28, "Rua"), "getProfessionalAddressStreet");
+        attributes.put(new Bean.Attribute("professionalAddressZipCode", 29, "CEP"), "getProfessionalAddressZipCode");
+        attributes.put(new Bean.Attribute("professionalAddressCity", 30, "Cidade"), "getProfessionalAddressCity");
+        attributes.put(new Bean.Attribute("professionalAddressCountry", 31, "País"), "getProfessionalAddressCountry");
+        attributes.put(new Bean.Attribute("professionalAddressDistrict", 32, "Bairro"), "getProfessionalAddressDistrict");
+        attributes.put(new Bean.Attribute("professionalAddressState", 33, "Estado"), "getProfessionalAddressState");
+        attributes.put(new Bean.Attribute("professionalAddressPhone", 34, "Telefone"), "getProfessionalAddressPhone");
+        attributes.put(new Bean.Attribute("miscEmail", 35, "Email"), "getMiscEmail");
     }
 
     public String getGeneralName()

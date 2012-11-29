@@ -3,7 +3,9 @@
 <hibernate-mapping>
     <class name="webproject.bean.Published" table="Published">
         <id name="id" column="id">
-            <generator class="native"/>
+            <generator class="sequence">
+                <param name="sequence">publishedPkSequence</param>
+            </generator>
         </id>
 	<property name="completeName" column="completeName"/>
 	<many-to-one name="login" class="webproject.bean.Login" column="loginId"/>

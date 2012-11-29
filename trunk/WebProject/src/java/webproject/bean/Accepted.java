@@ -1,6 +1,6 @@
 package webproject.bean;
 
-public class Accepted extends User
+public class Accepted extends LoginDependant
 {
 
     private String generalTitle;
@@ -12,12 +12,12 @@ public class Accepted extends User
 
     public Accepted()
     {
-	attributes.put("getGeneralTitle", new Bean.Attribute("generalTitle", 0+1, "Título"));
-	attributes.put("getGeneralLanguage", new Bean.Attribute("generalLanguage", 1+1, "Idioma"));
-	attributes.put("getGeneralYear", new Bean.Attribute("generalYear", 2+1, "Ano previsto para publicação"));
-	attributes.put("getDetailedTitle", new Bean.Attribute("detailedTitle", 3+1, "Título do periódico/revista em que o artigo será publicado"));
-	attributes.put("getDetailedISSN", new Bean.Attribute("detailedISSN", 4+1, "ISSN"));
-	attributes.put("getOtherInfo", new Bean.Attribute("otherInfo", 5+1, "Outras informações"));
+	attributes.put(new Bean.Attribute("generalTitle", 0+1, "Título"), "getGeneralTitle");
+	attributes.put(new Bean.Attribute("generalLanguage", 1+1, "Idioma"), "getGeneralLanguage");
+	attributes.put(new Bean.Attribute("generalYear", 2+1, "Ano previsto para publicação"), "getGeneralYear");
+	attributes.put(new Bean.Attribute("detailedTitle", 3+1, "Título do periódico/revista em que o artigo será publicado"), "getDetailedTitle");
+	attributes.put(new Bean.Attribute("detailedISSN", 4+1, "ISSN"), "getDetailedISSN");
+	attributes.put(new Bean.Attribute("otherInfo", 5+1, "Outras informações"), "getOtherInfo");
     }
 
     public String getGeneralTitle()

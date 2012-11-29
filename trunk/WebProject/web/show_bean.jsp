@@ -34,10 +34,10 @@
                 
         <table>
             <%
-            for (Map.Entry<String, Bean.Attribute> entry : bean.getAttributes().entrySet())
+            for (Map.Entry<Bean.Attribute, String> entry : bean.getAttributes().entrySet())
             {
-                String method = entry.getKey();
-                Bean.Attribute attribute = entry.getValue();
+                String method = entry.getValue();
+                Bean.Attribute attribute = entry.getKey();
                 Object value = bean.getClass().getMethod(method).invoke(bean);
                 
                 out.print("<tr>");
