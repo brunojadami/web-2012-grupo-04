@@ -48,14 +48,17 @@ public class Login extends HttpServlet
 
             loginCheck = logins.isEmpty() ? null : (webproject.bean.Login) logins.get(0);
 
-            
-
             if (loginCheck == null 
                     || !login.getEmail().equals(loginCheck.getEmail())
                     || !login.getPassword().equals(loginCheck.getPassword()))
             {
                 dispatcher = request.getRequestDispatcher("index.jsp");
                 request.setAttribute("errorMessage", "Usuário/senha incorreto.");
+            }
+            else if (!loginCheck.isEnabled())
+            {
+                dispatcher = request.getRequestDispatcher("index.jsp");
+                request.setAttribute("errorMessage", "Usuário desabilitado!");
             }
             else
             {

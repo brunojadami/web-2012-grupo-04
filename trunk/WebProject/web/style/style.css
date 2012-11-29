@@ -51,6 +51,11 @@ form input
     display: block;
 }
 
+form.Invisible
+{
+    background-color: transparent;
+}
+
 a
 {
     font-weight: bold;
@@ -79,6 +84,11 @@ table
 table td
 {
     min-width: 5%;
+}
+
+table th
+{
+    text-align: left;
 }
 
 table td.Right

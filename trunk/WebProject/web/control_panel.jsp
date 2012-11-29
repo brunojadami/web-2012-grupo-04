@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="ISO-8859-15"%>
 <%@page import="webproject.misc.PageType"%>
 <% pageContext.setAttribute("pageTitle", "Painel de Controle"); %>
-<% pageContext.setAttribute("pageType", PageType.ANY); %>
+<% pageContext.setAttribute("pageType", PageType.SESSION); %>
 <%@ include file="session.jsp" %>
 <!DOCTYPE html>
 <html>

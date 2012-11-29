@@ -22,6 +22,15 @@
             %>
         </label>
         
+        <table id="optionsTable">
+            <tr>
+                <td>Opções</td>
+                <td class="Right">
+                    <a href="admin.jsf"><img src="image/control_panel.png" title="Painel de controle do administrador - JSF"/></a>
+                </td>
+            </tr>
+        </table>
+        
         <form name="form" method="POST" action="./Login" onsubmit="return validateForm();">
             
             <h3>Entrar</h3>
