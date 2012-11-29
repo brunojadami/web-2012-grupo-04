@@ -111,6 +111,7 @@ CREATE TABLE experience (
     bondtime character varying(2) NOT NULL,
     bondexclusive character varying(100) NOT NULL,
     periodmonth character varying(2) NOT NULL,
+    periodfinished character varying(10) NOT NULL,
     periodyear character varying(4) NOT NULL,
     otherinfo character varying(300) NOT NULL,
     id integer DEFAULT nextval('experiencepksequence'::regclass) NOT NULL,
