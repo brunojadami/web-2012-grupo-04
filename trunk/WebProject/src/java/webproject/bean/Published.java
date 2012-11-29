@@ -6,7 +6,7 @@ public class Published extends LoginDependant
 
     public Published()
     {
-	attributes.put(new Bean.Attribute("completeName",  1, "DOI, ISSN ou parte do nome do periódico"), "getProfInstitution");
+	attributes.put(new Bean.Attribute("completeName",  1, "DOI, ISSN ou parte do nome do periódico"), "getCompleteName");
     }
 
     public String getCompleteName()
