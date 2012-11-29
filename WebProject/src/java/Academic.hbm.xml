@@ -3,7 +3,9 @@
 <hibernate-mapping>
     <class name="webproject.bean.Academic" table="Academic">
         <id name="id" column="id">
-            <generator class="native"/>
+            <generator class="sequence">
+                <param name="sequence">academicPkSequence</param>
+            </generator>
         </id>
         <property name="generalLevel" column="generalLevel"/>
         <property name="generalType" column="generalType"/>

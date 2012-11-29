@@ -10,11 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import webproject.bean.Bean;
-import webproject.misc.BeanIO;
 import webproject.misc.HibernateUtil;
-import webproject.misc.Util;
-import webproject.validation.Validator;
 
 /**
  * Published servlet.

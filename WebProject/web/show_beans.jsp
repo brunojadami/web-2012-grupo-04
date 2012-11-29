@@ -33,18 +33,21 @@
         
         for (Bean bean : beans)
         {
-            int count = 3;
+            int count = 5;
             
             out.print("<tr><td>" + bean.getId() + "</td>");
             
-            for (Map.Entry<String, Bean.Attribute> entry : bean.getAttributes().entrySet())
+            for (Map.Entry<Bean.Attribute, String> entry : bean.getAttributes().entrySet())
             {
-                String method = entry.getKey();
+                String method = entry.getValue();
                 Object value = bean.getClass().getMethod(method).invoke(bean);
+                
+                if (count-- == 5)
+                    continue;
                 
                 out.print("<td class=\"Right\">" + value.toString() + "</td>");
                 
-                if (count-- < 0)
+                if (count < 0)
                     break;
             }
             

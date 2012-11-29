@@ -1,6 +1,6 @@
 package webproject.bean;
 
-public class Book extends User
+public class Book extends LoginDependant
 {
 
     private String bookType;
@@ -8,8 +8,8 @@ public class Book extends User
 
     public Book()
     {
-	attributes.put("getBookType", new Bean.Attribute("bookType", 0+1, "Tipo de produção"));
-	attributes.put("getBookISSN", new Bean.Attribute("bookISSN", 1+1, "DOI ou ISSN"));
+	attributes.put(new Bean.Attribute("bookType", 0+1, "Tipo de produção"), "getBookType");
+	attributes.put(new Bean.Attribute("bookISSN", 1+1, "DOI ou ISSN"), "getBookISSN");
     }
 
     public String getBookType()
