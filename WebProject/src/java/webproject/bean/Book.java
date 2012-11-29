@@ -2,7 +2,6 @@ package webproject.bean;
 
 public class Book extends LoginDependant
 {
-
     private String bookType;
     private String bookISSN;
 

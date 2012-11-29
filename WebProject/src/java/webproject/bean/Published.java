@@ -2,7 +2,6 @@ package webproject.bean;
 
 public class Published extends LoginDependant
 {
-
     private String completeName;
 
     public Published()

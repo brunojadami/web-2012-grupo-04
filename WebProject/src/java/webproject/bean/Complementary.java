@@ -2,7 +2,6 @@ package webproject.bean;
 
 public class Complementary extends LoginDependant
 {
-
     private String generalLevel;
     private String generalInstitution;
     private String generalCourse;

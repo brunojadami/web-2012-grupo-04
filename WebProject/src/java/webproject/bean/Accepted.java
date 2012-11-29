@@ -2,7 +2,6 @@ package webproject.bean;
 
 public class Accepted extends LoginDependant
 {
-
     private String generalTitle;
     private String generalLanguage;
     private String generalYear;

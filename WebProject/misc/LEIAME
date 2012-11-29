@@ -1,0 +1,13 @@
+Trabalho 3 de Programação Web
+
+Grupo:
+Bruno Junqueira Adami	6878762
+Lucas Junqueira Adami	6792496
+
+As queries SQL para criar o banco de dados estão no arquivo web.sql. Não sabemos se é possível importar como backup direto, pois tivemos alguns problemas com o postgres*.
+
+Note que as senhas estão em plaintext. Elas devem ser encriptadas! Mas para o trabalhos, deixamos assim mesmo, para facilitar :)
+
+Na tabela PersonalInfo, para cada usuário, há um único registro. Por isso, o id é sempre igual ao loginId. Deviamos ter feito uma PK-FK única, que funcionou no MySQL, mas estava dando alguns problemas no postgres*.
+
+* Tivemos que mudar de MySQL para postgres de última hora. Pensamos que você iria deixar utilizar esse SGBD. Nos desculpe pelos paus que não conseguimos solucionar a tempo!!!!
