@@ -7,6 +7,7 @@ public class Login extends Bean
 {
     private String email;   
     private String password;
+    private boolean enabled;
 
     public String getEmail()
     {
@@ -26,5 +27,15 @@ public class Login extends Bean
     public void setPassword(String password)
     {
         this.password = password;
+    }
+
+    public boolean isEnabled()
+    {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled)
+    {
+        this.enabled = enabled;
     }
 }

@@ -9,7 +9,7 @@
 <%@page import="webproject.misc.PageType"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-15"%>
 <% pageContext.setAttribute("pageTitle", "Entrar"); %>
-<% pageContext.setAttribute("pageType", PageType.ANY); %>
+<% pageContext.setAttribute("pageType", PageType.SESSION); %>
 <%@ include file="session.jsp" %>
 <!DOCTYPE html>
 <html>

@@ -6,5 +6,6 @@ package webproject.misc;
 public enum PageType
 {
     INDEX,
-    ANY
+    SESSION,
+    NONE;
 }

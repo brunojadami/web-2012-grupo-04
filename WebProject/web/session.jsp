@@ -8,7 +8,7 @@ if (pageType == pageType.INDEX && login != null)
 {
     pageContext.forward("control_panel.jsp");
 }
-else if (pageType != pageType.INDEX && login == null)
+else if (pageType == pageType.SESSION && login == null)
 {
     pageContext.forward("index.jsp");
 }

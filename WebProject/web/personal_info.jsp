@@ -4,7 +4,7 @@
 <%@page import="webproject.misc.Util"%>
 <%@page import="java.util.List"%>
 <% pageContext.setAttribute("pageTitle", "Informações pessoais"); %>
-<% pageContext.setAttribute("pageType", PageType.ANY); %>
+<% pageContext.setAttribute("pageType", PageType.SESSION); %>
 <%@ include file="session.jsp" %>
 <!DOCTYPE html>
 <html>
