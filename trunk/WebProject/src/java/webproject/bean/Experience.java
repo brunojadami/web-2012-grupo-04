@@ -2,7 +2,6 @@ package webproject.bean;
 
 public class Experience extends LoginDependant
 {
-
     private String profInstitution;
     private String bondType;
     private String bondEmployment;

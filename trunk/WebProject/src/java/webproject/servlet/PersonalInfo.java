@@ -38,9 +38,6 @@ public class PersonalInfo extends HttpServlet
         Session session = HibernateUtil.getSessionFactory().openSession();
         
         webproject.bean.PersonalInfo personalInfo = new webproject.bean.PersonalInfo();
-        // Para cada usuário, há um único 'personalInfo'. Por isso, o id é sempre igual ao
-        // loginId. Deviamos ter feito uma PK-FK única. Mas estava dando alguns problemas
-        // e não deu tempo de solucionar o erro :)
         personalInfo.setId(Integer.parseInt(request.getParameter("id")));
         personalInfo.setLogin((webproject.bean.Login) request.getSession().getAttribute("login"));
         
